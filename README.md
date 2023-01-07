@@ -16,9 +16,9 @@ Glue is the culmination of my ~5 years of full-stack web development. It's my ul
 2. Add glue remote
 
 ```bash
-git remote add glue https://github.com/jay-joo-code/glue-root.git
+git remote add glue https://github.com/jay-joo-code/glue2-sentiment.git
 git fetch --all
-git switch -c glue-master glue/master
+git switch -c glue-main glue/main
 ```
 
 ## Scripts
