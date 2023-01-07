@@ -45,5 +45,6 @@ git push glue glue-master:master
 
 ## Backend
 
-**Deploy Pocketbase to Fly.io**
+The entire backend is handled by Pocketbase deployed for free on Fly.io. The development speed is significantly faster, since 99% of backend development is handled by Pocketbase.
+
 https://github.com/pocketbase/pocketbase/discussions/537
