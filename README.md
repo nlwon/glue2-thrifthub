@@ -1,38 +1,49 @@
-# create-svelte
+# Glue
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Glue aims to be an extremely opinionated design system, frontend, backend, database framework. It shares many design patterns and best practices across all of my web apps. It "glues" them together.
 
-## Creating a project
+After building ~20 full-stack web apps, I realized that most websites follow a large set predicatable design patterns. If I'm able to capture this large set in a framework, I'll never have to write duplicate code for a design pattern I've implemented in the past.
 
-If you're seeing this, you've probably already done this step. Congrats!
+It's currently closer to a glorified full-stack boilerplate. But I hope to build a full-stack framework some day. Opinionated frameworks limit customizability, but I hope to expand Glue to support all possible "common" variations of a web app.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+I think this will be possible from a UX perspective rather than a software one. Users don't like UX that they've never experienced before. This encourages web builders to imitate UX that have been commonly implemented. If the intended UX repeats, so do design patterns to implement that UX.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Glue is the culmination of my ~5 years of full-stack web development. It's my ultimate pet project that I hope to cultivate until either the web or I am gone from this world. If Glue survives until my 30s or 40s, I hope to rename it to a more human name and consider it my "baby".
 
-## Developing
+## Extend Glue root
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Import this repo to clone it (click on the + sign at the top right side of the page)
+2. Add glue remote
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+git remote add glue https://github.com/jay-joo-code/glue-root.git
+git fetch --all
+git switch -c glue-master glue/master
 ```
 
-## Building
+## Scripts
 
-To create a production version of your app:
+**Pushing specific commits to Glue root**
 
 ```bash
-npm run build
+$ git checkout glue-master
+$ git cherry-pick <commit-hash>
+$ git push
 ```
 
-You can preview the production build with `npm run preview`.
+**Setting upstream to glue/master**
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+$ git branch -u glue/master
+```
+
+**Push to glue/master**
+
+```bash
+git push glue glue-master:master
+```
+
+## Backend
+
+**Deploy Pocketbase to Fly.io**
+https://github.com/pocketbase/pocketbase/discussions/537
