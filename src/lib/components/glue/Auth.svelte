@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { APP_NAME } from '$lib/glue/config';
-	import IconAdd from '$lib/glue/icons/IconAdd.svelte';
-	import IconHome from '$lib/glue/icons/IconHome.svelte';
-	import IconLogout from '$lib/glue/icons/IconLogout.svelte';
+	import IconAdd from '$lib/icons/glue/IconAdd.svelte';
+	import IconHome from '$lib/icons/glue/IconHome.svelte';
+	import IconLogout from '$lib/icons/glue/IconLogout.svelte';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
 	import { onMount } from 'svelte';
 
