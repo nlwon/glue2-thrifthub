@@ -3,6 +3,7 @@
 	import BackButton from '$lib/components/glue/BackButton.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import TopicBadge from '$lib/components/TopicBadge.svelte';
+	import TopicQa from '$lib/components/TopicQA.svelte';
 	import { pb } from '$lib/glue/pocketbase';
 	import { onMount } from 'svelte';
 
@@ -17,22 +18,27 @@
 
 {#if topic}
 	<PageContainer title={`${topic?.name} - ${topic?.subtitle}`}>
-		<div class="space-y-4">
+		<div class="space-y-8">
 			<BackButton class="btn-sm" />
-			<div class="prose">
-				<h1>{topic?.name}</h1>
-				<div class="flex items-center space-x-3">
-					<TopicBadge category={topic?.category} />
-					{#if topic?.subtitle}
-						<h4 class="m-0">{topic?.subtitle}</h4>
+			<div class="space-y-14">
+				<div class="prose">
+					<h1>{topic?.name}</h1>
+					<div class="flex items-center space-x-3">
+						<TopicBadge category={topic?.category} />
+						{#if topic?.subtitle}
+							<h4 class="m-0">{topic?.subtitle}</h4>
+						{/if}
+					</div>
+					<p class={`whitespace-pre-line ${isDescLineClamp ? 'line-clamp-5' : ''}`}>
+						{topic?.desc}
+					</p>
+					{#if topic?.desc?.length > 340}
+						<button class="btn-sm btn" on:click={() => (isDescLineClamp = !isDescLineClamp)}
+							>Show {isDescLineClamp ? 'all' : 'less'}</button
+						>
 					{/if}
 				</div>
-				<p class={`whitespace-pre-line ${isDescLineClamp ? 'line-clamp-5' : ''}`}>{topic?.desc}</p>
-				{#if topic?.desc?.length > 340}
-					<button class="btn-sm btn" on:click={() => (isDescLineClamp = !isDescLineClamp)}
-						>Show {isDescLineClamp ? 'all' : 'less'}</button
-					>
-				{/if}
+				<TopicQa {topic} />
 			</div>
 		</div>
 	</PageContainer>
