@@ -5,7 +5,7 @@
 	import TextInput from '$lib/components/glue/TextInput.svelte';
 	import TopicListItem from '$lib/components/TopicListItem.svelte';
 	import debounce from 'just-debounce-it';
-	import MeiliSearch from 'meilisearch';
+	import { MeiliSearch } from 'meilisearch';
 
 	const client = new MeiliSearch({
 		host: 'https://meilisearch-production-023b.up.railway.app/',
@@ -19,7 +19,6 @@
 	const searchByQuery = async (event) => {
 		const res = await client.index('topics').search(event?.target?.value);
 
-		console.log('res', res);
 		hits = res?.hits;
 		processingTimeMs = res?.processingTimeMs || 0;
 		estimatedTotalHits = res?.estimatedTotalHits || 0;
@@ -31,7 +30,6 @@
 <PageContainer title="Home" layout="aside-main">
 	<Aside>aside</Aside>
 	<Main>
-		test
 		<div class="space-y-2">
 			<TextInput on:input={debouncedSearchByQuery} />
 			<p class="text-sm text-base-content/80">
@@ -39,8 +37,7 @@
 			</p>
 			<div class="space-y-2">
 				{#each hits as hit (hit.id)}
-					<div>{hit?.name}</div>
-					<!-- <TopicListItem topic={hit} /> -->
+					<TopicListItem topic={hit} />
 				{/each}
 			</div>
 		</div>
