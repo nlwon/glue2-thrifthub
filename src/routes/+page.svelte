@@ -3,6 +3,7 @@
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import TextInput from '$lib/components/glue/TextInput.svelte';
+	import TopicListItem from '$lib/components/TopicListItem.svelte';
 	import debounce from 'just-debounce-it';
 	import MeiliSearch from 'meilisearch';
 
@@ -30,16 +31,16 @@
 <PageContainer title="Home" layout="aside-main">
 	<Aside>aside</Aside>
 	<Main>
-		<TextInput label="Search query" on:input={debouncedSearchByQuery} />
-		<p>{hits?.length} of 7890 found in {processingTimeMs} milliseconds</p>
 		<div class="space-y-2">
-			{#each hits as hit (hit.id)}
-				<div class="bg-base-200 p-2">
-					<p>{hit?.name}</p>
-					<p>{hit?.subtitle}</p>
-					<p>{hit?.desc}</p>
-				</div>
-			{/each}
+			<TextInput on:input={debouncedSearchByQuery} />
+			<p class="text-sm text-base-content/80">
+				{hits?.length} of 7890 found in {processingTimeMs} milliseconds
+			</p>
+			<div class="space-y-2">
+				{#each hits as hit (hit.id)}
+					<TopicListItem topic={hit} />
+				{/each}
+			</div>
 		</div>
 	</Main>
 </PageContainer>
