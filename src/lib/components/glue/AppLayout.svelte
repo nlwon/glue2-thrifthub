@@ -55,7 +55,7 @@
 								{/if}
 							</div>
 						</div>
-						<Auth />
+						<!-- <Auth /> -->
 					</div>
 				</div>
 			</div>
