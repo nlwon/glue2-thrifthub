@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import BackButton from '$lib/components/glue/BackButton.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import TopicBadge from '$lib/components/TopicBadge.svelte';
 	import { pb } from '$lib/glue/pocketbase';
@@ -17,6 +18,7 @@
 {#if topic}
 	<PageContainer title={`${topic?.name} - ${topic?.subtitle}`}>
 		<div class="space-y-4">
+			<BackButton class="btn-sm" />
 			<div class="prose">
 				<h1>{topic?.name}</h1>
 				<div class="flex items-center space-x-3">
