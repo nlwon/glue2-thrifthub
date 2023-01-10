@@ -6,6 +6,9 @@
 	import TopicListItem from '$lib/components/TopicListItem.svelte';
 	import debounce from 'just-debounce-it';
 	import { MeiliSearch } from 'meilisearch';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	const client = new MeiliSearch({
 		host: 'https://meilisearch-production-023b.up.railway.app/',
@@ -15,9 +18,17 @@
 	let hits = [];
 	let processingTimeMs = 0;
 	let estimatedTotalHits = 0;
+	let query = $page.url.searchParams.get('query');
 
-	const searchByQuery = async (event) => {
-		const res = await client.index('topics').search(event?.target?.value);
+	const handleChange = (event) => {
+		query = event?.target?.value;
+		debouncedSearchByQuery(query);
+	};
+
+	const searchByQuery = async (query) => {
+		$page.url.searchParams.set('query', query);
+		goto(`?${$page.url.searchParams.toString()}`);
+		const res = await client.index('topics').search(query);
 
 		hits = res?.hits;
 		processingTimeMs = res?.processingTimeMs || 0;
@@ -25,13 +36,17 @@
 	};
 
 	const debouncedSearchByQuery = debounce(searchByQuery, 200);
+
+	onMount(() => {
+		searchByQuery(query);
+	});
 </script>
 
 <PageContainer title="Home" layout="aside-main">
 	<Aside>aside</Aside>
 	<Main>
 		<div class="space-y-2">
-			<TextInput on:input={debouncedSearchByQuery} />
+			<TextInput bind:value={query} on:input={handleChange} />
 			<p class="text-sm text-base-content/80">
 				{hits?.length} of 7890 found in {processingTimeMs} milliseconds
 			</p>
