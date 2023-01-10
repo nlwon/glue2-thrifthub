@@ -10,9 +10,11 @@
 </script>
 
 <div class="form-control w-full max-w-sm">
-	<label class="label">
-		<span class="label-text">{label}</span>
-	</label>
+	{#if label}
+		<label class="label">
+			<span class="label-text">{label}</span>
+		</label>
+	{/if}
 	<input
 		bind:value
 		on:blur

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Aside from '$lib/components/glue/Aside.svelte';
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
@@ -6,10 +8,7 @@
 	import TopicListItem from '$lib/components/TopicListItem.svelte';
 	import debounce from 'just-debounce-it';
 	import { MeiliSearch } from 'meilisearch';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import ka from 'date-fns/locale/ka';
 
 	const client = new MeiliSearch({
 		host: 'https://meilisearch-production-023b.up.railway.app/',
@@ -48,7 +47,7 @@
 		'cooking',
 		'piano club',
 		'toni morrison',
-		'CS 1110',
+		'INFO 1300',
 		'dance club',
 		'web dev'
 	];
@@ -56,15 +55,17 @@
 
 <PageContainer title="Home" layout="aside-main">
 	<Main>
-		<div class="space-y-6">
+		<div class="space-y-4">
 			<TextInput
 				bind:value={query}
 				on:input={(event) => {
 					handleChangeQuery(event?.target?.value);
 				}}
+				placeholder="🔍  Search for a topic"
+				class="rounded-full pl-4"
 			/>
 			{#if Boolean(query)}
-				<p class="text-sm text-base-content/80">
+				<p class="ml-2 text-sm text-base-content/80">
 					{hits?.length} of 7890 found in {processingTimeMs} milliseconds
 				</p>
 				<div class="space-y-2">
@@ -73,9 +74,9 @@
 					{/each}
 				</div>
 			{:else}
-				<div class="space-y-4">
-					<p class="font-semibold uppercase">Suggested searches</p>
-					<div class="space-y-2">
+				<div>
+					<p class="mt-8 mb-4 font-semibold uppercase">Suggested search terms</p>
+					<div class="space-y-3">
 						{#each SUGGESTED_SEARCH_QUERIES as queryString, idx (queryString)}
 							<div>
 								<button class="btn" on:click={() => handleChangeQuery(queryString)}
@@ -88,5 +89,38 @@
 			{/if}
 		</div>
 	</Main>
-	<Aside>aside</Aside>
+	<Aside>
+		<div class="space-y-6 py-6 md:py-0">
+			<div class="space-y-2">
+				<p class="font-semibold uppercase">📚 Hot courses</p>
+				<div class="space-y-2">
+					<button class="btn-sm btn block">1. CS 1110</button>
+					<button class="btn-sm btn block">1. CS 1110</button>
+					<button class="btn-sm btn block">1. CS 1110</button>
+				</div>
+			</div>
+			<div class="space-y-2">
+				<p class="font-semibold uppercase">🏠 Hot dorms</p>
+				<div class="space-y-2">
+					<button class="btn-sm btn block">1. Ganędagǫ: Hall</button>
+					<button class="btn-sm btn block">2. Toni Morrison Hall</button>
+					<button class="btn-sm btn block">1. CS 1110</button>
+				</div>
+			</div>
+			<div class="space-y-2">
+				<p class="font-semibold uppercase">⚽ Hot clubs</p>
+				<div class="space-y-2">
+					<button class="btn-sm btn block">1. CS 1110</button>
+					<button class="btn-sm btn block">1. CS 1110</button>
+					<button class="btn-sm btn block">1. CS 1110</button>
+				</div>
+			</div>
+		</div>
+	</Aside>
 </PageContainer>
+
+<style>
+	#icon-search {
+		font-size: 1.6rem;
+	}
+</style>
