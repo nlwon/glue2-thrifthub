@@ -46,7 +46,7 @@
 		processingTimeMs = res?.processingTimeMs || 0;
 		estimatedTotalHits = res?.estimatedTotalHits || 0;
 
-		if (query?.length > 0) {
+		if (import.meta.env.MODE === 'production' && query?.length > 0) {
 			pb.collection('logs').create({
 				variant: 'search',
 				value: query
