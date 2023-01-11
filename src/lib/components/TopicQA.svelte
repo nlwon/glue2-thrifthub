@@ -6,6 +6,8 @@
 	import IconUpArrow from '$lib/icons/glue/IconUpArrow.svelte';
 	import showdown from 'showdown';
 	import highlightWords from 'highlight-words';
+	import IconAdd from '$lib/icons/glue/IconAdd.svelte';
+	import ComingSoon from './glue/ComingSoonButton.svelte';
 
 	export let topic;
 
@@ -179,7 +181,10 @@
 </script>
 
 <div class="">
-	<p class="text-3xl font-semibold">Discussions ({questionThreads?.length})</p>
+	<div class="flex items-center justify-between">
+		<p class="text-3xl font-semibold">Discussions ({questionThreads?.length})</p>
+		<ComingSoon variant="click-create-post"><IconAdd /> Create post</ComingSoon>
+	</div>
 	<div class="">
 		{#each questionThreads as question (question?.id)}
 			<div class="space-y-4 border-b border-base-300 py-8">
