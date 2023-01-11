@@ -54,7 +54,7 @@
 		}
 	};
 
-	const debouncedSearchByQuery = debounce(searchByQuery, 200);
+	const debouncedSearchByQuery = debounce(searchByQuery, 500);
 
 	onMount(() => {
 		searchByQuery(query);
