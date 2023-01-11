@@ -1,5 +1,8 @@
 <script>
 	import { pb } from '$lib/glue/pocketbase';
+	import IconDocs from '$lib/icons/glue/IconDocs.svelte';
+	import IconHome from '$lib/icons/glue/IconHome.svelte';
+	import IconRugbyBall from '$lib/icons/glue/IconRugbyBall.svelte';
 	import { onMount } from 'svelte';
 
 	let courses = [];
@@ -30,7 +33,10 @@
 
 <div class="space-y-6 rounded-xl bg-base-200 py-6 px-4 md:py-6">
 	<div class="space-y-3">
-		<p class="text-sm font-semibold uppercase">📚 Hot courses</p>
+		<div class="flex items-center space-x-2">
+			<IconDocs />
+			<p class="text-sm font-semibold uppercase">Hot courses</p>
+		</div>
 		<div class="space-y-2">
 			{#each courses as course, idx (course?.id)}
 				<a href={`/topic/${course?.id}`} class="block" target="_self">
@@ -42,7 +48,10 @@
 		</div>
 	</div>
 	<div class="space-y-3">
-		<p class="text-sm font-semibold uppercase">🏠 Hot dorms</p>
+		<div class="flex items-center space-x-2">
+			<IconHome />
+			<p class="text-sm font-semibold uppercase">Hot dorms</p>
+		</div>
 		<div class="space-y-2">
 			{#each dorms as dorm, idx (dorm?.id)}
 				<a href={`/topic/${dorm?.id}`} class="block" target="_self">
@@ -54,7 +63,10 @@
 		</div>
 	</div>
 	<div class="space-y-3">
-		<p class="text-sm font-semibold uppercase">⚽ Hot clubs</p>
+		<div class="flex items-center space-x-2">
+			<IconRugbyBall />
+			<p class="text-sm font-semibold uppercase">Hot clubs</p>
+		</div>
 		<div class="space-y-2">
 			{#each clubs as club, idx (club?.id)}
 				<a href={`/topic/${club?.id}`} class="block" target="_self">
