@@ -129,6 +129,7 @@
 	const fetchQAFromDB = async () => {
 		const questions = await pb.collection('questions').getFullList(200, {
 			filter: `topic='${topic?.id}'`,
+			// NOTE: doesn't sort by providerCreated
 			sort: '-created'
 		});
 		const promises = questions?.map(async (question) => {
