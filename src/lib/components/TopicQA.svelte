@@ -8,6 +8,7 @@
 	import highlightWords from 'highlight-words';
 	import IconAdd from '$lib/icons/glue/IconAdd.svelte';
 	import ComingSoon from './glue/ComingSoonButton.svelte';
+	import ComingSoonButton from './glue/ComingSoonButton.svelte';
 
 	export let topic;
 
@@ -182,7 +183,9 @@
 
 <div class="">
 	<p class="mb-6 text-3xl font-semibold">Discussions ({questionThreads?.length})</p>
-	<ComingSoon variant="click-create-post"><IconAdd /> Create post</ComingSoon>
+	<ComingSoon variant="click-create-post" class="btn-primary" context={topic}
+		><IconAdd /> Create post</ComingSoon
+	>
 	<div class="">
 		{#each questionThreads as question (question?.id)}
 			<div class="space-y-4 border-b border-base-300 py-8">
@@ -203,9 +206,14 @@
 									{@html formatContent(answer?.content)}
 								</article>
 								<div class="flex items-center space-x-2">
-									<button class="btn-base btn-xs btn gap-2 rounded-full"
-										><IconUpArrow /> {answer?.helpfulCount} Helpful</button
+									<ComingSoonButton
+										variant="click-helpful"
+										class="btn-xs btn gap-2 rounded-full"
+										context={answer}
 									>
+										<IconUpArrow />
+										{answer?.helpfulCount} Helpful
+									</ComingSoonButton>
 									<p class="mt-0.5 text-sm text-base-content/80">
 										{formatDate(answer)}
 									</p>
