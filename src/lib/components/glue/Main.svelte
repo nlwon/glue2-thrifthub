@@ -1,3 +1,3 @@
-<main class="flex-1">
+<main class="w-full md:max-w-[552px]">
 	<slot />
 </main>
