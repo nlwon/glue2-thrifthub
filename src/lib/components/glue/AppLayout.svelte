@@ -30,13 +30,18 @@
 								>
 							</label>
 						</div>
-						<div>
-							<button>
-								<a href="/" class="btn-ghost btn text-xl normal-case">{APP_NAME}</a>
-							</button>
-						</div>
-						<div class="flex flex-1 justify-center">
-							<!-- <div class="hidden md:block">
+					{/if}
+
+					<!-- app name -->
+					<div>
+						<button>
+							<a href="/" class="btn-ghost btn text-xl normal-case">{APP_NAME}</a>
+						</button>
+					</div>
+
+					<!-- right side menu -->
+					<div class="flex flex-1 justify-center">
+						<!-- <div class="hidden md:block">
 							<div class="menu menu-horizontal p-2">
 								{#if PUBLIC_NAVS?.length > 0}
 									{#each PUBLIC_NAVS as nav}
@@ -45,20 +50,19 @@
 								{/if}
 							</div>
 						</div> -->
-						</div>
-						<div class="flex-none">
-							<div class="hidden md:block">
-								<div class="menu menu-horizontal p-2">
-									{#if PUBLIC_NAVS?.length > 0}
-										{#each PUBLIC_NAVS as nav}
-											<li class="font-medium"><a href={nav.path}>{nav.label}</a></li>
-										{/each}
-									{/if}
-								</div>
+					</div>
+					<div class="flex-none">
+						<div class="hidden md:block">
+							<div class="menu menu-horizontal p-2">
+								{#if PUBLIC_NAVS?.length > 0}
+									{#each PUBLIC_NAVS as nav}
+										<li class="font-medium"><a href={nav.path}>{nav.label}</a></li>
+									{/each}
+								{/if}
 							</div>
 							<Auth />
 						</div>
-					{/if}
+					</div>
 				</div>
 			</div>
 			<div class="w-full max-w-4xl p-4 md:pl-6">
