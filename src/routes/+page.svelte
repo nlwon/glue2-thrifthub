@@ -63,7 +63,7 @@
 
 	onMount(async () => {
 		searchByQuery(query);
-		const coursesData = await pb.collection('topics').getList(1, 20, {
+		const coursesData = await pb.collection('topics').getList(1, 4, {
 			filter: "category='course'",
 			sort: '-pageView'
 		});
@@ -76,14 +76,16 @@
 <PageContainer title="Home" layout="aside-main">
 	<Main>
 		<div class="space-y-4">
-			<TextInput
-				bind:value={query}
-				on:input={(event) => {
-					handleChangeQuery(event?.target?.value);
-				}}
-				placeholder="🔍  Search for a topic"
-				class="rounded-full pl-4"
-			/>
+			<div class="rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-0.5">
+				<TextInput
+					bind:value={query}
+					on:input={(event) => {
+						handleChangeQuery(event?.target?.value);
+					}}
+					placeholder="🔍  Search for a topic"
+					class="w-full rounded-full pl-4"
+				/>
+			</div>
 			<div>
 				<div class="flex items-center space-x-2 overflow-auto pb-3">
 					{#each SUGGESTED_SEARCH_QUERIES as queryString, idx (queryString)}
