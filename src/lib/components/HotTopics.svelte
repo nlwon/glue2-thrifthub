@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div class="space-y-3">
-		<p class="text-sm font-semibold uppercase">📚 Hot dorms</p>
+		<p class="text-sm font-semibold uppercase">🏠 Hot dorms</p>
 		<div class="space-y-2">
 			{#each dorms as dorm, idx (dorm?.id)}
 				<a href={`/topic/${dorm?.id}`} class="block" target="_self">
@@ -47,7 +47,7 @@
 		</div>
 	</div>
 	<div class="space-y-3">
-		<p class="text-sm font-semibold uppercase">📚 Hot clubs</p>
+		<p class="text-sm font-semibold uppercase">⚽ Hot clubs</p>
 		<div class="space-y-2">
 			{#each clubs as club, idx (club?.id)}
 				<a href={`/topic/${club?.id}`} class="block" target="_self">
