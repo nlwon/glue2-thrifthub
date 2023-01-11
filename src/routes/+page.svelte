@@ -41,6 +41,10 @@
 			});
 		}
 
+		// reset hits before searching to prevent
+		// previous hits from flashing
+		hits = [];
+
 		const res = await client.index('topics').search(query);
 
 		hits = res?.hits;
@@ -66,7 +70,7 @@
 		popularCourses = coursesData?.items || [];
 	});
 
-	const SUGGESTED_SEARCH_QUERIES = ['dance club', 'cooking', 'Toni Morrison', 'web dev'];
+	const SUGGESTED_SEARCH_QUERIES = ['dance clubs', 'sophomore dorms', 'info 1300'];
 </script>
 
 <PageContainer title="Home" layout="aside-main">
@@ -80,29 +84,31 @@
 				placeholder="🔍  Search for a topic"
 				class="rounded-full pl-4"
 			/>
-			<div class="flex items-center space-x-2 overflow-auto pb-3">
-				{#each SUGGESTED_SEARCH_QUERIES as queryString, idx (queryString)}
-					<button class="btn-outline btn-sm btn" on:click={() => handleChangeQuery(queryString)}
-						>{queryString}</button
-					>
-				{/each}
+			<div>
+				<div class="flex items-center space-x-2 overflow-auto pb-3">
+					{#each SUGGESTED_SEARCH_QUERIES as queryString, idx (queryString)}
+						<button class="btn-outline btn-sm btn" on:click={() => handleChangeQuery(queryString)}
+							>{queryString}</button
+						>
+					{/each}
+				</div>
+				{#if Boolean(query)}
+					<p class="mt-4 text-sm text-base-content/80">
+						{hits?.length} of 7890 found in {processingTimeMs} milliseconds
+					</p>
+					<div class="space-y-2">
+						{#each hits as hit (hit.id)}
+							<TopicListItem topic={hit} />
+						{/each}
+					</div>
+				{:else}
+					<div class="space-y-2">
+						{#each popularCourses as course (course.id)}
+							<TopicListItem topic={course} />
+						{/each}
+					</div>
+				{/if}
 			</div>
-			{#if Boolean(query)}
-				<p class="ml-2 text-sm text-base-content/80">
-					{hits?.length} of 7890 found in {processingTimeMs} milliseconds
-				</p>
-				<div class="space-y-2">
-					{#each hits as hit (hit.id)}
-						<TopicListItem topic={hit} />
-					{/each}
-				</div>
-			{:else}
-				<div class="space-y-2">
-					{#each popularCourses as course (course.id)}
-						<TopicListItem topic={course} />
-					{/each}
-				</div>
-			{/if}
 		</div>
 	</Main>
 	<Aside>
