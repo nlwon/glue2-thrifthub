@@ -25,7 +25,7 @@
 	});
 </script>
 
-<div class="space-y-6 rounded-xl bg-base-200 py-6 px-2 md:py-4">
+<div class="space-y-6 rounded-xl bg-base-200 py-6 px-4 md:py-6">
 	<div class="space-y-3">
 		<p class="text-sm font-semibold uppercase">📚 Hot courses</p>
 		<div class="space-y-2">
