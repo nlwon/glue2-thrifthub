@@ -9,10 +9,12 @@
 	export let value: string = '';
 </script>
 
-<div class="form-control w-full max-w-sm">
-	<label class="label">
-		<span class="label-text">{label}</span>
-	</label>
+<div class="form-control w-full">
+	{#if label}
+		<label class="label">
+			<span class="label-text">{label}</span>
+		</label>
+	{/if}
 	<input
 		bind:value
 		on:blur
@@ -31,6 +33,6 @@
 		type="text"
 		{...$$restProps}
 		{name}
-		class={`${$$props.class} input-bordered input w-full max-w-sm`}
+		class={`${$$props.class} input-bordered input w-full`}
 	/>
 </div>
