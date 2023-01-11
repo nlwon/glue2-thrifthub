@@ -2,15 +2,17 @@
 	import { pb } from '$lib/glue/pocketbase';
 
 	export let variant: string;
+	export let context = {};
 
 	const handleClick = () => {
 		pb.collection('logs').create({
-			variant
+			variant,
+			context
 		});
 	};
 </script>
 
-<label for={variant} class="btn-primary btn gap-2" on:click={handleClick}><slot /></label>
+<label for={variant} class={`${$$props.class} btn gap-2`} on:click={handleClick}><slot /></label>
 
 <input type="checkbox" id={variant} class="modal-toggle" />
 <label for={variant} class="modal cursor-pointer">
