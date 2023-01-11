@@ -19,6 +19,11 @@
 		keyword = keyword.substring(0, lastIndex);
 	}
 
+	if (topic?.category === 'club') {
+		keyword = keyword?.replace('at cornell uniersity', '');
+		keyword = keyword?.replace('at cornell', '');
+	}
+
 	let questionThreads = [];
 	let isScraped = false;
 	let isLoading = true;
