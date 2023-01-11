@@ -34,7 +34,9 @@
 		<div class="space-y-2">
 			{#each courses as course, idx (course?.id)}
 				<a href={`/topic/${course?.id}`} class="block" target="_self">
-					<button class="btn-block btn-sm btn block text-left">{idx + 1}. {course?.name}</button>
+					<button class="btn-outline btn-block btn-sm btn block text-left opacity-90"
+						>{idx + 1}. {course?.name}</button
+					>
 				</a>
 			{/each}
 		</div>
@@ -44,7 +46,9 @@
 		<div class="space-y-2">
 			{#each dorms as dorm, idx (dorm?.id)}
 				<a href={`/topic/${dorm?.id}`} class="block" target="_self">
-					<button class="btn-block btn-sm btn block text-left">{idx + 1}. {dorm?.name}</button>
+					<button class="btn-outline btn-block btn-sm btn block text-left opacity-90"
+						>{idx + 1}. {dorm?.name}</button
+					>
 				</a>
 			{/each}
 		</div>
@@ -54,7 +58,7 @@
 		<div class="space-y-2">
 			{#each clubs as club, idx (club?.id)}
 				<a href={`/topic/${club?.id}`} class="block" target="_self">
-					<button class="btn-block btn-sm btn block text-left"
+					<button class="btn-outline btn-block btn-sm btn block text-left opacity-90"
 						><p class="line-clamp-1">{idx + 1}. {club?.name}</p></button
 					>
 				</a>
