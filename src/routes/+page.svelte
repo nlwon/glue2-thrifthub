@@ -28,10 +28,18 @@
 	};
 
 	const searchByQuery = async (query) => {
-		$page.url.searchParams.set('query', query);
-		goto(`?${$page.url.searchParams.toString()}`, {
-			keepFocus: true
-		});
+		if (query?.length > 0) {
+			$page.url.searchParams.set('query', query);
+			goto(`?${$page.url.searchParams.toString()}`, {
+				keepFocus: true
+			});
+		} else {
+			$page.url.searchParams.delete('query');
+			goto(`?${$page.url.searchParams.toString()}`, {
+				keepFocus: true
+			});
+		}
+
 		const res = await client.index('topics').search(query);
 
 		hits = res?.hits;
