@@ -1,12 +1,20 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import axios from 'axios';
 	import { pb } from '$lib/glue/pocketbase';
 	import { differenceInDays, format, formatDistance } from 'date-fns';
 	import IconUpArrow from '$lib/icons/glue/IconUpArrow.svelte';
 	import showdown from 'showdown';
+	import highlightWords from 'highlight-words';
 
 	export let topic;
+
+	let keyword = topic?.name?.toLowerCase();
+
+	if (topic?.category === 'dorm' && keyword?.split(' ').pop() === 'hall') {
+		const lastIndex = keyword.lastIndexOf(' ');
+		keyword = keyword.substring(0, lastIndex);
+	}
 
 	let questionThreads = [];
 
@@ -20,8 +28,11 @@
 		const promises = data?.data?.children?.map(async ({ data }) => {
 			const { selftext, title, permalink } = data;
 
+			// TODO: format required substring (ie dont require the full name)
+			// clubs -> remove "club", "at cornell" from the end
+
 			if (
-				(selftext?.includes(topic?.name) || title?.includes(topic?.name)) &&
+				(selftext?.toLowerCase()?.includes(keyword) || title?.toLowerCase()?.includes(keyword)) &&
 				(selftext?.includes('?') || title?.includes('?'))
 			) {
 				const { data: postData } = await axios.get(`https://www.reddit.com${permalink}.json`);
@@ -148,6 +159,23 @@
 			return `${formatDistance(new Date(), new Date(date))} ago`;
 		}
 	};
+
+	const formatContent = (content: string) => {
+		const chunks = highlightWords({
+			text: converter.makeHtml(content) || '',
+			query: keyword,
+			matchExactly: false,
+			clipBy: false
+		});
+		return chunks
+			?.map((chunk) => {
+				if (chunk?.match) {
+					return `<span class="decoration-primary underline decoration-2">${chunk?.text}</span>`;
+				}
+				return chunk?.text;
+			})
+			?.join('');
+	};
 </script>
 
 <div class="">
@@ -155,9 +183,11 @@
 	<div class="">
 		{#each questionThreads as question (question?.id)}
 			<div class="space-y-4 border-b border-base-300 py-8">
-				<p class="text-xl font-semibold">Q. {question?.title}</p>
+				<p class="inline text-xl font-semibold [&>p:first-of-type]:inline">
+					Q. {@html `${formatContent(question?.title)}`}
+				</p>
 				<article class="prose prose-a:text-blue-600">
-					{@html converter.makeHtml(question?.content)}
+					{@html formatContent(question?.content)}
 				</article>
 				<p class="mt-0.5 text-sm text-base-content/80">
 					{formatDate(question)}
@@ -167,7 +197,7 @@
 						{#each question?.answers as answer (answer?.id)}
 							<div class="space-y-3 border-l-2 border-primary/80 pl-5">
 								<article class="prose prose-a:text-blue-600">
-									{@html converter.makeHtml(answer?.content)}
+									{@html formatContent(answer?.content)}
 								</article>
 								<div class="flex items-center space-x-2">
 									<button class="btn-base btn-xs btn gap-2 rounded-full"
