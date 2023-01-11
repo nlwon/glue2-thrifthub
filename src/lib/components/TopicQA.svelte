@@ -134,7 +134,6 @@
 		fetchQAFromDB();
 		scrapeQAFromReddit();
 	});
-	$: console.log('questionThreads', questionThreads);
 
 	const converter = new showdown.Converter();
 	converter?.setOption('openLinksInNewWindow', true);
