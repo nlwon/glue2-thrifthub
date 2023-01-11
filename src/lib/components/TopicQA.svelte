@@ -20,6 +20,9 @@
 	}
 
 	let questionThreads = [];
+	let isScraped = false;
+	let isLoading = true;
+	$: isLoading = questionThreads?.length === 0 && !isScraped;
 
 	const scrapeQAFromReddit = async () => {
 		const { data } = await axios(
@@ -124,6 +127,7 @@
 			(question) => question && !existingQuestionIds?.includes(question?.id)
 		);
 		questionThreads = [...questionThreads, ...newQuestionThreads];
+		isScraped = true;
 	};
 
 	const fetchQAFromDB = async () => {
@@ -187,6 +191,24 @@
 	<ComingSoon variant="click-create-post" class="btn-primary" context={topic}
 		><IconAdd /> Create post</ComingSoon
 	>
+
+	{#if isLoading}
+		<div class="space-y-10 py-8">
+			<div class="space-y-4">
+				<div class="h-8 w-full animate-pulse rounded-xl bg-base-300" />
+				<div class="h-24 w-full animate-pulse rounded-xl bg-base-300" />
+			</div>
+			<div class="space-y-4">
+				<div class="h-8 w-full animate-pulse rounded-xl bg-base-300" />
+				<div class="h-24 w-full animate-pulse rounded-xl bg-base-300" />
+			</div>
+			<div class="space-y-4">
+				<div class="h-8 w-full animate-pulse rounded-xl bg-base-300" />
+				<div class="h-24 w-full animate-pulse rounded-xl bg-base-300" />
+			</div>
+		</div>
+	{/if}
+
 	<div class="">
 		{#each questionThreads as question (question?.id)}
 			<div class="space-y-4 border-b border-base-300 py-8">
@@ -203,7 +225,7 @@
 					<div class="space-y-6 pt-2">
 						{#each question?.answers as answer (answer?.id)}
 							<div class="space-y-3 border-l-2 border-primary/80 pl-5">
-								<article class="prose prose-a:text-blue-600">
+								<article class="prose break-words prose-a:text-blue-600">
 									{@html formatContent(answer?.content)}
 								</article>
 								<div class="flex items-center space-x-2">

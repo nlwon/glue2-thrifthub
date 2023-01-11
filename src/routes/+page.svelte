@@ -5,6 +5,7 @@
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import TextInput from '$lib/components/glue/TextInput.svelte';
+	import HotTopics from '$lib/components/HotTopics.svelte';
 	import TopicListItem from '$lib/components/TopicListItem.svelte';
 	import { pb } from '$lib/glue/pocketbase';
 	import debounce from 'just-debounce-it';
@@ -98,32 +99,7 @@
 		</div>
 	</Main>
 	<Aside>
-		<div class="space-y-6 py-6 md:py-0">
-			<div class="space-y-2">
-				<p class="font-semibold uppercase">📚 Hot courses</p>
-				<div class="space-y-2">
-					<button class="btn-sm btn block">1. CS 1110</button>
-					<button class="btn-sm btn block">1. CS 1110</button>
-					<button class="btn-sm btn block">1. CS 1110</button>
-				</div>
-			</div>
-			<div class="space-y-2">
-				<p class="font-semibold uppercase">🏠 Hot dorms</p>
-				<div class="space-y-2">
-					<button class="btn-sm btn block">1. Ganędagǫ: Hall</button>
-					<button class="btn-sm btn block">2. Toni Morrison Hall</button>
-					<button class="btn-sm btn block">1. CS 1110</button>
-				</div>
-			</div>
-			<div class="space-y-2">
-				<p class="font-semibold uppercase">⚽ Hot clubs</p>
-				<div class="space-y-2">
-					<button class="btn-sm btn block">1. CS 1110</button>
-					<button class="btn-sm btn block">1. CS 1110</button>
-					<button class="btn-sm btn block">1. CS 1110</button>
-				</div>
-			</div>
-		</div>
+		<HotTopics />
 	</Aside>
 </PageContainer>
 
