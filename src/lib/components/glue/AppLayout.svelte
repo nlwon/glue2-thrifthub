@@ -13,29 +13,30 @@
 			<div class={`w-full max-w-4xl`}>
 				<div class="navbar bg-base-100">
 					<!-- mobile nav: hamburger -->
-					<div class="flex-none md:hidden">
-						<label for="drawer-mobile-nav" class="btn-ghost drawer-button btn-square btn">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								class="inline-block h-5 w-5 stroke-current"
-								><path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 6h16M4 12h16M4 18h16"
-								/></svg
-							>
-						</label>
-					</div>
-					<div>
-						<button>
-							<a href="/" class="btn-ghost btn text-xl normal-case">{APP_NAME}</a>
-						</button>
-					</div>
-					<div class="flex flex-1 justify-center">
-						<!-- <div class="hidden md:block">
+					{#if PUBLIC_NAVS?.length > 0}
+						<div class="flex-none md:hidden">
+							<label for="drawer-mobile-nav" class="btn-ghost drawer-button btn-square btn">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									class="inline-block h-5 w-5 stroke-current"
+									><path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M4 6h16M4 12h16M4 18h16"
+									/></svg
+								>
+							</label>
+						</div>
+						<div>
+							<button>
+								<a href="/" class="btn-ghost btn text-xl normal-case">{APP_NAME}</a>
+							</button>
+						</div>
+						<div class="flex flex-1 justify-center">
+							<!-- <div class="hidden md:block">
 							<div class="menu menu-horizontal p-2">
 								{#if PUBLIC_NAVS?.length > 0}
 									{#each PUBLIC_NAVS as nav}
@@ -44,19 +45,20 @@
 								{/if}
 							</div>
 						</div> -->
-					</div>
-					<div class="flex-none">
-						<div class="hidden md:block">
-							<div class="menu menu-horizontal p-2">
-								{#if PUBLIC_NAVS?.length > 0}
-									{#each PUBLIC_NAVS as nav}
-										<li class="font-medium"><a href={nav.path}>{nav.label}</a></li>
-									{/each}
-								{/if}
-							</div>
 						</div>
-						<!-- <Auth /> -->
-					</div>
+						<div class="flex-none">
+							<div class="hidden md:block">
+								<div class="menu menu-horizontal p-2">
+									{#if PUBLIC_NAVS?.length > 0}
+										{#each PUBLIC_NAVS as nav}
+											<li class="font-medium"><a href={nav.path}>{nav.label}</a></li>
+										{/each}
+									{/if}
+								</div>
+							</div>
+							<!-- <Auth /> -->
+						</div>
+					{/if}
 				</div>
 			</div>
 			<div class="w-full max-w-4xl p-4 md:pl-6">
