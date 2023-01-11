@@ -164,7 +164,7 @@
 		const chunks = highlightWords({
 			text: converter.makeHtml(content) || '',
 			query: keyword,
-			matchExactly: false,
+			matchExactly: true,
 			clipBy: false
 		});
 		return chunks
