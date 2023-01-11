@@ -18,6 +18,7 @@
 	});
 
 	let hits = [];
+	let popularCourses = [];
 	let processingTimeMs = 0;
 	let estimatedTotalHits = 0;
 	let query = $page.url.searchParams.get('query');
@@ -56,18 +57,16 @@
 
 	const debouncedSearchByQuery = debounce(searchByQuery, 500);
 
-	onMount(() => {
+	onMount(async () => {
 		searchByQuery(query);
+		const coursesData = await pb.collection('topics').getList(1, 20, {
+			filter: "category='course'",
+			sort: '-pageView'
+		});
+		popularCourses = coursesData?.items || [];
 	});
 
-	const SUGGESTED_SEARCH_QUERIES = [
-		'cooking',
-		'piano club',
-		'toni morrison',
-		'INFO 1300',
-		'dance club',
-		'web dev'
-	];
+	const SUGGESTED_SEARCH_QUERIES = ['dance club', 'cooking', 'Toni Morrison', 'web dev'];
 </script>
 
 <PageContainer title="Home" layout="aside-main">
@@ -81,6 +80,13 @@
 				placeholder="🔍  Search for a topic"
 				class="rounded-full pl-4"
 			/>
+			<div class="flex items-center space-x-2 overflow-auto pb-3">
+				{#each SUGGESTED_SEARCH_QUERIES as queryString, idx (queryString)}
+					<button class="btn-outline btn-sm btn" on:click={() => handleChangeQuery(queryString)}
+						>{queryString}</button
+					>
+				{/each}
+			</div>
 			{#if Boolean(query)}
 				<p class="ml-2 text-sm text-base-content/80">
 					{hits?.length} of 7890 found in {processingTimeMs} milliseconds
@@ -91,17 +97,10 @@
 					{/each}
 				</div>
 			{:else}
-				<div>
-					<p class="mt-8 mb-4 font-semibold uppercase">Suggested search terms</p>
-					<div class="space-y-3">
-						{#each SUGGESTED_SEARCH_QUERIES as queryString, idx (queryString)}
-							<div>
-								<button class="btn" on:click={() => handleChangeQuery(queryString)}
-									>{idx + 1}. {queryString}</button
-								>
-							</div>
-						{/each}
-					</div>
+				<div class="space-y-2">
+					{#each popularCourses as course (course.id)}
+						<TopicListItem topic={course} />
+					{/each}
 				</div>
 			{/if}
 		</div>

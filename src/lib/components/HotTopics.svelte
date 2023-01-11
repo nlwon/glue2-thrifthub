@@ -9,17 +9,20 @@
 	onMount(async () => {
 		const coursesData = await pb.collection('topics').getList(1, 4, {
 			filter: "category='course'",
-			sort: '-pageView'
+			sort: '-pageView',
+			$autoCancel: false
 		});
 		courses = coursesData?.items || [];
 		const clubsData = await pb.collection('topics').getList(1, 4, {
 			filter: "category='club'",
-			sort: '-pageView'
+			sort: '-pageView',
+			$autoCancel: false
 		});
 		clubs = clubsData?.items || [];
 		const dormsData = await pb.collection('topics').getList(1, 4, {
 			filter: "category='dorm'",
-			sort: '-pageView'
+			sort: '-pageView',
+			$autoCancel: false
 		});
 		dorms = dormsData?.items || [];
 	});
