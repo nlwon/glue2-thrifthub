@@ -6,6 +6,7 @@
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import TextInput from '$lib/components/glue/TextInput.svelte';
 	import TopicListItem from '$lib/components/TopicListItem.svelte';
+	import { pb } from '$lib/glue/pocketbase';
 	import debounce from 'just-debounce-it';
 	import { MeiliSearch } from 'meilisearch';
 	import { onMount } from 'svelte';
@@ -35,6 +36,13 @@
 		hits = res?.hits;
 		processingTimeMs = res?.processingTimeMs || 0;
 		estimatedTotalHits = res?.estimatedTotalHits || 0;
+
+		if (query?.length > 0) {
+			pb.collection('logs').create({
+				variant: 'search',
+				value: query
+			});
+		}
 	};
 
 	const debouncedSearchByQuery = debounce(searchByQuery, 200);
