@@ -35,7 +35,7 @@
 	};
 </script>
 
-<div class="fixed bottom-4 right-4 md:bottom-6 md:right-1/2 md:-translate-y-1/2">
+<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2">
 	<label
 		for="modal-feedback"
 		class="btn-primary btn"
