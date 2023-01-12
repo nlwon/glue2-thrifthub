@@ -8,6 +8,7 @@
 	import HotTopics from '$lib/components/HotTopics.svelte';
 	import TopicListItem from '$lib/components/TopicListItem.svelte';
 	import { pb } from '$lib/glue/pocketbase';
+	import IconDownKarat from '$lib/icons/glue/IconDownKarat.svelte';
 	import debounce from 'just-debounce-it';
 	import { MeiliSearch } from 'meilisearch';
 	import { onMount } from 'svelte';
@@ -44,6 +45,7 @@
 		// reset hits before searching to prevent
 		// previous hits from flashing
 		hits = [];
+		pageNumber = 1;
 
 		const res = await client.index('topics').search(query);
 
@@ -71,6 +73,20 @@
 	});
 
 	const SUGGESTED_SEARCH_QUERIES = ['dance clubs', 'sophomore dorms', 'info 1300'];
+
+	// load more
+	let pageNumber = 1;
+
+	const loadMore = async () => {
+		pageNumber += 1;
+
+		const res = await client.index('topics').search(query, {
+			hitsPerPage: 20,
+			page: pageNumber
+		});
+
+		hits = [...hits, ...res?.hits];
+	};
 </script>
 
 <PageContainer title="Home" layout="aside-main">
@@ -96,13 +112,27 @@
 				</div>
 				{#if Boolean(query)}
 					<p class="mt-4 text-sm text-base-content/80">
-						{hits?.length} of 7890 found in {processingTimeMs} milliseconds
+						{estimatedTotalHits} of 7890 found in {processingTimeMs} milliseconds
 					</p>
 					<div class="space-y-2">
 						{#each hits as hit (hit.id)}
 							<TopicListItem topic={hit} />
 						{/each}
 					</div>
+					{#if hits?.length > 0}
+						<div class="mt-4 mb-12">
+							<div class="">
+								<button class="btn-primary btn gap-1 rounded-full" on:click={loadMore}
+									><span class="text-2xl"><IconDownKarat /></span> Load more</button
+								>
+							</div>
+							<div class="mt-4 ml-2 text-sm text-base-content/80">
+								<p>
+									Search results might start to become inaccurate if you load more search results.
+								</p>
+							</div>
+						</div>
+					{/if}
 				{:else}
 					<div class="space-y-2">
 						{#each popularCourses as course (course.id)}
