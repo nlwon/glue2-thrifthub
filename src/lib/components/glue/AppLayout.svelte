@@ -3,6 +3,7 @@
 	import MobileDrawerContent from '$lib/components/glue/MobileDrawerContent.svelte';
 	import { APP_NAME, PUBLIC_NAVS } from '$lib/glue/config';
 	import './app.css';
+	import FeedbackModal from './FeedbackModal.svelte';
 </script>
 
 <div class="w-screen">
@@ -65,7 +66,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="w-full max-w-4xl p-4 md:pl-6">
+			<div class="relative w-full max-w-4xl p-4 md:pl-6">
 				<!-- body content -->
 				<div class="min-h-[82vh]">
 					<slot />
@@ -77,6 +78,9 @@
 						<p>{APP_NAME} © 2022</p>
 					</div>
 				</footer>
+
+				<!-- feedback -->
+				<FeedbackModal />
 			</div>
 		</div>
 
