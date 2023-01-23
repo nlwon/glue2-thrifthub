@@ -61,8 +61,8 @@
 									{/each}
 								{/if}
 							</div>
-							<Auth />
 						</div>
+						<Auth />
 					</div>
 				</div>
 			</div>
