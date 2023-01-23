@@ -16,7 +16,7 @@ Glue is the culmination of my ~5 years of full-stack web development. It's my ul
 2. Add glue remote
 
 ```bash
-git remote add glue https://github.com/jay-joo-code/glue2-sentiment.git
+git remote add glue https://github.com/jay-joo-code/glue2-root.git
 git fetch --all
 git switch -c glue-main glue/main
 ```
@@ -26,21 +26,21 @@ git switch -c glue-main glue/main
 **Pushing specific commits to Glue root**
 
 ```bash
-$ git checkout glue-master
+$ git checkout glue-main
 $ git cherry-pick <commit-hash>
 $ git push
 ```
 
-**Setting upstream to glue/master**
+**Setting upstream to glue/main**
 
 ```bash
-$ git branch -u glue/master
+$ git branch -u glue/main
 ```
 
-**Push to glue/master**
+**Push to glue/main**
 
 ```bash
-git push glue glue-master:master
+git push glue glue-main:main
 ```
 
 ## Backend
