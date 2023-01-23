@@ -42,7 +42,7 @@
 
 					<!-- right side menu -->
 					<div class="flex flex-1 justify-center">
-						<!-- <div class="hidden md:block">
+						<div class="hidden md:block">
 							<div class="menu menu-horizontal p-2">
 								{#if PUBLIC_NAVS?.length > 0}
 									{#each PUBLIC_NAVS as nav}
@@ -50,7 +50,7 @@
 									{/each}
 								{/if}
 							</div>
-						</div> -->
+						</div>
 					</div>
 					<div class="flex-none">
 						<div class="hidden md:block">
@@ -61,7 +61,7 @@
 									{/each}
 								{/if}
 							</div>
-							<!-- <Auth /> -->
+							<Auth />
 						</div>
 					</div>
 				</div>
