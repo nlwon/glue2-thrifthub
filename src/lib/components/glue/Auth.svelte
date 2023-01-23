@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { APP_NAME } from '$lib/glue/config';
+	import { APP_NAME, IS_GOOGLE_AUTH_ONLY } from '$lib/glue/config';
 	import IconAdd from '$lib/icons/glue/IconAdd.svelte';
 	import IconHome from '$lib/icons/glue/IconHome.svelte';
 	import IconLogout from '$lib/icons/glue/IconLogout.svelte';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
 	import { onMount } from 'svelte';
+	import IconGoogle from '$lib/icons/glue/IconGoogle.svelte';
+	import { page } from '$app/stores';
 
 	const PRIVATE_NAVS = [
 		{
@@ -31,38 +33,55 @@
 	let redirectUrl = '';
 
 	onMount(async () => {
-		const result = await pb.collection('users').listAuthMethods();
-		if (result) {
+		if (window?.location?.pathname !== '/redirect') {
+			localStorage.setItem('returnUrl', window?.location?.href);
+		}
+
+		const authMethods = await pb.collection('users').listAuthMethods();
+
+		if (authMethods) {
 			redirectUrl = `${window.location.origin}/redirect`;
 
-			result?.authProviders?.forEach((provider) => {
+			authMethods?.authProviders?.forEach((provider) => {
 				authProviders[provider?.name] = provider;
 			});
 
 			const params = new URL(window.location as string).searchParams;
+			const authCode = params.get('code');
 			const provider = JSON.parse(localStorage.getItem('provider') || '');
 
-			if (params.get('code')) {
-				console.log('authProviders?.google?.codeVerifier', authProviders?.google?.codeVerifier);
-				console.log('params.get', params.get('code'));
+			if (authCode && provider.state === params.get('state')) {
 				const authResult = await pb
 					.collection('users')
-					.authWithOAuth2('google', params.get('code'), provider.codeVerifier, redirectUrl);
-				console.log('authResult', authResult);
+					.authWithOAuth2('google', authCode, provider.codeVerifier, redirectUrl);
 
-				// pb.collection('users').update(authResult?.record?.id, {
-				// 	name: authResult?.meta?.name,
+				pb.collection('users').update(authResult?.record?.id, {
+					name: authResult?.meta?.rawUser?.name,
+					avatarUrl: authResult?.meta?.rawUser?.picture
+				});
+			}
 
-				// })
+			$page.url.searchParams.delete('code');
+			$page.url.searchParams.delete('state');
+			$page.url.searchParams.delete('scope');
+			$page.url.searchParams.delete('authuser');
+			$page.url.searchParams.delete('hd');
+			$page.url.searchParams.delete('prompt');
+
+			const returnUrl = localStorage.getItem('returnUrl');
+
+			if (returnUrl) {
+				goto(returnUrl);
+			} else {
+				goto(`?${$page.url.searchParams.toString()}`);
 			}
 		}
 	});
-	$: console.log('authProviders', authProviders);
-	$: console.log('$currentUser', $currentUser);
 
 	const signInGoogle = async () => {
-		const url = authProviders?.google?.authUrl + redirectUrl;
 		localStorage.setItem('provider', JSON.stringify(authProviders?.google));
+
+		const url = authProviders?.google?.authUrl + redirectUrl;
 		goto(url);
 	};
 
@@ -106,7 +125,11 @@
 				<div
 					class="w-8 rounded-full bg-neutral-focus text-neutral-content ring-2 ring ring-primary ring-offset-2 ring-offset-base-100"
 				>
-					<span class="text-sm">{$currentUser?.name?.charAt(0)}</span>
+					{#if $currentUser?.avatarUrl}
+						<img src={$currentUser?.avatarUrl} />
+					{:else}
+						<span class="text-sm">{$currentUser?.name?.charAt(0)}</span>
+					{/if}
 				</div>
 			</div>
 		</label>
@@ -133,50 +156,58 @@
 		<label class="modal-box relative w-11/12 max-w-sm" for="">
 			<form on:submit|preventDefault={handleSubmit}>
 				<div class="flex flex-col gap-3">
-					<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">
-						{state === 'signin' ? 'Sign in to' : 'Create an account on'}
-						{APP_NAME}
-					</h3>
-					<button type="button" class="btn-primary btn" on:click={signInGoogle}
-						>Sign in with Google</button
-					>
-					{#if state === 'register'}
+					{#if IS_GOOGLE_AUTH_ONLY}
+						<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">
+							Sign in to {APP_NAME}
+						</h3>
+						<p class="mb-2">
+							Access all of the features by signing in and getting started with {APP_NAME}.
+						</p>
+						<button type="button" class="btn-primary btn gap-2" on:click={signInGoogle}
+							><IconGoogle /> Sign in with Google</button
+						>
+					{:else}
+						<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">
+							{state === 'signin' ? 'Sign in to' : 'Create an account on'}
+							{APP_NAME}
+						</h3>
+						{#if state === 'register'}
+							<div class="form-control">
+								<label class="label" for="username">Name</label>
+								<input
+									class="input-bordered input w-full max-w-xs"
+									name="username"
+									placeholder="John Doe"
+									required
+									bind:value={username}
+								/>
+							</div>
+						{/if}
 						<div class="form-control">
-							<label class="label" for="username">Name</label>
+							<label class="label" for="email">Email</label>
 							<input
 								class="input-bordered input w-full max-w-xs"
-								name="username"
-								placeholder="John Doe"
+								type="email"
+								name="email"
+								placeholder="name@company.com"
 								required
-								bind:value={username}
+								bind:value={email}
 							/>
 						</div>
-					{/if}
-					<div class="form-control">
-						<label class="label" for="email">Email</label>
-						<input
-							class="input-bordered input w-full max-w-xs"
-							type="email"
-							name="email"
-							placeholder="name@company.com"
-							required
-							bind:value={email}
-						/>
-					</div>
-					<div class="form-control">
-						<label class="label" for="password">Password</label>
-						<input
-							class="input-bordered input w-full max-w-xs"
-							type="password"
-							name="password"
-							placeholder="••••••••••"
-							required
-							bind:value={password}
-						/>
-					</div>
-					<div class="flex items-center justify-between">
-						<!-- NOTE: remember me checkbox -->
-						<!-- <div class="form-control">
+						<div class="form-control">
+							<label class="label" for="password">Password</label>
+							<input
+								class="input-bordered input w-full max-w-xs"
+								type="password"
+								name="password"
+								placeholder="••••••••••"
+								required
+								bind:value={password}
+							/>
+						</div>
+						<div class="flex items-center justify-between">
+							<!-- NOTE: remember me checkbox -->
+							<!-- <div class="form-control">
 							<label class="label cursor-pointer">
 								<div class="flex items-center gap-3">
 									<input type="checkbox" checked={true} class="checkbox-primary checkbox" />
@@ -184,26 +215,29 @@
 								</div>
 							</label>
 						</div> -->
-						{#if state === 'signin'}
-							<div>
-								<a href="/" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-									>Lost password?</a
-								>
-							</div>
-						{/if}
-					</div>
-					<button type="submit" class="btn-primary btn-block btn"
-						>{state === 'signin' ? 'Sign in' : 'Create account'}</button
-					>
-					<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-						{state === 'signin' ? 'Not registered?' : 'Already have an account?'}
-						<button
-							class="text-blue-700 hover:underline dark:text-blue-500"
-							on:click={toggleState}
-							type="button"
-							>{state === 'signin' ? 'Create account' : 'Sign in'}
-						</button>
-					</div>
+							{#if state === 'signin'}
+								<div>
+									<a
+										href="/"
+										class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
+										>Lost password?</a
+									>
+								</div>
+							{/if}
+						</div>
+						<button type="submit" class="btn-primary btn-block btn"
+							>{state === 'signin' ? 'Sign in' : 'Create account'}</button
+						>
+						<div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+							{state === 'signin' ? 'Not registered?' : 'Already have an account?'}
+							<button
+								class="text-blue-700 hover:underline dark:text-blue-500"
+								on:click={toggleState}
+								type="button"
+								>{state === 'signin' ? 'Create account' : 'Sign in'}
+							</button>
+						</div>
+					{/if}
 				</div>
 				<!-- <input placeholder="Username" type="text" bind:value={email} />
 				<input placeholder="Password" type="password" bind:value={password} />
