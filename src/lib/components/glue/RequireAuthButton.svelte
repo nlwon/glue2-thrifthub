@@ -12,12 +12,12 @@
 {#if $currentUser}
 	{#if href}
 		<a {href}>
-			<button {...$$restProps} class={$$props.class}>
+			<button on:click {...$$restProps} class={$$props.class}>
 				<slot />
 			</button>
 		</a>
 	{:else}
-		<button {...$$restProps} class={$$props.class}>
+		<button on:click {...$$restProps} class={$$props.class}>
 			<slot />
 		</button>
 	{/if}
