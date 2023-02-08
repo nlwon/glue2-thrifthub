@@ -56,8 +56,8 @@
 	{/each}
 	<div class="fixed bottom-0 left-0 right-0 bg-base-300 p-4">
 		<form on:submit={handleCreateChat} class="flex items-center space-x-2">
-			<TextInput bind:value={content} class="input-sm" placeholder="Enter message here" />
-			<button class="btn-primary btn-sm btn">Send</button>
+			<TextInput bind:value={content} class="input" placeholder="Enter message here" />
+			<button class="btn-primary btn">Send</button>
 		</form>
 	</div>
 {/if}
