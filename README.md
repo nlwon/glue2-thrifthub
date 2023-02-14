@@ -21,6 +21,12 @@ git fetch --all
 git switch -c glue-main glue/main
 ```
 
+## Add branch protection rules
+
+Add branch protection rules in the repo settings to force users to create a PR + get approval to commit changes to main.
+
+Refer to RideHub repo settings.
+
 ## Scripts
 
 **Pushing specific commits to Glue root**
