@@ -3,7 +3,9 @@
 	import getOtherUser from '$lib/util/glue/chat/getOtherUser';
 	import { format } from 'date-fns';
 	import { onDestroy, onMount } from 'svelte';
+	import BackButton from '../BackButton.svelte';
 	import TextInput from '../TextInput.svelte';
+	import ChatPanelContent from '../../ChatPanelContent.svelte';
 
 	export let chatroom;
 
@@ -101,9 +103,16 @@
 	$: console.log('chatGroups', chatGroups);
 </script>
 
-<div class="flex">
+<div class="relative rounded border border-base-content/20">
+	<!-- top panel -->
 	<div
-		class="border-3 flex h-[75vh] flex-1 flex-col-reverse overflow-y-auto rounded border border-base-content/20 pr-2"
+		class="absolute left-0 right-0 z-10 flex items-center space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
+	>
+		<BackButton isRenderLabel={false} class="btn-sm px-2 text-2xl" />
+		<ChatPanelContent />
+	</div>
+	<div
+		class="relative mt-[3rem] mb-[4.5rem] flex h-[60vh] flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 [&>div>div:last-child]:snap-end"
 	>
 		<div>
 			{#if chatroom}
@@ -125,17 +134,16 @@
 						</div>
 					{/if}
 				{/each}
-
-				<!-- message input -->
-				<form on:submit={handleCreateChat} class=" p-4">
-					<TextInput
-						bind:value={content}
-						class="input rounded-full border-base-content/40"
-						placeholder="Type a message"
-						autofocus
-					/>
-				</form>
 			{/if}
 		</div>
 	</div>
+	<!-- bottom panel: message input -->
+	<form on:submit={handleCreateChat} class="absolute left-0 right-0 bottom-0 z-10 bg-base-100 p-4">
+		<TextInput
+			bind:value={content}
+			class="input rounded-full border-base-content/40"
+			placeholder="Type a message"
+			autofocus
+		/>
+	</form>
 </div>
