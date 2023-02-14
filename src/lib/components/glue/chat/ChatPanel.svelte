@@ -103,7 +103,7 @@
 <div class="relative rounded border border-base-content/20">
 	<!-- top panel -->
 	<div
-		class="absolute left-0 right-0 z-10 flex items-center space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
+		class="absolute left-0 right-0 z-10 flex items-start space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
 	>
 		<BackButton isRenderLabel={false} class="btn-sm px-2 text-2xl md:hidden" />
 		<ChatPanelContent {chatroom} />
