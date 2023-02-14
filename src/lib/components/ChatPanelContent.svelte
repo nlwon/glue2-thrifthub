@@ -1,7 +1,7 @@
 <script>
 	export let chatroom;
 
-	$: console.log('chatroom', chatroom?.expand?.post);
+	$: console.log('chatroom?.expand?.post', chatroom?.expand?.post);
 </script>
 
 {#if chatroom}
