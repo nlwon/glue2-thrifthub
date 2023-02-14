@@ -4,6 +4,7 @@
 
 	export let fallbackLabel = 'Go home';
 	export let fallbackPath = '/';
+	export let isRenderLabel = true;
 
 	const handleClick = () => {
 		if (canBack) history?.back();
@@ -17,5 +18,8 @@
 </script>
 
 <button class={`${$$props.class} btn gap-2`} on:click={handleClick}
-	><IconBack />{canBack ? 'Back' : fallbackLabel}</button
->
+	><IconBack />
+	{#if isRenderLabel}
+		{canBack ? 'Back' : fallbackLabel}
+	{/if}
+</button>
