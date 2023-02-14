@@ -98,9 +98,6 @@
 	onDestroy(() => {
 		unsubscribe?.();
 	});
-
-	$: console.log('chatroom', chatroom);
-	$: console.log('chatGroups', chatGroups);
 </script>
 
 <div class="relative rounded border border-base-content/20">
