@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import Aside from '$lib/components/glue/Aside.svelte';
-	import Chatroom from '$lib/components/glue/chat/Chatroom.svelte';
+	import ChatPanel from '$lib/components/glue/chat/ChatPanel.svelte';
 	import MyChatroomList from '$lib/components/glue/chat/MyChatroomList.svelte';
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
@@ -25,6 +25,6 @@
 		</div>
 	</Aside>
 	<Main>
-		<Chatroom {chatroom} />
+		<ChatPanel {chatroom} />
 	</Main>
 </PageContainer>

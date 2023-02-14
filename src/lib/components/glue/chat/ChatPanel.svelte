@@ -39,6 +39,7 @@
 			chatGroups[chatGroups?.length - 1].id = chat?.id; // update group id to force rerender
 		}
 
+		chatGroups = [...chatGroups];
 		prevChatUser = chat?.sender;
 		prevDateString = chatDateString;
 	};
@@ -76,14 +77,14 @@
 
 	const subscribeToChats = async () => {
 		unsubscribe = await pb.collection('chats').subscribe('*', async ({ action, record }) => {
-			if (action === 'create') {
+			if (record?.chatroom === chatroom?.id && action === 'create') {
 				appendChat(record);
 			}
 		});
 	};
 
 	const chatGroupName = (group) => {
-		return group?.sender === chatroom?.author?.id
+		return group?.sender === chatroom?.author
 			? chatroom?.expand?.author?.name
 			: chatroom?.expand?.searcher?.name;
 	};
@@ -100,30 +101,41 @@
 	$: console.log('chatGroups', chatGroups);
 </script>
 
-<div class="border-3 rounded border border-base-content/10">
-	{#if chatroom}
-		{#each chatGroups as group (group?.id)}
-			{#if group?.variant === 'datestamp'}
-				<div class="divider mt-0 mb-2 text-sm">{group?.content}</div>
-			{:else}
-				<div class={`chat ${group?.sender === $currentUser?.id ? 'chat-end' : 'chat-start'}`}>
-					<div class="chat-header mb-2">
-						{chatGroupName(group)}
-						<time class="ml-1 text-xs opacity-50"
-							>{format(new Date(group?.created), 'hh:mm aaa')}</time
-						>
-					</div>
-					{#each group?.items as item (item?.id)}
-						<div class="chat-bubble mb-2">{item?.content}</div>
-					{/each}
-				</div>
+<div class="flex">
+	<div
+		class="border-3 flex h-[75vh] flex-1 flex-col-reverse overflow-y-auto rounded border border-base-content/20 pr-2"
+	>
+		<div>
+			{#if chatroom}
+				<!-- chat messages -->
+				{#each chatGroups as group (group?.id)}
+					{#if group?.variant === 'datestamp'}
+						<div class="divider mt-0 mb-2 text-sm">{group?.content}</div>
+					{:else}
+						<div class={`chat ${group?.sender === $currentUser?.id ? 'chat-end' : 'chat-start'}`}>
+							<div class="chat-header mb-2">
+								{chatGroupName(group)}
+								<time class="ml-1 text-xs opacity-50"
+									>{format(new Date(group?.created), 'hh:mm aaa')}</time
+								>
+							</div>
+							{#each group?.items as item (item?.id)}
+								<div class="chat-bubble mb-2">{item?.content}</div>
+							{/each}
+						</div>
+					{/if}
+				{/each}
+
+				<!-- message input -->
+				<form on:submit={handleCreateChat} class=" p-4">
+					<TextInput
+						bind:value={content}
+						class="input rounded-full border-base-content/40"
+						placeholder="Type a message"
+						autofocus
+					/>
+				</form>
 			{/if}
-		{/each}
-		<div class="fixed bottom-0 left-0 right-0 bg-base-300 p-4">
-			<form on:submit={handleCreateChat} class="flex items-center space-x-2">
-				<TextInput bind:value={content} class="input" placeholder="Type a message" autofocus />
-				<button class="btn-primary btn">Send</button>
-			</form>
 		</div>
-	{/if}
+	</div>
 </div>
