@@ -1,1 +1,9 @@
-<div class="flex-1 bg-base-content/20">Edit me: Chat panel content</div>
+<script>
+	export let chatroom;
+
+	$: console.log('chatroom', chatroom?.expand?.post);
+</script>
+
+{#if chatroom}
+	<div class="flex-1">ChatPanelContent (edit me)</div>
+{/if}

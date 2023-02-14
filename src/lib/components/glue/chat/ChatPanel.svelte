@@ -109,7 +109,7 @@
 		class="absolute left-0 right-0 z-10 flex items-center space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
 	>
 		<BackButton isRenderLabel={false} class="btn-sm px-2 text-2xl md:hidden" />
-		<ChatPanelContent />
+		<ChatPanelContent {chatroom} />
 	</div>
 	<div
 		class="relative mt-[3rem] mb-[4.5rem] flex h-[60vh] flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 md:h-[70vh] [&>div>div:last-child]:snap-end"
