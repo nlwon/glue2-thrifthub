@@ -13,9 +13,13 @@
 	const fetchChatroom = async (pathname) => {
 		if (pathname) {
 			chatroomId = pathname?.split('/')[2];
-			chatroom = await pb.collection('chatrooms').getOne(chatroomId, {
-				expand: 'author,searcher,post'
-			});
+			try {
+				chatroom = await pb.collection('chatrooms').getOne(chatroomId, {
+					expand: 'author,searcher,post'
+				});
+			} catch (error) {
+				if (error?.status !== 404) throw error;
+			}
 		}
 	};
 
