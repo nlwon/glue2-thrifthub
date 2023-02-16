@@ -14,23 +14,33 @@
 		});
 
 		const chatroomPromises = chatroomDocs?.map(async (chatroom) => {
-			const latestChat = await pb
-				.collection('chats')
-				.getFirstListItem(`chatroom="${chatroom?.id}"`, {
-					sort: '-created'
-				});
-			return {
-				...chatroom,
-				otherUser: getOtherUser({ chatroom, user: $currentUser, isExpanded: true }),
-				latestChat
-			};
+			try {
+				const latestChat = await pb
+					.collection('chats')
+					.getFirstListItem(`chatroom="${chatroom?.id}"`, {
+						sort: '-created'
+					});
+
+				return {
+					...chatroom,
+					otherUser: getOtherUser({ chatroom, user: $currentUser, isExpanded: true }),
+					latestChat
+				};
+			} catch (error) {
+				return null;
+			}
 		});
-		chatrooms = await Promise.all(chatroomPromises);
+		chatrooms = (await Promise.all(chatroomPromises))
+			?.filter((chatroom) => chatroom && chatroom?.latestChat)
+			?.sort(
+				(a, b) =>
+					new Date(b?.latestChat?.created)?.getTime() - new Date(a?.latestChat?.created)?.getTime()
+			);
 	});
 </script>
 
-<div class="h-[70vh] rounded border border-base-content/20 md:h-[80vh]">
-	<div class="p-4 pb-2">
+<div class="h-[70vh] rounded border-base-content/20 md:h-[80vh] md:border">
+	<div class="pl-4 md:p-4 md:pb-2">
 		<p class="text-2xl font-semibold">Messages</p>
 	</div>
 	{#each chatrooms as chatroom (chatroom?.id)}
