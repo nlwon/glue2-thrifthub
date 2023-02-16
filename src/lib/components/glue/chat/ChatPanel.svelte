@@ -100,24 +100,27 @@
 	});
 </script>
 
-<div class="relative h-[70vh] rounded border border-base-content/20 md:h-[80vh]">
+<div class="relative h-[70vh] overflow-hidden rounded border border-base-content/20 md:h-[80vh]">
 	<!-- top panel -->
 	<div
-		class="absolute left-0 right-0 z-10 flex h-16 items-start space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
+		class="absolute left-0 right-0 z-10 flex h-16 items-center space-x-3 border-b border-base-content/20 bg-base-300 px-3 py-2"
 	>
-		<BackButton isRenderLabel={false} class="btn-sm px-2 text-2xl md:hidden" />
+		<BackButton isRenderLabel={false} class="btn-sm mr-0.5 px-2 text-2xl md:hidden" />
 		<ChatPanelContent {chatroom} />
 	</div>
 
+	<!-- top panel height placeholder -->
+	<div class="h-16" />
+
 	<!-- chat content -->
 	<div
-		class="relative mt-[5rem] mb-[4.5rem] flex flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 [&>div>div:last-child]:snap-end"
+		class="relative flex h-[52vh] flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 md:h-[64vh] [&>div>div:last-child]:snap-end"
 	>
-		<div>
+		<div class="">
 			{#if chatroom}
 				{#each chatGroups as group (group?.id)}
 					{#if group?.variant === 'datestamp'}
-						<div class="divider mt-0 mb-2 text-sm">{group?.content}</div>
+						<div class="divider mt-4 mb-3 text-sm">{group?.content}</div>
 					{:else}
 						<div class={`chat ${group?.sender === $currentUser?.id ? 'chat-end' : 'chat-start'}`}>
 							<div class="chat-header mb-2">
@@ -137,7 +140,10 @@
 	</div>
 
 	<!-- bottom panel: message input -->
-	<form on:submit={handleCreateChat} class="absolute left-0 right-0 bottom-0 z-10 bg-base-100 p-4">
+	<form
+		on:submit={handleCreateChat}
+		class="absolute left-0 right-0 bottom-0 z-10 h-20 bg-base-100 p-4"
+	>
 		<TextInput
 			bind:value={content}
 			class="input rounded-full border-base-content/40"
