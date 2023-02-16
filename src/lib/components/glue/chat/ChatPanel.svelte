@@ -14,6 +14,7 @@
 	let unsubscribe: () => void;
 	let prevChatUser = null;
 	let prevDateString = null;
+	const md = window.matchMedia('(min-width: 768px)')?.matches;
 
 	const appendChat = (chat) => {
 		const chatDateString = format(new Date(chat?.created), 'MMM dd');
@@ -148,7 +149,7 @@
 			bind:value={content}
 			class="input rounded-full border-base-content/40"
 			placeholder="Type a message"
-			autofocus
+			autofocus={md || undefined}
 		/>
 	</form>
 </div>
