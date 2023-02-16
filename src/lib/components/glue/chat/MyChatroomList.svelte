@@ -40,8 +40,11 @@
 </script>
 
 <div class="h-[70vh] rounded border-base-content/20 md:h-[80vh] md:border">
-	<div class="pl-4 md:p-4 md:pb-2">
+	<div class="space-y-2 pl-4 pb-0 md:p-4 md:pb-0">
 		<p class="text-2xl font-semibold">Messages</p>
+		<p class="text-xs text-base-content/70">
+			You'll receive an email notification when someone messages you!
+		</p>
 	</div>
 	{#each chatrooms as chatroom (chatroom?.id)}
 		<a href={`/chatrooms/${chatroom?.id}`}>

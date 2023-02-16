@@ -6,16 +6,20 @@
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import { pb } from '$lib/glue/pocketbase';
-	import { onMount } from 'svelte';
 
-	const chatroomId = $page?.url?.pathname?.split('/')[2];
+	let chatroomId = null;
 	let chatroom = null;
 
-	onMount(async () => {
-		chatroom = await pb.collection('chatrooms').getOne(chatroomId, {
-			expand: 'author,searcher,post'
-		});
-	});
+	const fetchChatroom = async (pathname) => {
+		if (pathname) {
+			chatroomId = pathname?.split('/')[2];
+			chatroom = await pb.collection('chatrooms').getOne(chatroomId, {
+				expand: 'author,searcher,post'
+			});
+		}
+	};
+
+	$: fetchChatroom($page?.url?.pathname);
 </script>
 
 <PageContainer title="Chatroom" layout="aside-main">
