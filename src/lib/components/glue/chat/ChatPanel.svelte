@@ -19,7 +19,7 @@
 	const appendChat = (chat) => {
 		const chatDateString = format(new Date(chat?.created), 'MMM dd');
 
-		if (!prevChatUser || prevDateString !== chatDateString) {
+		if (chatGroups?.length === 0 || !prevChatUser || prevDateString !== chatDateString) {
 			// first chat group || new date, new chat group
 			chatGroups?.push({
 				id: chatDateString,
