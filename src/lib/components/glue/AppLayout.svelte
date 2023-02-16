@@ -1,7 +1,7 @@
 <script>
 	import Auth from '$lib/components/glue/Auth.svelte';
 	import MobileDrawerContent from '$lib/components/glue/MobileDrawerContent.svelte';
-	import { APP_NAME, PUBLIC_NAVS } from '$lib/glue/config';
+	import { APP_NAME, IS_BETA, PUBLIC_NAVS } from '$lib/glue/config';
 	import './app.css';
 	import FeedbackModal from './FeedbackModal.svelte';
 </script>
@@ -36,7 +36,12 @@
 					<!-- app name -->
 					<div>
 						<button>
-							<a href="/" class="btn-ghost btn text-xl normal-case">{APP_NAME}</a>
+							<a href="/" class="btn-ghost btn text-xl normal-case"
+								>{APP_NAME}
+								{#if IS_BETA}
+									<span class="ml-1.5 text-base-content/60">beta</span>
+								{/if}
+							</a>
 						</button>
 					</div>
 
