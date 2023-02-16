@@ -14,7 +14,7 @@
 	let unsubscribe: () => void;
 	let prevChatUser = null;
 	let prevDateString = null;
-	const md = window.matchMedia('(min-width: 768px)')?.matches;
+	let md = false;
 
 	const appendChat = (chat) => {
 		const chatDateString = format(new Date(chat?.created), 'MMM dd');
@@ -94,6 +94,7 @@
 
 	onMount(() => {
 		subscribeToChats();
+		md = window.matchMedia('(min-width: 768px)')?.matches; // TODO: dynamically update, not just on mount
 	});
 
 	onDestroy(() => {
