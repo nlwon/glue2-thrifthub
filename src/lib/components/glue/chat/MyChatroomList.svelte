@@ -3,12 +3,58 @@
 	import IconRightArrowLong from '$lib/icons/glue/IconRightArrowLong.svelte';
 	import getOtherUser from '$lib/util/glue/chat/getOtherUser';
 	import dynamicAgo from '$lib/util/glue/dynamicAgo';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let activeChatroomId;
 	let chatrooms = [];
+	let unsubscribe: () => void;
 
-	onMount(async () => {
+	const appendChat = async (chat) => {
+		let existingChatroom = null;
+		const filteredChatrooms = chatrooms?.filter((chatroom) => {
+			if (chatroom?.id === chat?.chatroom) {
+				existingChatroom = chatroom;
+			}
+			return chatroom?.id !== chat?.chatroom;
+		});
+
+		if (existingChatroom) {
+			// prepend existing chatroom
+			chatrooms = [
+				{
+					...existingChatroom,
+					latestChat: chat
+				},
+				...filteredChatrooms
+			];
+		} else {
+			// new chatroom
+			const newChatroom = await pb.collection('chatrooms').getOne(chat?.chatroom, {
+				expand: 'author,searcher,post'
+			});
+			chatrooms = [
+				{
+					...newChatroom,
+					otherUser: getOtherUser({ chatroom: newChatroom, user: $currentUser, isExpanded: true }),
+					latestChat: chat
+				},
+				...filteredChatrooms
+			];
+		}
+	};
+
+	const subscribeToChats = async () => {
+		unsubscribe = await pb.collection('chats').subscribe('*', async ({ action, record }) => {
+			if (
+				action === 'create' &&
+				(record?.sender === $currentUser?.id || record?.receiver === $currentUser?.id)
+			) {
+				appendChat(record);
+			}
+		});
+	};
+
+	const fetchChatrooms = async () => {
 		const chatroomDocs = await pb.collection('chatrooms').getFullList(200, {
 			filter: `author="${$currentUser?.id}"||searcher="${$currentUser?.id}"`,
 			expand: 'author,searcher,post'
@@ -37,6 +83,15 @@
 				(a, b) =>
 					new Date(b?.latestChat?.created)?.getTime() - new Date(a?.latestChat?.created)?.getTime()
 			);
+	};
+
+	onMount(() => {
+		subscribeToChats();
+		fetchChatrooms();
+	});
+
+	onDestroy(() => {
+		unsubscribe?.();
 	});
 </script>
 
