@@ -100,20 +100,21 @@
 	});
 </script>
 
-<div class="relative rounded border border-base-content/20">
+<div class="relative h-[70vh] rounded border border-base-content/20 md:h-[80vh]">
 	<!-- top panel -->
 	<div
-		class="absolute left-0 right-0 z-10 flex items-start space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
+		class="absolute left-0 right-0 z-10 flex h-16 items-start space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
 	>
 		<BackButton isRenderLabel={false} class="btn-sm px-2 text-2xl md:hidden" />
 		<ChatPanelContent {chatroom} />
 	</div>
+
+	<!-- chat content -->
 	<div
-		class="relative mt-[3rem] mb-[4.5rem] flex h-[60vh] flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 md:h-[70vh] [&>div>div:last-child]:snap-end"
+		class="relative mt-[5rem] mb-[4.5rem] flex flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 [&>div>div:last-child]:snap-end"
 	>
 		<div>
 			{#if chatroom}
-				<!-- chat messages -->
 				{#each chatGroups as group (group?.id)}
 					{#if group?.variant === 'datestamp'}
 						<div class="divider mt-0 mb-2 text-sm">{group?.content}</div>
@@ -134,6 +135,7 @@
 			{/if}
 		</div>
 	</div>
+
 	<!-- bottom panel: message input -->
 	<form on:submit={handleCreateChat} class="absolute left-0 right-0 bottom-0 z-10 bg-base-100 p-4">
 		<TextInput
