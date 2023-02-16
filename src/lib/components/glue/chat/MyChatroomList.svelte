@@ -5,6 +5,7 @@
 	import dynamicAgo from '$lib/util/glue/dynamicAgo';
 	import { onMount } from 'svelte';
 
+	export let activeChatroomId;
 	let chatrooms = [];
 
 	onMount(async () => {
@@ -40,7 +41,7 @@
 </script>
 
 <div class="h-[70vh] rounded border-base-content/20 md:h-[80vh] md:border">
-	<div class="space-y-2 pl-4 pb-0 md:p-4 md:pb-0">
+	<div class="space-y-2 pl-4 pb-2 md:p-4">
 		<p class="text-2xl font-semibold">Messages</p>
 		<p class="text-xs text-base-content/70">
 			You'll receive an email notification when someone messages you!
@@ -48,7 +49,11 @@
 	</div>
 	{#each chatrooms as chatroom (chatroom?.id)}
 		<a href={`/chatrooms/${chatroom?.id}`}>
-			<div class="border-b border-base-content/20 p-4">
+			<div
+				class={`border-b border-base-content/20 p-4 pt-2 ${
+					activeChatroomId === chatroom?.id && 'bg-base-300'
+				}`}
+			>
 				<div class="flex items-center space-x-3">
 					<!-- avatar -->
 					<div class="avatar">

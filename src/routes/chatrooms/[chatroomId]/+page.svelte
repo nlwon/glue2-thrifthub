@@ -25,7 +25,7 @@
 <PageContainer title="Chatroom" layout="aside-main">
 	<Aside>
 		<div class="hidden md:block">
-			<MyChatroomList />
+			<MyChatroomList activeChatroomId={chatroomId} />
 		</div>
 	</Aside>
 	<Main>
