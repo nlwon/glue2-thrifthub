@@ -104,7 +104,7 @@
 <div class="relative h-[70vh] overflow-hidden rounded border border-base-content/20 md:h-[80vh]">
 	<!-- top panel -->
 	<div
-		class="absolute left-0 right-0 z-10 flex h-16 items-center space-x-3 border-b border-base-content/20 bg-base-300 px-3 py-2"
+		class="absolute left-0 right-0 z-10 flex h-16 items-center space-x-3 border-b border-base-content/20 bg-base-100 px-3 py-2"
 	>
 		<BackButton isRenderLabel={false} class="btn-sm mr-0.5 px-2 text-2xl md:hidden" />
 		<ChatPanelContent {chatroom} />
