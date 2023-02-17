@@ -68,14 +68,31 @@
 	}
 
 	const handleCreateChat = async () => {
+		const receiver = getOtherUser({ chatroom, user: $currentUser });
+		const chatContent = content;
+
+		// reset input value first to make it feel more performant
+		content = '';
+
 		pb.collection('chats').create({
 			variant: 'text',
-			content,
+			content: chatContent,
 			chatroom: chatroom?.id,
 			sender: $currentUser?.id,
-			receiver: getOtherUser({ chatroom, user: $currentUser })
+			receiver
 		});
-		content = '';
+
+		await fetch('/api/email', {
+			method: 'POST',
+			body: JSON.stringify({
+				senderName: $currentUser?.name,
+				receiverId: receiver,
+				content: chatContent
+			}),
+			headers: {
+				'content-type': 'application/json'
+			}
+		});
 	};
 
 	const subscribeToChats = async () => {
