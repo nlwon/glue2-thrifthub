@@ -14,7 +14,7 @@
 	let unsubscribe: () => void;
 	let prevChatUser = null;
 	let prevDateString = null;
-	let md = false;
+	let innerWidth = 0;
 
 	const appendChat = (chat) => {
 		const chatDateString = format(new Date(chat?.created), 'MMM dd');
@@ -111,13 +111,14 @@
 
 	onMount(() => {
 		subscribeToChats();
-		md = window.matchMedia('(min-width: 768px)')?.matches; // TODO: dynamically update, not just on mount
 	});
 
 	onDestroy(() => {
 		unsubscribe?.();
 	});
 </script>
+
+<svelte:window bind:innerWidth />
 
 <div class="relative h-[70vh] overflow-hidden rounded border border-base-content/20 md:h-[80vh]">
 	<!-- top panel -->
@@ -167,7 +168,7 @@
 			bind:value={content}
 			class="input rounded-full border-base-content/40"
 			placeholder="Type a message"
-			autofocus={md || undefined}
+			autofocus={innerWidth >= 768 || undefined}
 		/>
 	</form>
 </div>
