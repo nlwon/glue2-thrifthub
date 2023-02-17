@@ -3,6 +3,10 @@
 
 	export let variant: string;
 	export let context = {};
+	export let infoParagraphs = [
+		'This feature is currently under development.',
+		'Your interaction has been recorded, and will help us decide which features to proritize.'
+	];
 
 	const handleClick = () => {
 		pb.collection('logs').create({
@@ -19,10 +23,9 @@
 	<label class="modal-box relative" for="">
 		<div class="prose">
 			<h2>Coming soon 🎉</h2>
-			<p>This feature is currently under development.</p>
-			<p>
-				Your interaction has been recorded, and will help us decide which features to proritise.
-			</p>
+			{#each infoParagraphs as paragraph}
+				<p>{paragraph}</p>
+			{/each}
 		</div>
 	</label>
 </label>
