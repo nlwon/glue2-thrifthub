@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { APP_NAME, IS_GOOGLE_AUTH_ONLY } from '$lib/glue/config';
+	import { APP_NAME, IS_ENFORCE_CORNELL_EMAIL, IS_GOOGLE_AUTH_ONLY } from '$lib/glue/config';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
 	import IconGoogle from '$lib/icons/glue/IconGoogle.svelte';
 	import IconLogout from '$lib/icons/glue/IconLogout.svelte';
@@ -151,14 +151,33 @@
 			<form on:submit|preventDefault={handleSubmit}>
 				<div class="flex flex-col gap-3">
 					{#if IS_GOOGLE_AUTH_ONLY}
-						<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">
-							Sign in to {APP_NAME}
+						<h3 class="mb-2 p-0 text-xl font-medium text-gray-900 dark:text-white">
+							Sign in
+							{#if IS_ENFORCE_CORNELL_EMAIL}
+								<span
+									>with your <span class="underline decoration-primary underline-offset-2"
+										>Cornell email</span
+									></span
+								>
+							{:else}
+								<span>to {APP_NAME}</span>
+							{/if}
 						</h3>
 						<p class="mb-2">
 							Access all of the features by signing in and getting started with {APP_NAME}.
 						</p>
+						{#if IS_ENFORCE_CORNELL_EMAIL}
+							<p class="mb-2">
+								You must sign in with your <span
+									class="underline decoration-primary underline-offset-2">Cornell email</span
+								>
+								to sign into {APP_NAME}!
+							</p>
+						{/if}
 						<button type="button" class="btn-primary btn gap-2" on:click={signInGoogle}
-							><IconGoogle /> Sign in with Google</button
+							><IconGoogle /> Sign in with {IS_ENFORCE_CORNELL_EMAIL
+								? 'Cornell email'
+								: 'Google'}</button
 						>
 					{:else}
 						<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">
