@@ -25,6 +25,7 @@
 
 	let authProviders = {};
 	let redirectUrl = '';
+	let isForceCornellModalOpen = false;
 
 	onMount(async () => {
 		if (window?.location?.pathname !== '/redirect') {
@@ -53,6 +54,13 @@
 					name: authResult?.meta?.rawUser?.name,
 					avatarUrl: authResult?.meta?.rawUser?.picture
 				});
+
+				const isCornell = authResult?.meta?.rawUser?.email?.split('@')[1] === 'cornell.edu';
+
+				if (IS_ENFORCE_CORNELL_EMAIL && !isCornell) {
+					signOut();
+					isForceCornellModalOpen = true;
+				}
 			}
 
 			$page.url.searchParams.delete('code');
@@ -62,13 +70,8 @@
 			$page.url.searchParams.delete('hd');
 			$page.url.searchParams.delete('prompt');
 
-			const returnUrl = localStorage.getItem('returnUrl');
-
-			if (returnUrl) {
-				goto(returnUrl);
-			} else {
-				goto(`?${$page.url.searchParams.toString()}`);
-			}
+			let returnUrl = localStorage.getItem('returnUrl') || `?${$page.url.searchParams.toString()}`;
+			goto(returnUrl);
 		}
 	});
 
@@ -111,6 +114,28 @@
 		else if (state === 'register') signUp();
 	};
 </script>
+
+<!-- modal: force cornell auth -->
+<div class={`modal ${isForceCornellModalOpen && 'modal-open'}`} id="modal-force-cornell">
+	<div class="modal-box w-11/12 max-w-sm">
+		<h3 class="text-lg font-bold">Sign in with a @cornell.edu account</h3>
+		<p class="py-4">
+			You must sign in with a <span class="underline decoration-primary underline-offset-2"
+				>Cornell email</span
+			>
+			to use {APP_NAME}.
+		</p>
+		<div class="flex justify-end space-x-2">
+			<button
+				class="btn-ghost btn"
+				on:click={() => {
+					isForceCornellModalOpen = false;
+				}}>Close</button
+			>
+			<button type='button' class="btn-primary btn" on:click={signInGoogle}>Sign in again</button>
+		</div>
+	</div>
+</div>
 
 {#if $currentUser}
 	<div class="dropdown-end dropdown">
