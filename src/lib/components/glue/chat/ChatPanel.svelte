@@ -134,7 +134,7 @@
 
 	<!-- chat content -->
 	<div
-		class="relative flex h-[52vh] flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 md:h-[64vh] [&>div>div:last-child]:snap-end"
+		class="chat-content-container relative flex flex-1 snap-y snap-proximity flex-col-reverse overflow-y-auto overscroll-y-contain pr-2 pt-0 [&>div>div:last-child]:snap-end"
 	>
 		<div class="">
 			{#if chatroom}
@@ -172,3 +172,10 @@
 		/>
 	</form>
 </div>
+
+<style>
+	.chat-content-container {
+		/* subtracts height of top, bottom panels */
+		height: calc(100% - 9rem);
+	}
+</style>
