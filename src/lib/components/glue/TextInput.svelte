@@ -3,10 +3,12 @@
 	interface $$Props extends HTMLInputAttributes {
 		label?: string;
 		name?: string;
+		error?: string;
 	}
 	export let label: string = '';
 	export let name: string = '';
 	export let value: string = '';
+	export let error: string = '';
 </script>
 
 <div class="form-control w-full">
@@ -33,6 +35,11 @@
 		type="text"
 		{...$$restProps}
 		{name}
-		class={`${$$props.class} input-bordered input w-full`}
+		class={`${$$props.class} input-bordered input w-full ${error && 'input-error'}`}
 	/>
+	{#if error}
+		<label class="label">
+			<span class="label-text-alt text-error">{error}</span>
+		</label>
+	{/if}
 </div>
