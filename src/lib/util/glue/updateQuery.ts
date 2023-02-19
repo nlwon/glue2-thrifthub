@@ -11,7 +11,6 @@ interface IUpdateQuery {
 const updateQuery = ({ key = 'query', value = null, $page }: IUpdateQuery) => {
 	if (browser) {
 		const newSearchParams = new URLSearchParams($page?.url?.searchParams);
-		console.log('key, value, $page', key, value, $page);
 		if (value && value?.length > 0) {
 			newSearchParams?.set(key, value);
 			goto(`?${newSearchParams.toString()}`, {
