@@ -43,7 +43,10 @@
 
 			const params = new URL(window.location as string).searchParams;
 			const authCode = params.get('code');
-			const provider = JSON.parse(localStorage.getItem('provider') || '');
+			const provider =
+				localStorage.getItem('provider') && localStorage.getItem('provider') !== 'undefined'
+					? JSON.parse(localStorage.getItem('provider') || '')
+					: null;
 
 			if (authCode && provider.state === params.get('state')) {
 				const authResult = await pb
@@ -132,7 +135,7 @@
 					isForceCornellModalOpen = false;
 				}}>Close</button
 			>
-			<button type='button' class="btn-primary btn" on:click={signInGoogle}>Sign in again</button>
+			<button type="button" class="btn-primary btn" on:click={signInGoogle}>Sign in again</button>
 		</div>
 	</div>
 </div>
