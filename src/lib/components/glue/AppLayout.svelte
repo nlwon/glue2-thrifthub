@@ -1,9 +1,18 @@
 <script>
+	import { afterNavigate } from '$app/navigation';
 	import Auth from '$lib/components/glue/Auth.svelte';
 	import MobileDrawerContent from '$lib/components/glue/MobileDrawerContent.svelte';
 	import { APP_NAME, IS_BETA, PUBLIC_NAVS } from '$lib/glue/config';
 	import './app.css';
 	import FeedbackModal from './FeedbackModal.svelte';
+
+	let topAnchor;
+
+	afterNavigate(() => {
+		if (topAnchor) {
+			topAnchor.scrollIntoView();
+		}
+	});
 </script>
 
 <div class="w-screen">
@@ -11,6 +20,8 @@
 		<!-- mobile nav: invisible drawer toggle -->
 		<input id="drawer-mobile-nav" type="checkbox" class="drawer-toggle" />
 		<div class="drawer-content flex flex-col items-center">
+			<div bind:this={topAnchor} />
+
 			<!-- header -->
 			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95">
 				<div class={`w-full max-w-4xl`}>
