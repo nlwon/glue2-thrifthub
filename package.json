@@ -37,6 +37,9 @@
 	"type": "module",
 	"dependencies": {
 		"@sendgrid/mail": "^7.7.0",
+		"@sentry/node": "^7.39.0",
+		"@sentry/svelte": "^7.39.0",
+		"@sentry/tracing": "^7.39.0",
 		"axios": "^1.2.2",
 		"cheerio": "^1.0.0-rc.12",
 		"daisyui": "^2.46.0",
