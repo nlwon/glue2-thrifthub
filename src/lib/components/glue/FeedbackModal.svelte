@@ -15,21 +15,25 @@
 	const hideRouteIds = ['/chatrooms/[chatroomId]'];
 
 	const handleIconClick = async (review) => {
-		step = 2;
-		const feedback = await pb.collection('logs').create({
-			variant: 'feedback',
-			value: review
-		});
-		feedbackId = feedback?.id;
+		try {
+			step = 2;
+			const feedback = await pb.collection('logs').create({
+				variant: 'feedback',
+				value: review
+			});
+			feedbackId = feedback?.id;
+		} catch (error) {}
 	};
 
 	const handleSubmitFeedbackText = () => {
 		isOpen = false;
-		pb.collection('logs').update(feedbackId, {
-			context: {
-				feedbackText
-			}
-		});
+		try {
+			pb.collection('logs').update(feedbackId, {
+				context: {
+					feedbackText
+				}
+			});
+		} catch (error) {}
 	};
 
 	const handleCloseModal = () => {

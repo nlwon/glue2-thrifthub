@@ -9,10 +9,12 @@
 	];
 
 	const handleClick = () => {
-		pb.collection('logs').create({
-			variant,
-			context
-		});
+		try {
+			pb.collection('logs').create({
+				variant,
+				context
+			});
+		} catch (error) {}
 	};
 </script>
 

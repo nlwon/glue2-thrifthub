@@ -48,17 +48,19 @@
 	};
 
 	const fetchChats = async () => {
-		const chatDocs = await pb.collection('chats').getFullList(200, {
-			filter: `chatroom="${chatroom?.id}"`,
-			sort: 'created',
-			expand: 'sender,receiver'
-		});
+		try {
+			const chatDocs = await pb.collection('chats').getFullList(200, {
+				filter: `chatroom="${chatroom?.id}"`,
+				sort: 'created',
+				expand: 'sender,receiver'
+			});
 
-		chatGroups = [];
+			chatGroups = [];
 
-		chatDocs?.forEach((chat) => {
-			appendChat(chat);
-		});
+			chatDocs?.forEach((chat) => {
+				appendChat(chat);
+			});
+		} catch (error) {}
 	};
 
 	$: {
@@ -68,39 +70,43 @@
 	}
 
 	const handleCreateChat = async () => {
-		const receiver = getOtherUser({ chatroom, user: $currentUser });
-		const chatContent = content;
+		try {
+			const receiver = getOtherUser({ chatroom, user: $currentUser });
+			const chatContent = content;
 
-		// reset input value first to make it feel more performant
-		content = '';
+			// reset input value first to make it feel more performant
+			content = '';
 
-		pb.collection('chats').create({
-			variant: 'text',
-			content: chatContent,
-			chatroom: chatroom?.id,
-			sender: $currentUser?.id,
-			receiver
-		});
+			pb.collection('chats').create({
+				variant: 'text',
+				content: chatContent,
+				chatroom: chatroom?.id,
+				sender: $currentUser?.id,
+				receiver
+			});
 
-		await fetch('/api/email', {
-			method: 'POST',
-			body: JSON.stringify({
-				senderName: $currentUser?.name,
-				receiverId: receiver,
-				content: chatContent
-			}),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
+			await fetch('/api/email', {
+				method: 'POST',
+				body: JSON.stringify({
+					senderName: $currentUser?.name,
+					receiverId: receiver,
+					content: chatContent
+				}),
+				headers: {
+					'content-type': 'application/json'
+				}
+			});
+		} catch (error) {}
 	};
 
 	const subscribeToChats = async () => {
-		unsubscribe = await pb.collection('chats').subscribe('*', async ({ action, record }) => {
-			if (record?.chatroom === chatroom?.id && action === 'create') {
-				appendChat(record);
-			}
-		});
+		try {
+			unsubscribe = await pb.collection('chats').subscribe('*', async ({ action, record }) => {
+				if (record?.chatroom === chatroom?.id && action === 'create') {
+					appendChat(record);
+				}
+			});
+		} catch (error) {}
 	};
 
 	const chatGroupName = (group) => {

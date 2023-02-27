@@ -10,79 +10,90 @@
 	let unsubscribe: () => void;
 
 	const appendChat = async (chat) => {
-		let existingChatroom = null;
-		const filteredChatrooms = chatrooms?.filter((chatroom) => {
-			if (chatroom?.id === chat?.chatroom) {
-				existingChatroom = chatroom;
-			}
-			return chatroom?.id !== chat?.chatroom;
-		});
-
-		if (existingChatroom) {
-			// prepend existing chatroom
-			chatrooms = [
-				{
-					...existingChatroom,
-					latestChat: chat
-				},
-				...filteredChatrooms
-			];
-		} else {
-			// new chatroom
-			const newChatroom = await pb.collection('chatrooms').getOne(chat?.chatroom, {
-				expand: 'author,searcher,post'
+		try {
+			let existingChatroom = null;
+			const filteredChatrooms = chatrooms?.filter((chatroom) => {
+				if (chatroom?.id === chat?.chatroom) {
+					existingChatroom = chatroom;
+				}
+				return chatroom?.id !== chat?.chatroom;
 			});
-			chatrooms = [
-				{
-					...newChatroom,
-					otherUser: getOtherUser({ chatroom: newChatroom, user: $currentUser, isExpanded: true }),
-					latestChat: chat
-				},
-				...filteredChatrooms
-			];
-		}
+
+			if (existingChatroom) {
+				// prepend existing chatroom
+				chatrooms = [
+					{
+						...existingChatroom,
+						latestChat: chat
+					},
+					...filteredChatrooms
+				];
+			} else {
+				// new chatroom
+				const newChatroom = await pb.collection('chatrooms').getOne(chat?.chatroom, {
+					expand: 'author,searcher,post'
+				});
+				chatrooms = [
+					{
+						...newChatroom,
+						otherUser: getOtherUser({
+							chatroom: newChatroom,
+							user: $currentUser,
+							isExpanded: true
+						}),
+						latestChat: chat
+					},
+					...filteredChatrooms
+				];
+			}
+		} catch (error) {}
 	};
 
 	const subscribeToChats = async () => {
-		unsubscribe = await pb.collection('chats').subscribe('*', async ({ action, record }) => {
-			if (
-				action === 'create' &&
-				(record?.sender === $currentUser?.id || record?.receiver === $currentUser?.id)
-			) {
-				appendChat(record);
-			}
-		});
+		try {
+			unsubscribe = await pb.collection('chats').subscribe('*', async ({ action, record }) => {
+				if (
+					action === 'create' &&
+					(record?.sender === $currentUser?.id || record?.receiver === $currentUser?.id)
+				) {
+					appendChat(record);
+				}
+			});
+		} catch (error) {}
 	};
 
 	const fetchChatrooms = async () => {
-		const chatroomDocs = await pb.collection('chatrooms').getFullList(200, {
-			filter: `author="${$currentUser?.id}"||searcher="${$currentUser?.id}"`,
-			expand: 'author,searcher,post'
-		});
+		try {
+			const chatroomDocs = await pb.collection('chatrooms').getFullList(200, {
+				filter: `author="${$currentUser?.id}"||searcher="${$currentUser?.id}"`,
+				expand: 'author,searcher,post'
+			});
 
-		const chatroomPromises = chatroomDocs?.map(async (chatroom) => {
-			try {
-				const latestChat = await pb
-					.collection('chats')
-					.getFirstListItem(`chatroom="${chatroom?.id}"`, {
-						sort: '-created'
-					});
+			const chatroomPromises = chatroomDocs?.map(async (chatroom) => {
+				try {
+					const latestChat = await pb
+						.collection('chats')
+						.getFirstListItem(`chatroom="${chatroom?.id}"`, {
+							sort: '-created'
+						});
 
-				return {
-					...chatroom,
-					otherUser: getOtherUser({ chatroom, user: $currentUser, isExpanded: true }),
-					latestChat
-				};
-			} catch (error) {
-				return null;
-			}
-		});
-		chatrooms = (await Promise.all(chatroomPromises))
-			?.filter((chatroom) => chatroom && chatroom?.latestChat)
-			?.sort(
-				(a, b) =>
-					new Date(b?.latestChat?.created)?.getTime() - new Date(a?.latestChat?.created)?.getTime()
-			);
+					return {
+						...chatroom,
+						otherUser: getOtherUser({ chatroom, user: $currentUser, isExpanded: true }),
+						latestChat
+					};
+				} catch (error) {
+					return null;
+				}
+			});
+			chatrooms = (await Promise.all(chatroomPromises))
+				?.filter((chatroom) => chatroom && chatroom?.latestChat)
+				?.sort(
+					(a, b) =>
+						new Date(b?.latestChat?.created)?.getTime() -
+						new Date(a?.latestChat?.created)?.getTime()
+				);
+		} catch (error) {}
 	};
 
 	onMount(() => {

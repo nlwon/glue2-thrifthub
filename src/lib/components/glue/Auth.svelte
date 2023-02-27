@@ -28,54 +28,57 @@
 	let isForceCornellModalOpen = false;
 
 	onMount(async () => {
-		if (window?.location?.pathname !== '/redirect') {
-			localStorage.setItem('returnUrl', window?.location?.href);
-		}
-
-		const authMethods = await pb.collection('users').listAuthMethods();
-
-		if (authMethods) {
-			redirectUrl = `${window.location.origin}/redirect`;
-
-			authMethods?.authProviders?.forEach((provider) => {
-				authProviders[provider?.name] = provider;
-			});
-
-			const params = new URL(window.location as string).searchParams;
-			const authCode = params.get('code');
-			const provider =
-				localStorage.getItem('provider') && localStorage.getItem('provider') !== 'undefined'
-					? JSON.parse(localStorage.getItem('provider') || '')
-					: null;
-
-			if (authCode && provider.state === params.get('state')) {
-				const authResult = await pb
-					.collection('users')
-					.authWithOAuth2('google', authCode, provider.codeVerifier, redirectUrl);
-
-				pb.collection('users').update(authResult?.record?.id, {
-					name: authResult?.meta?.rawUser?.name,
-					avatarUrl: authResult?.meta?.rawUser?.picture
-				});
-
-				const isCornell = authResult?.meta?.rawUser?.email?.split('@')[1] === 'cornell.edu';
-
-				if (IS_ENFORCE_CORNELL_EMAIL && !isCornell) {
-					signOut();
-					isForceCornellModalOpen = true;
-				}
+		try {
+			if (window?.location?.pathname !== '/redirect') {
+				localStorage.setItem('returnUrl', window?.location?.href);
 			}
 
-			$page.url.searchParams.delete('code');
-			$page.url.searchParams.delete('state');
-			$page.url.searchParams.delete('scope');
-			$page.url.searchParams.delete('authuser');
-			$page.url.searchParams.delete('hd');
-			$page.url.searchParams.delete('prompt');
+			const authMethods = await pb.collection('users').listAuthMethods();
 
-			let returnUrl = localStorage.getItem('returnUrl') || `?${$page.url.searchParams.toString()}`;
-			goto(returnUrl);
-		}
+			if (authMethods) {
+				redirectUrl = `${window.location.origin}/redirect`;
+
+				authMethods?.authProviders?.forEach((provider) => {
+					authProviders[provider?.name] = provider;
+				});
+
+				const params = new URL(window.location as string).searchParams;
+				const authCode = params.get('code');
+				const provider =
+					localStorage.getItem('provider') && localStorage.getItem('provider') !== 'undefined'
+						? JSON.parse(localStorage.getItem('provider') || '')
+						: null;
+
+				if (authCode && provider.state === params.get('state')) {
+					const authResult = await pb
+						.collection('users')
+						.authWithOAuth2('google', authCode, provider.codeVerifier, redirectUrl);
+
+					pb.collection('users').update(authResult?.record?.id, {
+						name: authResult?.meta?.rawUser?.name,
+						avatarUrl: authResult?.meta?.rawUser?.picture
+					});
+
+					const isCornell = authResult?.meta?.rawUser?.email?.split('@')[1] === 'cornell.edu';
+
+					if (IS_ENFORCE_CORNELL_EMAIL && !isCornell) {
+						signOut();
+						isForceCornellModalOpen = true;
+					}
+				}
+
+				$page.url.searchParams.delete('code');
+				$page.url.searchParams.delete('state');
+				$page.url.searchParams.delete('scope');
+				$page.url.searchParams.delete('authuser');
+				$page.url.searchParams.delete('hd');
+				$page.url.searchParams.delete('prompt');
+
+				let returnUrl =
+					localStorage.getItem('returnUrl') || `?${$page.url.searchParams.toString()}`;
+				goto(returnUrl);
+			}
+		} catch (error) {}
 	});
 
 	const signInGoogle = async () => {
@@ -90,7 +93,9 @@
 	let username: string;
 
 	async function login() {
-		await pb.collection('users').authWithPassword(email, password);
+		try {
+			await pb.collection('users').authWithPassword(email, password);
+		} catch (error) {}
 	}
 
 	async function signUp() {
@@ -103,9 +108,7 @@
 			};
 			await pb.collection('users').create(data);
 			await login();
-		} catch (err) {
-			console.error(err);
-		}
+		} catch (error) {}
 	}
 
 	function signOut() {
@@ -141,7 +144,7 @@
 </div>
 
 {#if $currentUser}
-	<div class="dropdown-end dropdown">
+	<div class="dropdown dropdown-end">
 		<label tabindex="0" class="btn-ghost btn-square btn">
 			<div class="placeholder avatar">
 				<div
