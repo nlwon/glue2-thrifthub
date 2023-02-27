@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import { SENTRY_DSN_PUBLIC } from '$lib/glue/config';
 import * as SentryNode from '@sentry/node';
 import '@sentry/tracing';
@@ -6,6 +7,7 @@ import type { HandleServerError } from '@sveltejs/kit';
 SentryNode.init({
 	dsn: SENTRY_DSN_PUBLIC,
 	tracesSampleRate: 1.0,
+	environment: dev ? 'development' : 'production',
 	// Add the Http integration for tracing
 	integrations: [new SentryNode.Integrations.Http()]
 });
