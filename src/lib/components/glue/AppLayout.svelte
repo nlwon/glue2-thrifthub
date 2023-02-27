@@ -5,6 +5,7 @@
 	import { APP_NAME, IS_BETA, PUBLIC_NAVS } from '$lib/glue/config';
 	import './app.css';
 	import FeedbackModal from './FeedbackModal.svelte';
+	import TrackWidth from './TrackWidth.svelte';
 
 	let topAnchor;
 
@@ -14,6 +15,8 @@
 		}
 	});
 </script>
+
+<TrackWidth />
 
 <div class="w-screen">
 	<div class="drawer">
