@@ -1,20 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { APP_NAME, IS_ENFORCE_CORNELL_EMAIL, IS_GOOGLE_AUTH_ONLY } from '$lib/glue/config';
+	import {
+		APP_NAME,
+		IS_ENFORCE_CORNELL_EMAIL,
+		IS_GOOGLE_AUTH_ONLY,
+		PRIVATE_NAVS
+	} from '$lib/glue/config';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
 	import IconGoogle from '$lib/icons/glue/IconGoogle.svelte';
 	import IconLogout from '$lib/icons/glue/IconLogout.svelte';
-	import IconMessage from '$lib/icons/glue/IconMessage.svelte';
 	import { onMount } from 'svelte';
-
-	const PRIVATE_NAVS = [
-		{
-			label: 'Messages',
-			path: '/chatrooms',
-			icon: IconMessage
-		}
-	];
 
 	let state: 'signin' | 'register' = 'register';
 
@@ -144,7 +140,7 @@
 </div>
 
 {#if $currentUser}
-	<div class="dropdown dropdown-end">
+	<div class="dropdown-end dropdown">
 		<label tabindex="0" class="btn-ghost btn-square btn">
 			<div class="placeholder avatar">
 				<div
@@ -174,7 +170,7 @@
 	</div>
 {:else}
 	<button>
-		<label for="modal-auth" class="btn-primary btn">Get started</label>
+		<label for="modal-auth" class="btn">Sign in</label>
 	</button>
 	<input type="checkbox" id="modal-auth" class="modal-toggle" />
 	<label for="modal-auth" class="modal cursor-pointer">
