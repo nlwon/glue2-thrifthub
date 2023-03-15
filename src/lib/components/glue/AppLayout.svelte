@@ -3,6 +3,7 @@
 	import Auth from '$lib/components/glue/Auth.svelte';
 	import MobileDrawerContent from '$lib/components/glue/MobileDrawerContent.svelte';
 	import { APP_NAME, IS_BETA, PUBLIC_NAVS } from '$lib/glue/config';
+	import CreateListingButton from '../CreateListingButton.svelte';
 	import './app.css';
 	import FeedbackModal from './FeedbackModal.svelte';
 	import TrackWidth from './TrackWidth.svelte';
@@ -72,6 +73,7 @@
 									{/if}
 								</div>
 							</div>
+							<CreateListingButton />
 							<Auth />
 						</div>
 					</div>
