@@ -5,6 +5,7 @@
 	import MyChatroomList from '$lib/components/glue/chat/MyChatroomList.svelte';
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
+	import ProfileNavs from '$lib/components/ProfileNavs.svelte';
 	import { pb } from '$lib/glue/pocketbase';
 
 	let chatroomId = null;
@@ -29,6 +30,7 @@
 <PageContainer title="Chatroom" layout="aside-main">
 	<Aside>
 		<div class="hidden md:block">
+			<ProfileNavs />
 			<MyChatroomList activeChatroomId={chatroomId} />
 		</div>
 	</Aside>
