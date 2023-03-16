@@ -3,3 +3,4 @@
 ## Contributors
 
 - Jay Joo
+- Armita Jamshidi
