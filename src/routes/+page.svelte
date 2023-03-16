@@ -6,6 +6,6 @@
 
 <PageContainer title="Home" layout="aside-main">
 	
-	<Aside>test</Aside>
+	<Aside>aside</Aside>
 	<Main>main</Main>
 </PageContainer>
