@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { pb } from '$lib/glue/pocketbase';
+	import { goto } from '$app/navigation';
+	import { pb, currentUser } from '$lib/glue/pocketbase';
 	import IconDownKarat from '$lib/icons/glue/IconDownKarat.svelte';
 	import IconUpKarat from '$lib/icons/glue/IconUpKarat.svelte';
 	import { formatDistanceToNowStrict } from 'date-fns';
@@ -7,6 +8,32 @@
 	export let listing;
 
 	let isExpanded = false;
+	let isChatLoading = false;
+
+	const handleChatClick = async () => {
+		isChatLoading = true;
+
+		try {
+			const existingChatroom = await pb
+				.collection('chatrooms')
+				.getFirstListItem(
+					`post="${listing?.id}"&&author="${listing?.user}"&&searcher="${$currentUser?.id}"`
+				);
+
+			goto(`/chatrooms/${existingChatroom?.id}`);
+		} catch (error) {
+			if (error?.status === 404) {
+				const newChatroom = await pb.collection('chatrooms').create({
+					post: listing?.id,
+					author: listing?.user,
+					searcher: $currentUser?.id
+				});
+				goto(`/chatrooms/${newChatroom?.id}`);
+			}
+		}
+
+		isChatLoading = false;
+	};
 </script>
 
 {#if listing}
@@ -42,7 +69,10 @@
 		{#if isExpanded}
 			<div class="mt-4 w-4/5 space-y-2">
 				<p class="text-sm text-base-content/70">{listing?.desc}</p>
-				<button class="btn-primary btn-block btn-sm btn">Message seller</button>
+				<button
+					class="btn-primary btn-block btn-sm btn {isChatLoading && 'loading'}"
+					on:click={handleChatClick}>Message seller</button
+				>
 			</div>
 		{/if}
 
