@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { pb } from '$lib/glue/pocketbase';
 	import IconDownKarat from '$lib/icons/glue/IconDownKarat.svelte';
-	import IconUpArrow from '$lib/icons/glue/IconUpArrow.svelte';
 	import IconUpKarat from '$lib/icons/glue/IconUpKarat.svelte';
-	import dynamicAgo from '$lib/util/glue/dynamicAgo';
-	import { format, formatDistanceToNowStrict } from 'date-fns';
+	import { formatDistanceToNowStrict } from 'date-fns';
 
 	export let listing;
 
