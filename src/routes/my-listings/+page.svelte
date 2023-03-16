@@ -1,6 +1,9 @@
 <script lang="ts">
+	import Aside from '$lib/components/glue/Aside.svelte';
+	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import ListingItem from '$lib/components/ListingItem.svelte';
+	import ProfileNavs from '$lib/components/ProfileNavs.svelte';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
 	import { onMount } from 'svelte';
 
@@ -20,10 +23,18 @@
 	});
 </script>
 
-<PageContainer title="My listings">
-	<div class="space-y-2">
-		{#each listings as listing (listing?.id)}
-			<ListingItem {listing} />
-		{/each}
-	</div>
+<PageContainer title="My listings" layout="aside-main">
+	<Aside>
+		<ProfileNavs />
+	</Aside>
+	<Main>
+		<div class="space-y-4">
+			<h2 class="text-2xl font-semibold">My listings</h2>
+			<div class="space-y-2">
+				{#each listings as listing (listing?.id)}
+					<ListingItem {listing} />
+				{/each}
+			</div>
+		</div>
+	</Main>
 </PageContainer>

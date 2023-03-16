@@ -1,8 +1,15 @@
 <script>
+	import { goto } from '$app/navigation';
 	import Aside from '$lib/components/glue/Aside.svelte';
 	import Main from '$lib/components/glue/Main.svelte';
 	import PageContainer from '$lib/components/glue/PageContainer.svelte';
 	import ProfileNavs from '$lib/components/ProfileNavs.svelte';
+	import { pb } from '$lib/glue/pocketbase';
+
+	const signOut = () => {
+		pb.authStore.clear();
+		goto('/');
+	};
 </script>
 
 <PageContainer title="My listings" layout="aside-main">
@@ -10,6 +17,9 @@
 		<ProfileNavs />
 	</Aside>
 	<Main>
-		<p>Bookmarks feature coming soon!</p>
+		<div class="space-y-4">
+			<h2 class="text-2xl font-semibold">Logout</h2>
+			<button class="btn-sm btn" on:click={signOut}>Logout of ThriftHub</button>
+		</div>
 	</Main>
 </PageContainer>
