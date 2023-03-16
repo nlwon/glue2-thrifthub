@@ -10,7 +10,7 @@
 </script>
 
 {#if listing}
-	<div class="relative w-full p-2 md:w-[32rem]">
+	<div class="relative w-full py-2 md:w-[32rem]">
 		<div class="flex space-x-4">
 			<!-- photos -->
 			<div>
