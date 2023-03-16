@@ -10,6 +10,9 @@
 		<ProfileNavs />
 	</Aside>
 	<Main>
-		<p>Bookmarks feature coming soon!</p>
+		<div class="space-y-4">
+			<h2 class="text-2xl font-semibold tracking-wider">Bookmarks</h2>
+			<p>Bookmarks feature coming soon!</p>
+		</div>
 	</Main>
 </PageContainer>

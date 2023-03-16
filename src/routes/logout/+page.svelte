@@ -18,7 +18,7 @@
 	</Aside>
 	<Main>
 		<div class="space-y-4">
-			<h2 class="text-2xl font-semibold">Logout</h2>
+			<h2 class="text-2xl font-semibold tracking-wider">Logout</h2>
 			<button class="btn-sm btn" on:click={signOut}>Logout of ThriftHub</button>
 		</div>
 	</Main>
