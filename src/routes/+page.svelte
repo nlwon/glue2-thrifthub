@@ -23,12 +23,17 @@
 
 			<input type="checkbox" id="supplies" name="supplies" value="Supplies">
 			<label for="supplies">Supplies</label><br><br>
-			
 		</div>
 
 
 		<!-- <input type="checkbox" checked="checked" class="checkbox" />
 		<label for="my-modal" class="btn">open modal</label> -->
 	</Aside>
-	<Main>main</Main>
+
+
+	<Main>
+		<h1>Listings</h1>
+
+	</Main>
+
 </PageContainer>
