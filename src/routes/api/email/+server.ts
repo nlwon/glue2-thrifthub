@@ -17,7 +17,7 @@ export async function POST({ request }) {
 
 	try {
 		// TODO: generalize email parameters to app config file
-		const pbAdmin = new PocketBase('https://glue2-ridehub.fly.dev/');
+		const pbAdmin = new PocketBase('https://glue2-thrifthub.fly.dev/');
 		await pbAdmin.admins.authWithPassword(POCKETBASE_ADMIN_EMAIL, POCKETBASE_ADMIN_PWD);
 		await pbAdmin.collection('users').update(receiverId, {
 			emailVisibility: true
@@ -31,7 +31,7 @@ export async function POST({ request }) {
 
 		const devHtml = `<div>Intended recipent: ${targetUser?.email}</div>`;
 		const to = dev ? 'jj534@cornell.edu' : targetUser?.email;
-		const url = 'https://ride.hubcornell.com/chatrooms';
+		const url = 'https://thrift.hubcornell.com/chatrooms';
 		const html = `
     <div>
       ${dev ? devHtml : '<div></div>'}
@@ -58,8 +58,8 @@ export async function POST({ request }) {
 
 		await sgMail.send({
 			to,
-			from: 'ridehub.webdev@gmail.com',
-			subject: `[RideHub] ${senderName} sent you a message!`,
+			from: 'thrifthub.webdev@gmail.com',
+			subject: `[ThriftHub] ${senderName} sent you a message!`,
 			html
 		});
 
