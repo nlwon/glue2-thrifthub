@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { pb, currentUser } from '$lib/glue/pocketbase';
-	import IconDownKarat from '$lib/icons/glue/IconDownKarat.svelte';
-	import IconUpKarat from '$lib/icons/glue/IconUpKarat.svelte';
+	import { currentUser, pb } from '$lib/glue/pocketbase';
 	import { formatDistanceToNowStrict } from 'date-fns';
 
 	export let listing;
 
-	let isExpanded = false;
 	let isChatLoading = false;
 
 	const handleChatClick = async () => {
@@ -37,59 +34,67 @@
 </script>
 
 {#if listing}
-	<div class="relative w-full py-2 md:w-[32rem]">
-		<div class="flex space-x-4">
-			<!-- photos -->
-			<div>
-				<img
-					class="h-28 w-32 rounded object-cover"
-					src={pb.getFileUrl(listing, listing?.photos[0])}
-					alt=""
-				/>
-			</div>
+	<!-- listing card -->
+	<label for="modal-listing-{listing?.id}">
+		<div class="relative w-full cursor-pointer rounded-xl py-3 px-2 hover:bg-base-200 md:w-[32rem]">
+			<div class="flex space-x-4">
+				<!-- photos -->
+				<div class="flex-shrink-0">
+					<img
+						class="h-28 w-32 rounded object-cover"
+						src={pb.getFileUrl(listing, listing?.photos[0])}
+						alt=""
+					/>
+				</div>
 
-			<!-- info -->
-			<div class="mt-[-0.25rem]">
-				<p class="text-lg font-semibold text-base-content/90">{listing?.title}</p>
-				<p class="font-medium">${listing?.price}</p>
-				<div class="mt-3 flex items-center space-x-2">
-					<div class="avatar">
-						<div class="w-6 rounded-full">
-							<img src={listing?.expand?.user?.avatarUrl} alt="" />
+				<!-- info -->
+				<div class="mt-[-0.25rem]">
+					<p class="text-lg font-semibold text-base-content/90">{listing?.title}</p>
+					<p class="font-medium">${listing?.price}</p>
+					<div class="mt-3 flex items-center space-x-2">
+						<div class="avatar">
+							<div class="w-6 rounded-full">
+								<img src={listing?.expand?.user?.avatarUrl} alt="" />
+							</div>
 						</div>
+						<p class="text-sm text-base-content/70">
+							Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
+						</p>
 					</div>
-					<p class="text-sm text-base-content/70">
-						{formatDistanceToNowStrict(new Date(listing?.updated))} ago
+					<p class="mt-2 text-sm text-base-content/70 line-clamp-1">
+						{listing?.desc}
 					</p>
 				</div>
 			</div>
 		</div>
+	</label>
 
-		<!-- expanded content -->
-		{#if isExpanded}
-			<div class="mt-4 w-4/5 space-y-2">
-				<p class="text-sm text-base-content/70">{listing?.desc}</p>
-				<button
-					class="btn-primary btn-block btn-sm btn {isChatLoading && 'loading'}"
-					on:click={handleChatClick}>Message seller</button
-				>
+	<!-- listing modal -->
+	<input type="checkbox" id="modal-listing-{listing?.id}" class="modal-toggle" />
+	<label for="modal-listing-{listing?.id}" class="modal cursor-pointer">
+		<label class="modal-box relative max-w-none" for="">
+			<div class="flex justify-center">
+				<div class="w-[80vw] space-y-4">
+					<div class="carousel-center carousel rounded-box space-x-4 bg-neutral p-4">
+						{#each listing?.photos as photo}
+							<div class="carousel-item w-[60vw]">
+								<img src={pb.getFileUrl(listing, photo)} class="rounded-box" alt="" />
+							</div>
+						{/each}
+					</div>
+					<div class="space-y-1">
+						<h3 class="text-2xl font-semibold">{listing?.title}</h3>
+						<p class="text-lg font-semibold">${listing?.price}</p>
+						<p class="font-medium text-base-content/70">
+							Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
+						</p>
+						<p class="text-sm text-base-content/70">
+							{listing?.desc}
+						</p>
+					</div>
+					<button class="btn-primary btn-block btn mt-4">Message seller</button>
+				</div>
 			</div>
-		{/if}
-
-		<!-- expand / collapse button -->
-		<div class="absolute right-1 bottom-1">
-			<button
-				class="btn-sm btn rounded-full px-1 text-2xl"
-				on:click={() => {
-					isExpanded = !isExpanded;
-				}}
-			>
-				{#if isExpanded}
-					<IconUpKarat />
-				{:else}
-					<IconDownKarat />
-				{/if}
-			</button>
-		</div>
-	</div>
+		</label>
+	</label>
 {/if}
