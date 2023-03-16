@@ -6,6 +6,6 @@
 	$: label = $isMd ? 'New listing' : 'Listing';
 </script>
 
-<RequireAuthButton href="/create" class="btn-primary btn gap-2 pl-3">
+<RequireAuthButton href="/create" class="btn-primary btn-sm btn gap-2 pl-3 md:btn-md">
 	<span class="text-lg"><IconAdd /></span>{label}
 </RequireAuthButton>
