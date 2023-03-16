@@ -7,15 +7,28 @@
 <PageContainer title="Home" layout="aside-main">
 	
 	<Aside>
-		<div id="myBtnContainer">
-			<button class="btn active" onclick="filterSelection('all')"> Show all</button>
-			<button class="btn" onclick="filterSelection('cars')"> Cars</button>
-			<button class="btn" onclick="filterSelection('animals')"> Animals</button>
-			<button class="btn" onclick="filterSelection('fruits')"> Fruits</button>
-			<button class="btn" onclick="filterSelection('colors')"> Colors</button>
+		<h1>Filters</h1>
+		<div>
+			<input type="checkbox" id="clothing" name="clothing" value="Clothing">
+			<label for="clothing">Clothing</label><br>
+
+			<input type="checkbox" id="decoration" name="decoration" value="Decoration">
+			<label for="decoration">Decoration</label><br>
+
+			<input type="checkbox" id="furniture" name="furniture" value="Furniture">
+			<label for="furniture">Furniture</label><br><br>
+
+			<input type="checkbox" id="electronics" name="electronics" value="Electronics">
+			<label for="electronics">Electronics</label><br><br>
+
+			<input type="checkbox" id="supplies" name="supplies" value="Supplies">
+			<label for="supplies">Supplies</label><br><br>
+			
 		</div>
-		<input type="checkbox" checked="checked" class="checkbox" />
-		<label for="my-modal" class="btn">open modal</label>
+
+
+		<!-- <input type="checkbox" checked="checked" class="checkbox" />
+		<label for="my-modal" class="btn">open modal</label> -->
 	</Aside>
 	<Main>main</Main>
 </PageContainer>
