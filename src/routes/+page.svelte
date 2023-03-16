@@ -6,6 +6,8 @@
 
 <PageContainer title="Home" layout="aside-main">
 	
-	<Aside>aside</Aside>
+	<Aside>
+		<input type="checkbox" checked="checked" class="checkbox" />
+	</Aside>
 	<Main>main</Main>
 </PageContainer>
