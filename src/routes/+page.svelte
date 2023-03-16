@@ -8,6 +8,7 @@
 	
 	<Aside>
 		<input type="checkbox" checked="checked" class="checkbox" />
+		<label for="my-modal" class="btn">open modal</label>
 	</Aside>
 	<Main>main</Main>
 </PageContainer>
