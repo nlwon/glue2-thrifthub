@@ -37,15 +37,16 @@
 
 {#if listing}
 	<!-- listing card -->
-	<label for="modal-listing-{listing?.id}">
+	<label for="modal-listing-{listing?.isSold ? 'disabled' : listing?.id}">
 		<div
-			class="relative w-full cursor-pointer rounded-xl py-3 hover:bg-base-200 md:w-[32rem] md:px-2"
+			class="relative w-full cursor-pointer rounded-xl py-3 hover:bg-base-200 md:w-[32rem] md:px-2 {listing?.isSold &&
+				'cursor-default hover:bg-base-100'}"
 		>
 			<div class="flex w-full space-x-4">
 				<!-- thumbnail -->
 				<div class="flex-shrink-0">
 					<img
-						class="h-28 w-28 rounded object-cover md:w-32"
+						class="h-28 w-28 rounded object-cover md:w-32 {listing?.isSold && 'opacity-50'}"
 						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0])}
 						alt=""
 					/>
@@ -55,8 +56,15 @@
 				<div class="mt-[-0.25rem] flex-1">
 					<div class="flex w-full justify-between">
 						<div>
-							<p class="text-lg font-semibold text-base-content/90">{listing?.title}</p>
-							<p class="font-medium">${listing?.price}</p>
+							{#if listing?.isSold}
+								<div class="badge-error badge mb-1 ml-[-0.25rem]">Sold</div>
+							{/if}
+							<p
+								class="text-lg font-semibold text-base-content/90 {listing?.isSold && 'opacity-50'}"
+							>
+								{listing?.title}
+							</p>
+							<p class="font-medium {listing?.isSold && 'opacity-50'}">${listing?.price}</p>
 						</div>
 
 						{#if listing?.user === $currentUser?.id}
@@ -66,7 +74,7 @@
 									><IconEditPen /></button
 								>
 							</a>
-						{:else}
+						{:else if !listing?.isSold}
 							<!-- message button -->
 							<button
 								class="btn-primary btn-sm btn-circle btn h-[2.5rem] w-[2.5rem] text-lg"
@@ -76,7 +84,7 @@
 					</div>
 					<div class="mt-3 flex items-center space-x-2">
 						<div class="avatar">
-							<div class="w-6 rounded-full">
+							<div class="w-6 rounded-full {listing?.isSold && 'opacity-50'}">
 								<img src={listing?.expand?.user?.avatarUrl} alt="" />
 							</div>
 						</div>
@@ -84,9 +92,11 @@
 							Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
 						</p>
 					</div>
-					<p class="mt-2 text-sm text-base-content/70 line-clamp-1">
-						{listing?.desc}
-					</p>
+					{#if !listing?.isSold}
+						<p class="mt-2 text-sm text-base-content/70 line-clamp-1">
+							{listing?.desc}
+						</p>
+					{/if}
 				</div>
 			</div>
 		</div>
