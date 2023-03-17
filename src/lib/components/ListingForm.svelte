@@ -106,7 +106,7 @@
 </script>
 
 <form on:submit|preventDefault={handleCreateListing}>
-	<div class="space-y-6">
+	<div class="space-y-8">
 		<div class="space-y-4">
 			<div class="max-w-xs">
 				<TextInput label="Title" bind:value={title} error={errors?.title?.message} />
