@@ -94,10 +94,14 @@
 									{listing?.desc}
 								</p>
 							</div>
-							<button class="btn-primary btn hidden md:block">Message seller</button>
+							<button class="btn-primary btn hidden md:block" on:click={handleChatClick}
+								>Message seller</button
+							>
 						</div>
 					</div>
-					<button class="btn-primary btn-block btn mt-4 md:hidden">Message seller</button>
+					<button class="btn-primary btn-block btn mt-4 md:hidden" on:click={handleChatClick}
+						>Message seller</button
+					>
 				</div>
 			</div>
 		</label>
