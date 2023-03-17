@@ -46,7 +46,7 @@
 
 	<Main>
 		<h1>Listings</h1>
-		<div class="card w-96 bg-base-100 shadow-xl">
+		<div class="card bg-base-100 shadow-xl">
 			<!-- <figure class="px-10 pt-10">
 				<img
 					src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"

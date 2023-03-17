@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
+	import IconEditPen from '$lib/icons/glue/IconEditPen.svelte';
+	import IconMessage from '$lib/icons/glue/IconMessage.svelte';
 	import { formatDistanceToNowStrict } from 'date-fns';
 
 	export let listing;
@@ -36,21 +38,42 @@
 {#if listing}
 	<!-- listing card -->
 	<label for="modal-listing-{listing?.id}">
-		<div class="relative w-full cursor-pointer rounded-xl py-3 px-2 hover:bg-base-200 md:w-[32rem]">
-			<div class="flex space-x-4">
-				<!-- photos -->
+		<div
+			class="relative w-full cursor-pointer rounded-xl py-3 hover:bg-base-200 md:w-[32rem] md:px-2"
+		>
+			<div class="flex w-full space-x-4">
+				<!-- thumbnail -->
 				<div class="flex-shrink-0">
 					<img
-						class="h-28 w-32 rounded object-cover"
-						src={pb.getFileUrl(listing, listing?.photos[0])}
+						class="h-28 w-28 rounded object-cover md:w-32"
+						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0])}
 						alt=""
 					/>
 				</div>
 
 				<!-- info -->
-				<div class="mt-[-0.25rem]">
-					<p class="text-lg font-semibold text-base-content/90">{listing?.title}</p>
-					<p class="font-medium">${listing?.price}</p>
+				<div class="mt-[-0.25rem] flex-1">
+					<div class="flex w-full justify-between">
+						<div>
+							<p class="text-lg font-semibold text-base-content/90">{listing?.title}</p>
+							<p class="font-medium">${listing?.price}</p>
+						</div>
+
+						{#if listing?.user === $currentUser?.id}
+							<!-- edit button -->
+							<a href="/edit/{listing?.id}">
+								<button class="btn-primary btn-sm btn-circle btn h-[2.5rem] w-[2.5rem] text-lg"
+									><IconEditPen /></button
+								>
+							</a>
+						{:else}
+							<!-- message button -->
+							<button
+								class="btn-primary btn-sm btn-circle btn h-[2.5rem] w-[2.5rem] text-lg"
+								on:click={handleChatClick}><IconMessage /></button
+							>
+						{/if}
+					</div>
 					<div class="mt-3 flex items-center space-x-2">
 						<div class="avatar">
 							<div class="w-6 rounded-full">
