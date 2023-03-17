@@ -10,7 +10,6 @@
 
 	let isLoading = false;
 	let isDeleteLoading = false;
-	let isMarkAsSoldLoading = false;
 
 	const formData = new FormData();
 
@@ -19,6 +18,7 @@
 	let desc: string = '';
 	let photos: File[] = []; // should only contain new photos
 	let previews: string[] = [];
+	let isSold: boolean = false;
 	let thumbnailIdx = 0;
 	let deletedExistingPhotos: string[] = [];
 	let errors;
@@ -72,6 +72,7 @@
 			price = initialValues?.price;
 			desc = initialValues?.desc;
 			thumbnailIdx = initialValues?.thumbnailIdx || 0;
+			isSold = initialValues?.isSold;
 			previews = initialValues?.photos?.map((photo: string) => {
 				return pb.getFileUrl(initialValues, photo);
 			});
@@ -89,17 +90,14 @@
 		isDeleteLoading = false;
 	};
 
-	const handleMarkAsSold = async () => {
-		isMarkAsSoldLoading = true;
+	const toggleIsSold = async (event) => {
+		isSold = !event?.target?.checked;
 
 		try {
 			await pb.collection('listings').update(initialValues?.id, {
-				isSold: true
+				isSold: !event?.target?.checked
 			});
-			goto('/my-listings');
 		} catch (error) {}
-
-		isMarkAsSoldLoading = false;
 	};
 
 	onMount(() => {
@@ -108,20 +106,22 @@
 </script>
 
 <form on:submit|preventDefault={handleCreateListing}>
-	<div class="space-y-4">
-		<div class="max-w-xs">
-			<TextInput label="Title" bind:value={title} error={errors?.title?.message} />
-		</div>
-		<div class="max-w-xs">
-			<TextInput
-				label="Price ($)"
-				type="number"
-				bind:value={price}
-				error={errors?.price?.message}
-			/>
-		</div>
-		<div>
-			<Textarea label="Description" bind:value={desc} />
+	<div class="space-y-6">
+		<div class="space-y-4">
+			<div class="max-w-xs">
+				<TextInput label="Title" bind:value={title} error={errors?.title?.message} />
+			</div>
+			<div class="max-w-xs">
+				<TextInput
+					label="Price ($)"
+					type="number"
+					bind:value={price}
+					error={errors?.price?.message}
+				/>
+			</div>
+			<div>
+				<Textarea label="Description" bind:value={desc} />
+			</div>
 		</div>
 		<div class="space-y-4">
 			<div class="space-y-2">
@@ -171,19 +171,35 @@
 			</div>
 		</div>
 
+		{#if initialValues}
+			<div class="space-y-4">
+				<div class="space-y-2">
+					<p class="text-xl font-semibold">Availability</p>
+					<p class="text-sm text-base-content/70">
+						Mark your listing as sold if you've sold the item and wish to no longer receive messages
+						from buyers.
+					</p>
+				</div>
+				<div class="flex items-center space-x-3">
+					<input
+						type="checkbox"
+						class="toggle-success toggle"
+						checked={!isSold}
+						on:change={toggleIsSold}
+					/>
+					<p class="text-sm font-semibold">{isSold ? 'Sold' : 'Available'}</p>
+				</div>
+			</div>
+		{/if}
+
 		<!-- TODO: categories -->
 	</div>
 
-	<div class="mt-6 flex space-x-2 ">
+	<div class="mt-10 flex space-x-2 ">
 		<button class="btn-primary btn {isLoading && 'loading'}" type="submit"
 			>{initialValues ? 'Save' : 'Post'} listing</button
 		>
-		<button class="btn {isMarkAsSoldLoading && 'loading'}" type="button" on:click={handleMarkAsSold}
-			>Mark as sold</button
-		>
-		<label for="modal-delete-listing" class="btn-error btn-ghost btn text-2xl text-error"
-			><IconDelete /></label
-		>
+		<label for="modal-delete-listing" class="btn-outline btn text-2xl"><IconDelete /></label>
 	</div>
 	{#if errors}
 		<p class="mt-1 text-sm text-error">There were errors in your submission</p>
