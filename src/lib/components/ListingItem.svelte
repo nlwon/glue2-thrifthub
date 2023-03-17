@@ -85,14 +85,19 @@
 					<div class="space-y-1">
 						<h3 class="text-2xl font-semibold">{listing?.title}</h3>
 						<p class="text-lg font-semibold">${listing?.price}</p>
-						<p class="font-medium text-base-content/70">
-							Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
-						</p>
-						<p class="text-sm text-base-content/70">
-							{listing?.desc}
-						</p>
+						<div class="flex items-end justify-between">
+							<div class="space-y-2">
+								<p class="font-medium text-base-content/70">
+									Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
+								</p>
+								<p class="text-sm text-base-content/70">
+									{listing?.desc}
+								</p>
+							</div>
+							<button class="btn-primary btn hidden md:block">Message seller</button>
+						</div>
 					</div>
-					<button class="btn-primary btn-block btn mt-4">Message seller</button>
+					<button class="btn-primary btn-block btn mt-4 md:hidden">Message seller</button>
 				</div>
 			</div>
 		</label>
