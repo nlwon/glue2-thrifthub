@@ -53,28 +53,13 @@
 	</Aside>
 
 	<Main>
-		<h1>Listings</h1>
-		<div class="card bg-base-100 shadow-xl">
-			<!-- <figure class="px-10 pt-10">
-				<img
-					src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-					alt="Listing"
-					class="rounded-xl"
-				/>
-			</figure>
-			<div class="card-body items-center text-center">
-				<h2 class="card-title">Item Name</h2>
-				<p>This is the description for the item</p>
-				<div class="card-actions">
-					<button class="btn-primary btn">Message Poster</button>
-				</div> -->
-
+		<div class="space-y-3">
+			<h2 class="ml-1 text-2xl font-semibold tracking-wider">Listings</h2>
 			<div class="space-y-2">
 				{#each listings as listing (listing?.id)}
 					<ListingItem {listing} />
 				{/each}
 			</div>
 		</div>
-		<!-- </div> -->
 	</Main>
 </PageContainer>
