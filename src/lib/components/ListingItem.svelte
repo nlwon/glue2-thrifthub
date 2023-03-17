@@ -72,13 +72,17 @@
 	<!-- listing modal -->
 	<input type="checkbox" id="modal-listing-{listing?.id}" class="modal-toggle" />
 	<label for="modal-listing-{listing?.id}" class="modal cursor-pointer">
-		<label class="modal-box relative max-w-none" for="">
+		<label class="modal-box relative w-[80vw] max-w-none md:w-[60vw]" for="">
 			<div class="flex justify-center">
-				<div class="w-[80vw] space-y-4">
+				<div class=" space-y-4 ">
 					<div class="carousel-center carousel rounded-box h-[40vh] space-x-4 bg-neutral p-4">
 						{#each listing?.photos as photo}
-							<div class="carousel-item max-w-[60vw]">
-								<img src={pb.getFileUrl(listing, photo)} class="rounded-box" alt="" />
+							<div class="carousel-item">
+								<img
+									src={pb.getFileUrl(listing, photo)}
+									class="rounded-box w-[50vw] object-cover md:w-[30vw]"
+									alt=""
+								/>
 							</div>
 						{/each}
 					</div>
