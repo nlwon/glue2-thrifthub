@@ -4,6 +4,7 @@
 	import IconEditPen from '$lib/icons/glue/IconEditPen.svelte';
 	import IconMessage from '$lib/icons/glue/IconMessage.svelte';
 	import { formatDistanceToNowStrict } from 'date-fns';
+	import ListingModal from './ListingModal.svelte';
 
 	export let listing;
 
@@ -57,7 +58,7 @@
 					<div class="flex w-full justify-between">
 						<div>
 							{#if listing?.isSold}
-								<div class="badge-error badge mb-1 ml-[-0.25rem]">Sold</div>
+								<div class="badge badge-error mb-1 ml-[-0.25rem]">Sold</div>
 							{/if}
 							<p
 								class="text-lg font-semibold text-base-content/90 {listing?.isSold && 'opacity-50'}"
@@ -102,45 +103,5 @@
 		</div>
 	</label>
 
-	<!-- listing modal -->
-	<input type="checkbox" id="modal-listing-{listing?.id}" class="modal-toggle" />
-	<label for="modal-listing-{listing?.id}" class="modal cursor-pointer">
-		<label class="modal-box relative w-[80vw] max-w-none md:w-[60vw]" for="">
-			<div class="flex justify-center">
-				<div class=" space-y-4 ">
-					<div class="carousel-center carousel rounded-box h-[40vh] space-x-4 bg-neutral p-4">
-						{#each listing?.photos as photo}
-							<div class="carousel-item">
-								<img
-									src={pb.getFileUrl(listing, photo)}
-									class="rounded-box w-[50vw] object-cover md:w-[30vw]"
-									alt=""
-								/>
-							</div>
-						{/each}
-					</div>
-					<div class="space-y-1">
-						<h3 class="text-2xl font-semibold">{listing?.title}</h3>
-						<p class="text-lg font-semibold">${listing?.price}</p>
-						<div class="flex items-end justify-between">
-							<div class="space-y-2">
-								<p class="font-medium text-base-content/70">
-									Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
-								</p>
-								<p class="text-sm text-base-content/70">
-									{listing?.desc}
-								</p>
-							</div>
-							<button class="btn-primary btn hidden md:block" on:click={handleChatClick}
-								>Message seller</button
-							>
-						</div>
-					</div>
-					<button class="btn-primary btn-block btn mt-4 md:hidden" on:click={handleChatClick}
-						>Message seller</button
-					>
-				</div>
-			</div>
-		</label>
-	</label>
+	<ListingModal {listing} />
 {/if}
