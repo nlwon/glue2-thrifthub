@@ -6,13 +6,12 @@
 	import IconNeutralFace from '$lib/icons/glue/IconNeutralFace.svelte';
 	import IconSadFace from '$lib/icons/glue/IconSadFace.svelte';
 	import Textarea from './Textarea.svelte';
-	import TextInput from './TextInput.svelte';
 
 	let isOpen = false;
 	let step = 1;
 	let feedbackText = '';
 	let feedbackId = '';
-	const hideRouteIds = ['/chatrooms/[chatroomId]'];
+	const hideRouteIds = ['/chatrooms/[chatroomId]', '/create', '/edit/[listingId]'];
 
 	const handleIconClick = async (review) => {
 		try {
