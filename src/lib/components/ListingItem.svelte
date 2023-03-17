@@ -75,9 +75,9 @@
 		<label class="modal-box relative max-w-none" for="">
 			<div class="flex justify-center">
 				<div class="w-[80vw] space-y-4">
-					<div class="carousel-center carousel rounded-box space-x-4 bg-neutral p-4">
+					<div class="carousel-center carousel rounded-box h-[40vh] space-x-4 bg-neutral p-4">
 						{#each listing?.photos as photo}
-							<div class="carousel-item w-[60vw]">
+							<div class="carousel-item max-w-[60vw]">
 								<img src={pb.getFileUrl(listing, photo)} class="rounded-box" alt="" />
 							</div>
 						{/each}
