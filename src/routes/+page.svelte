@@ -23,8 +23,16 @@
 
 <PageContainer title="Home" layout="aside-main">
 	<Aside>
-		<h1>Welcome!</h1>
-		<h2>This is ThriftHub Beta! Please leave us any feedback below...</h2>
+		<div class="hidden space-y-3 rounded-lg bg-base-200 p-4  md:block">
+			<p class="font-semibold text-base-content/90">This is a Beta version of ThriftHub!</p>
+			<div class="space-y-1 text-base-content/70">
+				<p class="text-sm">
+					Please feel free to give us feedback using the feedback button on the bottom right corner
+					of the page.
+				</p>
+				<p class="text-sm">Or email us at thrifthub.webdev@gmail.com</p>
+			</div>
+		</div>
 		<!-- <h1>Filters</h1>
 		<div>
 			<input type="checkbox" id="clothing" name="clothing" value="Clothing" />
