@@ -1,11 +1,6 @@
 <script>
 	import { PRIVATE_NAVS } from '$lib/glue/config';
-	import { pb } from '$lib/glue/pocketbase';
 	import IconLogout from '$lib/icons/glue/IconLogout.svelte';
-
-	const signOut = () => {
-		pb.authStore.clear();
-	};
 </script>
 
 <div class="hidden md:block">
