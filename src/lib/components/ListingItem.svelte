@@ -4,6 +4,7 @@
 	import IconEditPen from '$lib/icons/glue/IconEditPen.svelte';
 	import IconMessage from '$lib/icons/glue/IconMessage.svelte';
 	import { formatDistanceToNowStrict } from 'date-fns';
+	import RequireAuthButton from './glue/RequireAuthButton.svelte';
 	import ListingModal from './ListingModal.svelte';
 
 	export let listing;
@@ -77,10 +78,12 @@
 							</a>
 						{:else if !listing?.isSold}
 							<!-- message button -->
-							<button
+							<RequireAuthButton
 								class="btn-primary btn-sm btn-circle btn h-[2.5rem] w-[2.5rem] text-lg"
-								on:click={handleChatClick}><IconMessage /></button
+								on:click={handleChatClick}
 							>
+								<IconMessage />
+							</RequireAuthButton>
 						{/if}
 					</div>
 					<div class="mt-3 flex items-center space-x-2">
