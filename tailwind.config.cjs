@@ -14,18 +14,18 @@ module.exports = {
 	],
 	daisyui: {
 		themes: [
-			// {
-			// 	light: {
-			// 		...require('daisyui/src/colors/themes')['[data-theme=light]'],
-			// 		primary: '#53B354'
-			// 	}
-			// },
-			// {
-			// 	dark: {
-			// 		...require('daisyui/src/colors/themes')['[data-theme=dark]'],
-			// 		primary: '#53B354'
-			// 	}
-			// }
+			{
+				light: {
+					...require('daisyui/src/colors/themes')['[data-theme=light]'],
+					primary: '#53B354'
+				}
+			},
+			{
+				dark: {
+					...require('daisyui/src/colors/themes')['[data-theme=dark]'],
+					primary: '#53B354'
+				}
+			}
 		]
 	}
 };
