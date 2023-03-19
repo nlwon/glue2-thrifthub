@@ -64,7 +64,7 @@
 		class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl"
 	>
 		{#each products as product}
-			<li class="my-0.5">
+			<li class="my-1">
 				<a
 					class="bg-base-100 hover:bg-base-100/50"
 					href={product?.stage === 'coming-soon' ? undefined : product?.url}
@@ -89,7 +89,7 @@
 						{/if}
 
 						{#if product?.stage === 'coming-soon'}
-							<div class="rounded-xs badge badge-primary badge-sm ml-[-0.25rem] mt-2">
+							<div class="rounded-xs badge-primary badge badge-sm ml-[-0.25rem] mt-2">
 								Coming soon
 							</div>
 						{/if}
