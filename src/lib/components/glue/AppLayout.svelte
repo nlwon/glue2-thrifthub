@@ -6,6 +6,7 @@
 	import CreateListingButton from '../CreateListingButton.svelte';
 	import './app.css';
 	import FeedbackModal from './FeedbackModal.svelte';
+	import HubSuite from './HubSuite.svelte';
 	import TrackWidth from './TrackWidth.svelte';
 
 	let topAnchor;
@@ -56,14 +57,14 @@
 								<a href="/" class="btn-ghost btn px-1 text-xl normal-case"
 									>{APP_NAME}
 									{#if IS_BETA}
-										<span class="ml-1.5 text-base-content/60">beta</span>
+										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>
 									{/if}
 								</a>
 							</button>
 						</div>
 
 						<!-- right side menu -->
-						<div class="flex flex-1 justify-end space-x-3">
+						<div class="flex flex-1 items-center justify-end space-x-2 md:space-x-3">
 							<div class="hidden md:block">
 								<div class="menu menu-horizontal p-2">
 									{#if PUBLIC_NAVS?.length > 0}
@@ -73,6 +74,7 @@
 									{/if}
 								</div>
 							</div>
+							<HubSuite />
 							<CreateListingButton />
 							<Auth />
 						</div>
