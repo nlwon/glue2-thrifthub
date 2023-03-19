@@ -122,9 +122,14 @@
 			>
 				<div class="flex items-center space-x-3">
 					<!-- avatar -->
-					<div class="avatar">
+					<div class="avatar {chatroom?.expand?.post?.isSold && 'opacity-50'}">
 						<div class="w-12 rounded-full">
-							<img src={chatroom?.otherUser?.avatarUrl} />
+							<img
+								src={pb.getFileUrl(
+									chatroom?.expand?.post,
+									chatroom?.expand?.post?.photos[chatroom?.expand?.post?.thumbnailIdx]
+								)}
+							/>
 						</div>
 					</div>
 
@@ -132,8 +137,11 @@
 					<div class="space-y-0.5 overflow-hidden">
 						<!-- top: name, origin, destination -->
 						<div class="flex items-center">
-							<p class="truncate font-medium">
-								{chatroom?.otherUser?.name}
+							{#if chatroom?.expand?.post?.isSold}
+								<div class="badge-error badge badge-xs mr-2">Sold</div>
+							{/if}
+							<p class="truncate text-sm font-medium line-clamp-1">
+								{chatroom?.expand?.post?.title} • {chatroom?.otherUser?.name?.split(' ')[0]}
 							</p>
 						</div>
 
