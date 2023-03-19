@@ -13,15 +13,19 @@ module.exports = {
 		require('daisyui')
 	],
 	daisyui: {
-		// themes: [
-		// 	'light',
-		// 	{
-		// 		dark: {
-		// 			...require('daisyui/src/colors/themes')['[data-theme=dark]'],
-		// 			'base-200': colors.slate['700'],
-		// 			'base-300': colors.slate['600']
-		// 		}
-		// 	}
-		// ]
+		themes: [
+			// {
+			// 	light: {
+			// 		...require('daisyui/src/colors/themes')['[data-theme=light]'],
+			// 		primary: '#53B354'
+			// 	}
+			// },
+			// {
+			// 	dark: {
+			// 		...require('daisyui/src/colors/themes')['[data-theme=dark]'],
+			// 		primary: '#53B354'
+			// 	}
+			// }
+		]
 	}
 };
