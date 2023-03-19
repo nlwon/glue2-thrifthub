@@ -11,6 +11,7 @@
 	const fetchListings = async () => {
 		try {
 			listings = await pb.collection('listings').getFullList(200, {
+				sort: '-updated',
 				expand: 'user'
 			});
 		} catch (error) {}
