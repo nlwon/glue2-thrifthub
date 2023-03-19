@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { currentUser, pb } from '$lib/glue/pocketbase';
+	import IconClose from '$lib/icons/glue/IconClose.svelte';
 	import IconDelete from '$lib/icons/glue/IconDelete.svelte';
 	import { onMount } from 'svelte';
 	import Textarea from './glue/Textarea.svelte';
@@ -20,7 +21,7 @@
 	let previews: string[] = [];
 	let isSold: boolean = false;
 	let thumbnailIdx = 0;
-	let deletedExistingPhotos: string[] = [];
+	let deletedPhotosIdx: string[] = [];
 	let errors;
 
 	const handleFileChange = (event) => {
@@ -51,10 +52,19 @@
 				formData.append('photos', photo);
 			}
 
-			// TODO: delete existing photos that were deleted
-
 			if (initialValues) {
 				await pb.collection('listings').update(initialValues?.id, formData);
+
+				if (deletedPhotosIdx?.length > 0) {
+					const deleteObj = {};
+
+					for (let i = 0; i < deletedPhotosIdx?.length; i++) {
+						deleteObj[`photos.${deletedPhotosIdx[i]}`] = null;
+					}
+					await pb.collection('listings').update(initialValues?.id, {
+						...deleteObj
+					});
+				}
 			} else {
 				await pb.collection('listings').create(formData);
 			}
@@ -100,6 +110,26 @@
 		} catch (error) {}
 	};
 
+	const deletePhoto = (targetPreview, idx) => {
+		const FILE_PATH_PREFIX = 'https://glue2-thrifthub.fly.dev/api/files/';
+
+		previews.splice(idx, 1);
+		previews = [...previews]; // to force svelte to rerender previews
+
+		if (thumbnailIdx >= previews?.length) {
+			thumbnailIdx = 0;
+		}
+
+		if (targetPreview?.includes(FILE_PATH_PREFIX)) {
+			// existing photo that was uploaded to backend
+			deletedPhotosIdx?.push(idx);
+		} else {
+			// new photo that's currently only in the user's machine
+			const targetIdx = idx - initialValues?.photos?.length + deletedPhotosIdx?.length;
+			photos?.splice(targetIdx, 1);
+		}
+	};
+
 	onMount(() => {
 		setInitialValues();
 	});
@@ -143,9 +173,9 @@
 			/>
 			<div class="flex flex-wrap items-start">
 				{#if previews}
-					{#each previews as preview, idx (`${preview}${idx}`)}
+					{#each previews as preview, idx}
 						<button
-							class="mx-1 my-2"
+							class="relative mx-1 my-2"
 							type="button"
 							on:click={() => {
 								thumbnailIdx = idx;
@@ -165,6 +195,15 @@
 								<!-- placeholder for thumbnail text space -->
 								<div class="h-4" />
 							{/if}
+
+							<!-- delete photo button -->
+							<button
+								type="button"
+								class="btn-xs btn-circle btn absolute -right-2 -top-2"
+								on:click={() => deletePhoto(preview, idx)}
+							>
+								<IconClose />
+							</button>
 						</button>
 					{/each}
 				{/if}
