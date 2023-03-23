@@ -7,14 +7,14 @@
 	const products = [
 		{
 			name: 'Sublet',
-			desc: 'Find and give sublets',
+			desc: 'Find and list student sublets',
 			stats: '12,000 users • 3,000 sublets',
 			gradient: 'scarlet',
 			url: 'https://cornlet.hubcornell.com'
 		},
 		{
 			name: 'Opinion',
-			desc: 'Course reviews',
+			desc: 'Synthesized course reviews',
 			stats: '7,100 courses • 2,000 reviews',
 			gradient: 'midnight',
 			url: 'https://opinion.hubcornell.com',
@@ -22,28 +22,28 @@
 		},
 		{
 			name: 'Ride',
-			desc: 'Carpool for school breaks',
+			desc: 'Carpooling for school breaks',
 			gradient: 'pumpkin',
 			url: 'https://ride.hubcornell.com',
 			stage: 'beta'
 		},
 		{
 			name: 'Thrift',
-			desc: 'Buy and sell marketplace',
+			desc: 'Resale platform for all items',
 			gradient: 'shamrock',
 			url: 'https://thrift.hubcornell.com/',
 			stage: 'beta'
 		},
 		{
 			name: 'Refer',
-			desc: 'Job application referrals',
+			desc: 'Application referrals by alumni',
 			gradient: 'daybreak',
 			url: 'https://refer.hubcornell.com/',
 			stage: 'coming-soon'
 		},
 		{
 			name: 'Find',
-			desc: 'Lost and found',
+			desc: 'Crowdsourced lost-and-found',
 			gradient: 'cerulean',
 			url: 'https://find.hubcornell.com/',
 			stage: 'coming-soon'
@@ -92,8 +92,8 @@
 						{/if}
 
 						{#if product?.stage === 'coming-soon'}
-							<div class="rounded-xs badge-primary badge badge-sm ml-[-0.25rem] mt-2">
-								Coming soon
+							<div style="background-color: #737b87; border-color: #737b87;" class="rounded-xs badge-primary badge badge-sm ml-[-0.25rem] mt-2 color-shift">
+								Coming Soon
 							</div>
 						{/if}
 					</div>
