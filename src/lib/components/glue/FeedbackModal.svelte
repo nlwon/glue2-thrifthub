@@ -50,7 +50,7 @@
 				right: 21.5%; 
 			}
 			.vert-adjust {
-				--tw-translate-y: 0%;
+				--tw-translate-y: -20%;
 			}
 		}
 	</style>

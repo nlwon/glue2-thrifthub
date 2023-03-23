@@ -4,8 +4,16 @@
 </script>
 
 <div class="hidden md:block">
-	<p class="ml-6 text-xl font-semibold">My ThriftHub</p>
-	<ul class="menu rounded-box menu-compact w-56 bg-base-100 p-2">
+	<style>
+		.left-adjust {
+			margin-left: 0;
+		}
+		.list-head, .list-head a {
+			padding-left: 0;
+		}
+	</style>
+	<p class="ml-6 text-xl font-semibold left-adjust">My ThriftHub</p>
+	<ul class="menu rounded-box menu-compact w-56 bg-base-100 p-2 list-head">
 		{#each PRIVATE_NAVS as nav}
 			<li>
 				<a href={nav.path}>
