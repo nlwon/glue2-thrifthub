@@ -8,7 +8,7 @@
 	let isLoading = false;
 
 	let title: string = '';
-	let price: number = 0;
+	let price: number = null;
 	let desc: string = '';
 	let photos;
 	let previews: string[] = [];
@@ -42,7 +42,7 @@
 		try {
 			const formData = new FormData();
 			formData.append('title', title);
-			formData.append('price', String(price));
+			formData.append('price', String(price)).place;
 			formData.append('desc', desc);
 			formData.append('user', $currentUser.id);
 
@@ -66,7 +66,7 @@
 			<TextInput label="Title" bind:value={title} />
 		</div>
 		<div class="max-w-xs">
-			<TextInput label="Price ($)" type="number" bind:value={price} />
+			<TextInput placeholder="$0" label="Price ($)" type="number" bind:value={price} />
 		</div>
 		<div>
 			<Textarea label="Description" bind:value={desc} />
