@@ -23,7 +23,7 @@
 		{
 			name: 'Ride',
 			desc: 'Carpool for school breaks',
-			gradient: 'pumpkin',
+			gradient: 'cerulean',
 			url: 'https://ride.hubcornell.com',
 			stage: 'beta'
 		},
