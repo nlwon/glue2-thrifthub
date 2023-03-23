@@ -15,7 +15,7 @@
 	const formData = new FormData();
 
 	let title: string = '';
-	let price: number = 0;
+	let price: number = null;
 	let desc: string = '';
 	let photos: File[] = []; // should only contain new photos
 	let previews: string[] = [];
@@ -145,6 +145,7 @@
 				<TextInput
 					label="Price ($)"
 					type="number"
+					placeholder="$0"
 					bind:value={price}
 					error={errors?.price?.message}
 				/>
