@@ -28,7 +28,7 @@
 			<p class="font-semibold text-base-content/90">Welcome to ThriftHub Beta!</p>
 			<div class="space-y-1 text-base-content/70">
 				<p class="text-sm">
-					Please share any feedback you may have using the button in the bottom right corner, or email us at:
+					Please share any feedback you may have using the button in the bottom left corner, or email us at:
 				</p>
 				<p class="text-sm">thrifthub.webdev@gmail.com</p>
 			</div>
