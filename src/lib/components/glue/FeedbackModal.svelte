@@ -57,8 +57,10 @@
 		.vert-adjust label {
 			width: 100%;
 		}
+		.hidefeedback { 
+		}
 	</style>
-	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2 shadow horiz-adjust vert-adjust">
+	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2 shadow horiz-adjust vert-adjust hidefeedback">
 		<label
 			for="modal-feedback"
 			class="btn-primary btn"

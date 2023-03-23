@@ -25,7 +25,7 @@
 <PageContainer title="Home" layout="aside-main">
 	<Aside>
 		<div class="hidden space-y-3 rounded-lg bg-base-200 p-4  md:block">
-			<p class="font-semibold text-base-content/90">Welcome to ThriftHub Beta!</p>
+			<p class="font-semibold text-base-content/90">Welcome to ThriftHub beta!</p>
 			<div class="space-y-1 text-base-content/70">
 				<p class="text-sm">
 					Please share any feedback you may have using the button in the bottom left corner, or email us at:
