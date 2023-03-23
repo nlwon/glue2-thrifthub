@@ -249,13 +249,13 @@
 <input type="checkbox" id="modal-delete-listing" class="modal-toggle" />
 <label for="modal-delete-listing" class="modal cursor-pointer">
 	<label class="modal-box relative" for="">
-		<h3 class="text-lg font-bold">Delete listing</h3>
+		<h3 class="text-lg font-bold">Delete Listing</h3>
 		<div class="space-y-1 py-3">
 			<p class="text-sm text-base-content/80">
 				Are you sure you would like to delete your listing?
 			</p>
 			<p class="text-sm text-base-content/80">
-				Your listing will be deleted permanantly and cannot be recovered.
+				Your listing will be permanently deleted and cannot be recovered.
 			</p>
 		</div>
 		<div class="flex justify-end space-x-1">

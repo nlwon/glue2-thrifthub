@@ -7,14 +7,14 @@
 	const products = [
 		{
 			name: 'Sublet',
-			desc: 'Find and list student sublets',
+			desc: 'Find and list student sublets!',
 			stats: '12,000 users • 3,000 sublets',
 			gradient: 'scarlet',
 			url: 'https://cornlet.hubcornell.com'
 		},
 		{
 			name: 'Opinion',
-			desc: 'Synthesized course reviews',
+			desc: 'Synthesized course reviews!',
 			stats: '7,100 courses • 2,000 reviews',
 			gradient: 'midnight',
 			url: 'https://opinion.hubcornell.com',
@@ -22,28 +22,28 @@
 		},
 		{
 			name: 'Ride',
-			desc: 'Carpooling for school breaks',
+			desc: 'Carpooling for school breaks!',
 			gradient: 'pumpkin',
 			url: 'https://ride.hubcornell.com',
 			stage: 'beta'
 		},
 		{
 			name: 'Thrift',
-			desc: 'Resale platform for all items',
+			desc: 'Item and clothing reselling!',
 			gradient: 'shamrock',
 			url: 'https://thrift.hubcornell.com/',
 			stage: 'beta'
 		},
 		{
 			name: 'Refer',
-			desc: 'Application referrals by alumni',
+			desc: 'Application referrals by alumni!',
 			gradient: 'daybreak',
 			url: 'https://refer.hubcornell.com/',
 			stage: 'coming-soon'
 		},
 		{
 			name: 'Find',
-			desc: 'Crowdsourced lost-and-found',
+			desc: 'Crowdsourced lost-and-found!',
 			gradient: 'cerulean',
 			url: 'https://find.hubcornell.com/',
 			stage: 'coming-soon'
