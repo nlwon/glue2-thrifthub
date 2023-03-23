@@ -81,7 +81,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="relative w-full max-w-4xl p-4 md:pl-6">
+			<style> .widen-content { max-width: 57.5rem; } </style>
+			<div class="relative w-full max-w-4xl p-4 md:pl-6 widen-content">
 				<!-- body content -->
 				<div class="min-h-[82vh]">
 					<slot />

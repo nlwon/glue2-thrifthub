@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+    .widen-listings {
+        flex-direction: row;
+    }
+}
+
+.widen-listings {
+    gap: 100px;
+}
