@@ -28,7 +28,14 @@
 			<div bind:this={topAnchor} />
 
 			<!-- header -->
-			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95">
+			<style>
+				.shadowed {
+					box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
+					padding: 5px;
+					margin-bottom: 5px;
+				}
+			</style>
+			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95 shadowed">
 				<div class={`w-full max-w-4xl`}>
 					<div class="navbar">
 						<!-- mobile nav: hamburger -->

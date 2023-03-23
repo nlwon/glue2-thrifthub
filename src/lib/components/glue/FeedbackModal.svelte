@@ -47,8 +47,8 @@
 		}
 		@media (min-width: 768px) {
 			.horiz-adjust { 
-				left: 21%;
-				right: 60.5%;
+				width: 290px;
+				right: 60%;
 			}
 		}
 		.vert-adjust {
@@ -58,6 +58,12 @@
 			width: 100%;
 		}
 		.hidefeedback { 
+		}
+		@media (max-width: 768px) {
+			.horiz-adjust { 
+				right: 30px;
+				bottom: 30px;
+			}
 		}
 	</style>
 	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2 shadow horiz-adjust vert-adjust hidefeedback">
