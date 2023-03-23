@@ -165,7 +165,7 @@
 					</a>
 				</li>
 			{/each}
-			<li><button on:click={signOut}><IconLogout />Logout</button></li>
+			<li><button on:click={() => goto('/logout')}><IconLogout />Log Out</button></li>
 		</ul>
 	</div>
 {:else}

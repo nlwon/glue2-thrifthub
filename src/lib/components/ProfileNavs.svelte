@@ -12,7 +12,7 @@
 			padding-left: 0;
 		}
 	</style>
-	<p class="ml-6 text-xl font-semibold left-adjust">My ThriftHub</p>
+	<p class="ml-6 text-2xl font-semibold left-adjust">My ThriftHub</p>
 	<ul class="menu rounded-box menu-compact w-56 bg-base-100 p-2 list-head">
 		{#each PRIVATE_NAVS as nav}
 			<li>
@@ -21,6 +21,6 @@
 				</a>
 			</li>
 		{/each}
-		<li><a href="/logout"><IconLogout />Logout</a></li>
+		<li><a href="/logout"><IconLogout />Log Out</a></li>
 	</ul>
 </div>

@@ -29,11 +29,11 @@
 	<PageContainer title="Edit listing" layout="aside-main">
 		<Main>
 			<div class="space-y-4">
-				<h2 class="text-4xl font-semibold">Edit listing</h2>
+				<h2 class="text-4xl font-semibold">Edit Listing</h2>
 				{#if listing}
 					<ListingForm initialValues={listing} />
 				{:else if isLoading}
-					<p class="text-sm">Loading ...</p>
+					<p class="text-sm">Loading...</p>
 				{:else}
 					<p class="text-sm">Failed to load listing. Please try refreshing the page.</p>
 				{/if}
