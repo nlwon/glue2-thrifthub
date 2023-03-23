@@ -42,15 +42,19 @@
 </script>
 
 {#if !hideRouteIds?.includes($page.route?.id)}
-	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2">
-		<label
-			for="modal-feedback"
-			class="btn-primary btn"
-			on:click={() => {
-				isOpen = true;
-				step = 1;
-			}}>Thoughts on {APP_NAME}?</label
-		>
+	<div class="fixed left-0 right-0 bottom-0 flex justify-center">
+		<div class="flex w-full max-w-4xl justify-end pb-6 pr-4 md:pr-0">
+			<div class="">
+				<label
+					for="modal-feedback"
+					class="btn-primary btn-sm btn"
+					on:click={() => {
+						isOpen = true;
+						step = 1;
+					}}>Thoughts on {APP_NAME}?</label
+				>
+			</div>
+		</div>
 	</div>
 	<input type="checkbox" id="modal-feedback" class="modal-toggle" />
 	<label for="modal-feedback" class={`modal cursor-pointer ${isOpen ? 'modal-open' : ''}`}>
