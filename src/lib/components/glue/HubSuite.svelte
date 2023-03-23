@@ -2,7 +2,7 @@
 	import IconHubSuite from '$lib/icons/glue/IconHubSuite.svelte';
 	import { isMd } from '$lib/stores/glue/device';
 
-	$: size = $isMd ? 30 : 24;
+	$: size = $isMd ? 40 : 30;
 
 	const products = [
 		{
@@ -53,7 +53,7 @@
 
 <div class="dropdown-end dropdown">
 	<div class="flex items-center">
-		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 px-2 md:btn-md">
+		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 !px-1 md:!px-2 md:btn-md">
 			<IconHubSuite width={size} height={size} />
 		</label>
 	</div>
@@ -63,6 +63,7 @@
 		tabindex="0"
 		class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl"
 	>
+		<p class="ml-2 mb-1 mt-1 text-lg font-semibold">HubSuite</p>
 		{#each products as product}
 			<li class="my-1">
 				<a
