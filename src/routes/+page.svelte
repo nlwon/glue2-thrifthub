@@ -54,7 +54,7 @@
 
 	<Main>
 		<div class="space-y-3">
-			<h2 class="ml-1 text-2xl font-semibold tracking-wider">Listings</h2>
+			<h2 class="ml-1 text-2xl font-semibold tracking-wider">New Listings</h2>
 			<div class="space-y-2">
 				{#each listings as listing (listing?.id)}
 					<ListingItem {listing} />

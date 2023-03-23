@@ -53,7 +53,13 @@
 
 <div class="dropdown-end dropdown">
 	<div class="flex items-center">
-		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 px-2 md:btn-md">
+		<style>
+			.padding-adjust {
+				padding-left: 0.6rem;
+    			padding-right: 0.6rem;
+			}
+		</style>
+		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 px-2 md:btn-md padding-adjust">
 			<IconHubSuite width={size} height={size} />
 		</label>
 	</div>
