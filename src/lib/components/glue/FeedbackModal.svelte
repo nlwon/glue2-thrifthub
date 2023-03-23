@@ -41,7 +41,7 @@
 </script>
 
 {#if !hideRouteIds?.includes($page.route?.id)}
-	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2">
+	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
 		<label
 			for="modal-feedback"
 			class="btn-primary btn"
