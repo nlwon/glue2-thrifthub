@@ -89,7 +89,15 @@
 				</div>
 
 				<!-- footer -->
-				<footer class="footer footer-center bg-base-100 py-8 text-base-content">
+				<style>
+					@media (max-width: 768px) {
+						.left-adjust {
+							place-items: start;
+							text-align: start;
+						}
+					}
+				</style>
+				<footer class="footer footer-center bg-base-100 py-8 text-base-content left-adjust">
 					<div>
 						<p>{APP_NAME} © 2022</p>
 					</div>
