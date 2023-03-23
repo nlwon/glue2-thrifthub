@@ -54,7 +54,7 @@
 						<!-- app name -->
 						<div>
 							<button>
-								<a href="/" class="btn-ghost btn px-1 text-xl normal-case"
+								<a href="/" class="btn-ghost btn px-1 text-2xl normal-case"
 									>{APP_NAME}
 									{#if IS_BETA}
 										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>

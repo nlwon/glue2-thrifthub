@@ -65,10 +65,7 @@
 	</div>
 
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-	<ul
-		tabindex="0"
-		class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl"
-	>
+	<ul tabindex="0" style="right: -5.8pc; width: 15rem;" class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl right-shift">
 		{#each products as product}
 			<li class="my-1">
 				<a

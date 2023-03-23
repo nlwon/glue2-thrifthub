@@ -3,7 +3,7 @@
 	import { isMd } from '$lib/stores/glue/device';
 	import RequireAuthButton from './glue/RequireAuthButton.svelte';
 
-	$: label = $isMd ? 'New listing' : 'Listing';
+	$: label = $isMd ? 'New Listing' : 'Listing';
 </script>
 
 <RequireAuthButton href="/create" class="btn-primary btn-sm btn gap-2 pl-3 md:btn-md">

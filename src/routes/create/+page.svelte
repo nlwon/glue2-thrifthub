@@ -6,10 +6,10 @@
 </script>
 
 <div class="py-4">
-	<PageContainer title="New listing" layout="aside-main">
+	<PageContainer title="New Listing" layout="aside-main">
 		<Main>
 			<div class="space-y-4">
-				<h2 class="text-4xl font-semibold">New listing</h2>
+				<h2 class="text-4xl font-semibold">New Listing</h2>
 				<ListingForm />
 			</div>
 		</Main>
