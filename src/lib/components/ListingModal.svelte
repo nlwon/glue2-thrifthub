@@ -54,7 +54,7 @@
 					</div>
 
 					<!-- info -->
-					<div class="space-y-1">
+					<div class="w-full space-y-1 overflow-auto">
 						<h3 class="text-2xl font-semibold">{listing?.title}</h3>
 						<p class="text-lg font-semibold">${listing?.price}</p>
 						<div class="flex items-end justify-between">
@@ -62,7 +62,9 @@
 								<p class="font-medium text-base-content/70">
 									Updated {formatDistanceToNowStrict(new Date(listing?.updated))} ago
 								</p>
-								<p class="text-sm text-base-content/70">
+								<p
+									class="overflow-auto whitespace-pre-wrap break-words text-sm text-base-content/70"
+								>
 									{listing?.desc}
 								</p>
 							</div>
