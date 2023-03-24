@@ -25,13 +25,12 @@
 <PageContainer title="Home" layout="aside-main">
 	<Aside>
 		<div class="hidden space-y-3 rounded-lg bg-base-200 p-4  md:block">
-			<p class="font-semibold text-base-content/90">This is a Beta version of ThriftHub!</p>
+			<p class="font-semibold text-base-content/90">Welcome to ThriftHub beta!</p>
 			<div class="space-y-1 text-base-content/70">
 				<p class="text-sm">
-					Please feel free to give us feedback using the feedback button on the bottom right corner
-					of the page.
+					Please share any feedback you may have using the button in the bottom left corner, or email us at:
 				</p>
-				<p class="text-sm">Or email us at thrifthub.webdev@gmail.com</p>
+				<p class="text-sm">thrifthub.webdev@gmail.com</p>
 			</div>
 		</div>
 		<!-- <h1>Filters</h1>
@@ -55,7 +54,7 @@
 
 	<Main>
 		<div class="space-y-3">
-			<h2 class="ml-1 text-2xl font-semibold tracking-wider">Listings</h2>
+			<h2 class="ml-1 text-2xl font-semibold tracking-wider">New Listings</h2>
 			<div class="space-y-2">
 				{#each listings as listing (listing?.id)}
 					<ListingItem {listing} />

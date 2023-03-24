@@ -163,4 +163,7 @@
 			</div>
 		</a>
 	{/each}
+
+	<!-- only kept here so the feedback hides when the messages frame exists on a page, can fix later -->
+	<style> .hidefeedback { display: none; } </style>
 </div>

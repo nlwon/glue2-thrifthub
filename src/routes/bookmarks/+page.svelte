@@ -5,7 +5,7 @@
 	import ProfileNavs from '$lib/components/ProfileNavs.svelte';
 </script>
 
-<PageContainer title="My listings" layout="aside-main">
+<PageContainer title="My Listings" layout="aside-main">
 	<Aside>
 		<ProfileNavs />
 	</Aside>

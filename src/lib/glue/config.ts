@@ -6,7 +6,7 @@ export const APP_NAME = 'ThriftHub';
 export const PUBLIC_NAVS: IPublicNav[] = [];
 export const PRIVATE_NAVS: IPrivateNav[] = [
 	{
-		label: 'My listings',
+		label: 'My Listings',
 		path: '/my-listings',
 		icon: IconMenu
 	},

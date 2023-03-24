@@ -123,7 +123,7 @@
 		<h3 class="text-lg font-bold">Sign in with a @cornell.edu account</h3>
 		<p class="py-4">
 			You must sign in with a <span class="underline decoration-primary underline-offset-2"
-				>Cornell email</span
+				>Cornell Email</span
 			>
 			to use {APP_NAME}.
 		</p>
@@ -165,7 +165,7 @@
 					</a>
 				</li>
 			{/each}
-			<li><button on:click={signOut}><IconLogout />Logout</button></li>
+			<li><button on:click={() => goto('/logout')}><IconLogout />Log Out</button></li>
 		</ul>
 	</div>
 {:else}
@@ -183,7 +183,7 @@
 							{#if IS_ENFORCE_CORNELL_EMAIL}
 								<span
 									>with your <span class="underline decoration-primary underline-offset-2"
-										>Cornell email</span
+										>Cornell Email</span
 									></span
 								>
 							{:else}
@@ -196,14 +196,14 @@
 						{#if IS_ENFORCE_CORNELL_EMAIL}
 							<p class="mb-2">
 								You must sign in with your <span
-									class="underline decoration-primary underline-offset-2">Cornell email</span
+									class="underline decoration-primary underline-offset-2">Cornell Email</span
 								>
 								to sign into {APP_NAME}!
 							</p>
 						{/if}
 						<button type="button" class="btn-primary btn gap-2" on:click={signInGoogle}
 							><IconGoogle /> Sign in with {IS_ENFORCE_CORNELL_EMAIL
-								? 'Cornell email'
+								? 'Cornell Email'
 								: 'Google'}</button
 						>
 					{:else}

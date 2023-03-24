@@ -24,13 +24,13 @@
 	});
 </script>
 
-<PageContainer title="My listings" layout="aside-main">
+<PageContainer title="My Listings" layout="aside-main">
 	<Aside>
 		<ProfileNavs />
 	</Aside>
 	<Main>
 		<div class="space-y-4">
-			<h2 class="text-2xl font-semibold tracking-wider">My listings</h2>
+			<h2 class="text-2xl font-semibold tracking-wider">My Listings</h2>
 			<div class="space-y-2">
 				{#each listings as listing (listing?.id)}
 					<ListingItem {listing} />

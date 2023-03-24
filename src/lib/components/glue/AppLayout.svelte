@@ -29,7 +29,7 @@
 			<div bind:this={topAnchor} />
 
 			<!-- header -->
-			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95">
+			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95 shadowed">
 				<div class={`w-full max-w-4xl`}>
 					<div class="navbar">
 						<!-- mobile nav: hamburger -->
@@ -57,7 +57,7 @@
 							<button>
 								<a href="/" class="btn-ghost btn px-1">
 									<img class="mr-1.5 h-5 w-5" src={logo} alt="" />
-									<p class="text-xl normal-case">{APP_NAME}</p>
+									<p class="text-2xl normal-case">{APP_NAME}</p>
 									{#if IS_BETA}
 										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>
 									{/if}
@@ -83,14 +83,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="relative w-full max-w-4xl p-4 md:pl-6">
+			<div class="relative w-full max-w-4xl p-4 md:pl-6 widen-content">
 				<!-- body content -->
 				<div class="min-h-[82vh]">
 					<slot />
 				</div>
 
 				<!-- footer -->
-				<footer class="footer footer-center bg-base-100 py-8 text-base-content">
+				<footer class="footer footer-center bg-base-100 py-8 text-base-content left-adjust">
 					<div>
 						<p>{APP_NAME} © 2023</p>
 					</div>
@@ -105,3 +105,24 @@
 		<MobileDrawerContent />
 	</div>
 </div>
+
+<!-- custom styles -->
+<style>
+	@media (max-width: 768px) {
+		.left-adjust {
+			place-items: end;
+			text-align: end;
+			padding-right: 30px;
+		}
+	}
+
+	.shadowed {
+		box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
+		padding: 5px;
+		margin-bottom: 5px;
+	}
+
+	.widen-content {
+		max-width: 57.5rem;
+	}
+</style>

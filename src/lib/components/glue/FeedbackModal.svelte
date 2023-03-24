@@ -45,10 +45,10 @@
 </script>
 
 {#if !hideRouteIds?.includes($page.route?.id)}
-	<div class="fixed left-0 right-0 bottom-0 flex justify-center">
-		<div class="flex w-full max-w-4xl justify-end pb-6 pr-4 md:pr-0">
+	<div class="fixed bottom-8 flex justify-center horiz-adjust vert-adjust">
+		<div class="flex w-full pr-4 md:pr-0 shadow hidefeedback">
 			<div class="">
-				<label for="modal-feedback" class="btn-primary btn-sm btn">Thoughts on {APP_NAME}?</label>
+				<label for="modal-feedback" class="btn-primary btn">Thoughts on {APP_NAME}?</label>
 			</div>
 		</div>
 	</div>

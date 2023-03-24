@@ -2,19 +2,19 @@
 	import IconHubSuite from '$lib/icons/glue/IconHubSuite.svelte';
 	import { isMd } from '$lib/stores/glue/device';
 
-	$: size = $isMd ? 40 : 30;
+	$: size = $isMd ? 30 : 24;
 
 	const products = [
 		{
 			name: 'Sublet',
-			desc: 'Find and give sublets',
+			desc: 'Find and list student sublets!',
 			stats: '12,000 users • 3,000 sublets',
 			gradient: 'scarlet',
 			url: 'https://cornlet.hubcornell.com'
 		},
 		{
 			name: 'Opinion',
-			desc: 'Course reviews',
+			desc: 'Synthesized course reviews!',
 			stats: '7,100 courses • 2,000 reviews',
 			gradient: 'midnight',
 			url: 'https://opinion.hubcornell.com',
@@ -22,28 +22,28 @@
 		},
 		{
 			name: 'Ride',
-			desc: 'Carpool for school breaks',
-			gradient: 'cerulean',
+			desc: 'Carpooling for school breaks!',
+			gradient: 'pumpkin',
 			url: 'https://ride.hubcornell.com',
 			stage: 'beta'
 		},
 		{
 			name: 'Thrift',
-			desc: 'Buy and sell marketplace',
+			desc: 'Item and clothing reselling!',
 			gradient: 'shamrock',
 			url: 'https://thrift.hubcornell.com/',
 			stage: 'beta'
 		},
 		{
 			name: 'Refer',
-			desc: 'Job application referrals',
+			desc: 'Application referrals by alumni!',
 			gradient: 'daybreak',
 			url: 'https://refer.hubcornell.com/',
 			stage: 'coming-soon'
 		},
 		{
 			name: 'Find',
-			desc: 'Lost and found',
+			desc: 'Crowdsourced lost-and-found!',
 			gradient: 'cerulean',
 			url: 'https://find.hubcornell.com/',
 			stage: 'coming-soon'
@@ -53,17 +53,13 @@
 
 <div class="dropdown-end dropdown">
 	<div class="flex items-center">
-		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 !px-1 md:!px-2 md:btn-md">
+		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 px-2 md:btn-md padding-adjust">
 			<IconHubSuite width={size} height={size} />
 		</label>
 	</div>
 
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-	<ul
-		tabindex="0"
-		class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl"
-	>
-		<p class="ml-2 mb-1 mt-1 text-lg font-semibold">HubSuite</p>
+	<ul tabindex="0" style="right: -4.8pc; width: 15rem;" class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl right-shift">
 		{#each products as product}
 			<li class="my-1">
 				<a
@@ -90,8 +86,8 @@
 						{/if}
 
 						{#if product?.stage === 'coming-soon'}
-							<div class="rounded-xs badge-primary badge badge-sm ml-[-0.25rem] mt-2">
-								Coming soon
+							<div style="background-color: #737b87; border-color: #737b87;" class="rounded-xs badge-primary badge badge-sm ml-[-0.25rem] mt-2 color-shift">
+								Coming Soon
 							</div>
 						{/if}
 					</div>
@@ -101,7 +97,13 @@
 	</ul>
 </div>
 
+<!-- custom styles -->
 <style>
+	.padding-adjust {
+		padding-left: 0.6rem;
+		padding-right: 0.6rem;
+	}
+
 	.scarlet {
 		background: linear-gradient(100.4deg, #b64468 5.49%, #ff5858 141.74%);
 		-webkit-background-clip: text;

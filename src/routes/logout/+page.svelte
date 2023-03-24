@@ -12,14 +12,14 @@
 	};
 </script>
 
-<PageContainer title="My listings" layout="aside-main">
+<PageContainer title="Log Out" layout="aside-main">
 	<Aside>
 		<ProfileNavs />
 	</Aside>
 	<Main>
 		<div class="space-y-4">
-			<h2 class="text-2xl font-semibold tracking-wider">Logout</h2>
-			<button class="btn-sm btn" on:click={signOut}>Logout of ThriftHub</button>
+			<h2 class="text-2xl font-semibold tracking-wider">Log Out</h2>
+			<button class="btn-sm btn" on:click={signOut}>Log out of ThriftHub</button>
 		</div>
 	</Main>
 </PageContainer>

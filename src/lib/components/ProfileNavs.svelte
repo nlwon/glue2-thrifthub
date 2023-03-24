@@ -4,8 +4,8 @@
 </script>
 
 <div class="hidden md:block">
-	<p class="ml-6 text-xl font-semibold">My ThriftHub</p>
-	<ul class="menu rounded-box menu-compact w-56 bg-base-100 p-2">
+	<p class="ml-6 text-2xl font-semibold left-adjust">My ThriftHub</p>
+	<ul class="menu rounded-box menu-compact w-56 bg-base-100 p-2 list-head">
 		{#each PRIVATE_NAVS as nav}
 			<li>
 				<a href={nav.path}>
@@ -13,6 +13,16 @@
 				</a>
 			</li>
 		{/each}
-		<li><a href="/logout"><IconLogout />Logout</a></li>
+		<li><a href="/logout"><IconLogout />Log Out</a></li>
 	</ul>
 </div>
+
+<!-- custom styles -->
+<style>
+	.left-adjust {
+		margin-left: 0;
+	}
+	.list-head, .list-head a {
+		padding-left: 0;
+	}
+</style>
