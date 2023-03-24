@@ -29,7 +29,7 @@
 			<div bind:this={topAnchor} />
 
 			<!-- header -->
-			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95 shadowed">
+			<div class="shadowed sticky top-0 z-30 flex w-full justify-center bg-base-100/95">
 				<div class={`w-full max-w-4xl`}>
 					<div class="navbar">
 						<!-- mobile nav: hamburger -->
@@ -56,7 +56,7 @@
 						<div>
 							<button>
 								<a href="/" class="btn-ghost btn px-1">
-									<img class="mr-1.5 h-5 w-5" src={logo} alt="" />
+									<img class="mr-1.5 h-5 w-5" src={logo} alt="logo" />
 									<p class="text-2xl normal-case">{APP_NAME}</p>
 									{#if IS_BETA}
 										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>
@@ -83,14 +83,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="relative w-full max-w-4xl p-4 md:pl-6 widen-content">
+			<div class="widen-content relative w-full max-w-4xl p-4 md:pl-6">
 				<!-- body content -->
 				<div class="min-h-[82vh]">
 					<slot />
 				</div>
 
 				<!-- footer -->
-				<footer class="footer footer-center bg-base-100 py-8 text-base-content left-adjust">
+				<footer class="left-adjust footer footer-center bg-base-100 py-8 text-base-content">
 					<div>
 						<p>{APP_NAME} © 2023</p>
 					</div>
