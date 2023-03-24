@@ -88,14 +88,6 @@
 				</div>
 
 				<!-- footer -->
-				<style>
-					@media (max-width: 768px) {
-						.left-adjust {
-							place-items: start;
-							text-align: start;
-						}
-					}
-				</style>
 				<footer class="footer footer-center bg-base-100 py-8 text-base-content left-adjust">
 					<div>
 						<p>{APP_NAME} © 2022</p>
@@ -114,6 +106,13 @@
 
 <!-- custom styles -->
 <style>
+	@media (max-width: 768px) {
+		.left-adjust {
+			place-items: start;
+			text-align: start;
+		}
+	}
+
 	.shadowed {
 		box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
 		padding: 5px;
