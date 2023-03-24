@@ -49,17 +49,19 @@
 				<div class="flex-shrink-0">
 					<img
 						class="h-28 w-28 rounded object-cover md:w-32 {listing?.isSold && 'opacity-50'}"
-						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0])}
+						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0], {
+							thumb: '800x0'
+						})}
 						alt=""
 					/>
 				</div>
 
 				<!-- info -->
-				<div class="mt-[-0.25rem] flex-1">
+				<div class="mt-[-0.25rem] flex-1 overflow-hidden">
 					<div class="flex w-full justify-between">
 						<div>
 							{#if listing?.isSold}
-								<div class="badge badge-error mb-1 ml-[-0.25rem]">Sold</div>
+								<div class="badge-error badge mb-1 ml-[-0.25rem]">Sold</div>
 							{/if}
 							<p
 								class="text-lg font-semibold text-base-content/90 {listing?.isSold && 'opacity-50'}"

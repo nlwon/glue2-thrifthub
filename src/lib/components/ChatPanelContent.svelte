@@ -18,7 +18,9 @@
 				<div class="">
 					<img
 						class="h-10 w-10 rounded object-cover {listing?.isSold && 'opacity-50'}"
-						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0])}
+						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0], {
+							thumb: '800x0'
+						})}
 						alt=""
 					/>
 				</div>
@@ -27,7 +29,7 @@
 				<div>
 					<div class="flex items-center space-x-2">
 						{#if listing?.isSold}
-							<div class="badge badge-error badge-sm">Sold</div>
+							<div class="badge-error badge badge-sm">Sold</div>
 						{/if}
 						<p class="text-sm font-medium">
 							{chatroom?.expand?.author?.name?.split(' ')[0]} • {listing?.title}

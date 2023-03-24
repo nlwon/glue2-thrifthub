@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
 	import Textarea from './glue/Textarea.svelte';
 	import TextInput from './glue/TextInput.svelte';
+	import Compressor from 'compressorjs';
 
 	export let initialValues;
 
@@ -15,7 +16,7 @@
 	const formData = new FormData();
 
 	let title: string = '';
-	let price: number = 0;
+	let price: number = null;
 	let desc: string = '';
 	let photos: File[] = []; // should only contain new photos
 	let previews: string[] = [];
@@ -25,7 +26,17 @@
 	let errors;
 
 	const handleFileChange = (event) => {
-		photos = [...photos, ...event?.target?.files];
+		for (let file of event?.target?.files) {
+			new Compressor(file, {
+				quality: 0.5,
+				success(result) {
+					photos = [...photos, result as File];
+				},
+				error(err) {
+					console.log(err.message);
+				}
+			});
+		}
 
 		for (let photo of event?.target?.files) {
 			(function (file) {
@@ -84,7 +95,9 @@
 			thumbnailIdx = initialValues?.thumbnailIdx || 0;
 			isSold = initialValues?.isSold;
 			previews = initialValues?.photos?.map((photo: string) => {
-				return pb.getFileUrl(initialValues, photo);
+				return pb.getFileUrl(initialValues, photo, {
+					thumb: '800x0'
+				});
 			});
 		}
 	};
@@ -145,6 +158,7 @@
 				<TextInput
 					label="Price ($)"
 					type="number"
+					placeholder="$0"
 					bind:value={price}
 					error={errors?.price?.message}
 				/>

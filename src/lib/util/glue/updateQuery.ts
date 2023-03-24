@@ -8,7 +8,7 @@ interface IUpdateQuery {
 	$page: Page;
 }
 
-const updateQuery = ({ key = 'query', value = null, $page }: IUpdateQuery) => {
+export const updateQuery = ({ key = 'query', value = null, $page }: IUpdateQuery) => {
 	if (browser) {
 		const newSearchParams = new URLSearchParams($page?.url?.searchParams);
 		if (value && value?.length > 0) {
@@ -22,6 +22,22 @@ const updateQuery = ({ key = 'query', value = null, $page }: IUpdateQuery) => {
 				keepFocus: true
 			});
 		}
+	}
+};
+
+export const updatQueryByObject = ($page, obj) => {
+	if (browser) {
+		const newSearchParams = new URLSearchParams($page?.url?.searchParams);
+		Object.entries(obj).map(([key, value]) => {
+			if (value && value?.length > 0) {
+				newSearchParams?.set(key, value);
+			} else {
+				newSearchParams?.delete(key);
+			}
+		});
+		goto(`?${newSearchParams.toString()}`, {
+			keepFocus: true
+		});
 	}
 };
 

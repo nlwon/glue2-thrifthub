@@ -13,7 +13,8 @@
 		try {
 			listings = await pb.collection('listings').getFullList(200, {
 				filter: `user="${$currentUser?.id}"`,
-				expand: 'user'
+				expand: 'user',
+				sort: '-updated'
 			});
 		} catch (error) {}
 	};

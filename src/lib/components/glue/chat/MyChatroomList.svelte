@@ -127,7 +127,10 @@
 							<img
 								src={pb.getFileUrl(
 									chatroom?.expand?.post,
-									chatroom?.expand?.post?.photos[chatroom?.expand?.post?.thumbnailIdx]
+									chatroom?.expand?.post?.photos[chatroom?.expand?.post?.thumbnailIdx],
+									{
+										thumb: '800x0'
+									}
 								)}
 							/>
 						</div>

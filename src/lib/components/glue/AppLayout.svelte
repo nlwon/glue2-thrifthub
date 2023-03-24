@@ -8,6 +8,7 @@
 	import FeedbackModal from './FeedbackModal.svelte';
 	import HubSuite from './HubSuite.svelte';
 	import TrackWidth from './TrackWidth.svelte';
+	import logo from '$lib/icons/logo.png';
 
 	let topAnchor;
 
@@ -54,8 +55,9 @@
 						<!-- app name -->
 						<div>
 							<button>
-								<a href="/" class="btn-ghost btn px-1 text-2xl normal-case"
-									>{APP_NAME}
+								<a href="/" class="btn-ghost btn px-1">
+									<img class="mr-1.5 h-5 w-5" src={logo} alt="" />
+									<p class="text-2xl normal-case">{APP_NAME}</p>
 									{#if IS_BETA}
 										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>
 									{/if}
@@ -90,7 +92,7 @@
 				<!-- footer -->
 				<footer class="footer footer-center bg-base-100 py-8 text-base-content left-adjust">
 					<div>
-						<p>{APP_NAME} © 2022</p>
+						<p>{APP_NAME} © 2023</p>
 					</div>
 				</footer>
 
@@ -108,8 +110,9 @@
 <style>
 	@media (max-width: 768px) {
 		.left-adjust {
-			place-items: start;
-			text-align: start;
+			place-items: end;
+			text-align: end;
+			padding-right: 30px;
 		}
 	}
 
