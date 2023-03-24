@@ -38,3 +38,6 @@
 		<ChatPanel {chatroom} />
 	</Main>
 </PageContainer>
+
+<!-- placed within this div... -->
+<style> .hidefeedback { display: none; } </style>

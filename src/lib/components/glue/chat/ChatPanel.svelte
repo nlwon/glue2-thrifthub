@@ -179,6 +179,7 @@
 	</form>
 </div>
 
+<!-- custom styles -->
 <style>
 	.chat-content-container {
 		/* subtracts height of top, bottom panels */

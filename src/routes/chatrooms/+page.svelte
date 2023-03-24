@@ -6,7 +6,7 @@
 	import ProfileNavs from '$lib/components/ProfileNavs.svelte';
 </script>
 
-<PageContainer layout="aside-main" title="My messages">
+<PageContainer layout="aside-main" title="Messages">
 	<Aside>
 		<ProfileNavs />
 		<MyChatroomList />

@@ -12,7 +12,7 @@
 	};
 </script>
 
-<PageContainer title="My listings" layout="aside-main">
+<PageContainer title="Log Out" layout="aside-main">
 	<Aside>
 		<ProfileNavs />
 	</Aside>

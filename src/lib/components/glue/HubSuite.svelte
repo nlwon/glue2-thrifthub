@@ -53,12 +53,6 @@
 
 <div class="dropdown-end dropdown">
 	<div class="flex items-center">
-		<style>
-			.padding-adjust {
-				padding-left: 0.6rem;
-    			padding-right: 0.6rem;
-			}
-		</style>
 		<label tabindex="0" class="btn-ghost btn-sm btn bg-base-content/10 px-2 md:btn-md padding-adjust">
 			<IconHubSuite width={size} height={size} />
 		</label>
@@ -103,7 +97,13 @@
 	</ul>
 </div>
 
+<!-- custom styles -->
 <style>
+	.padding-adjust {
+		padding-left: 0.6rem;
+		padding-right: 0.6rem;
+	}
+
 	.scarlet {
 		background: linear-gradient(100.4deg, #b64468 5.49%, #ff5858 141.74%);
 		-webkit-background-clip: text;

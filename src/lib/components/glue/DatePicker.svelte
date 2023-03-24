@@ -30,6 +30,7 @@
 	/>
 </div>
 
+<!-- custom styles -->
 <style>
 	:root {
 		--date-picker-background: hsl(var(--b1));

@@ -28,13 +28,6 @@
 			<div bind:this={topAnchor} />
 
 			<!-- header -->
-			<style>
-				.shadowed {
-					box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
-					padding: 5px;
-					margin-bottom: 5px;
-				}
-			</style>
 			<div class="sticky top-0 z-30 flex w-full justify-center bg-base-100/95 shadowed">
 				<div class={`w-full max-w-4xl`}>
 					<div class="navbar">
@@ -88,7 +81,6 @@
 					</div>
 				</div>
 			</div>
-			<style> .widen-content { max-width: 57.5rem; } </style>
 			<div class="relative w-full max-w-4xl p-4 md:pl-6 widen-content">
 				<!-- body content -->
 				<div class="min-h-[82vh]">
@@ -119,3 +111,16 @@
 		<MobileDrawerContent />
 	</div>
 </div>
+
+<!-- custom styles -->
+<style>
+	.shadowed {
+		box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
+		padding: 5px;
+		margin-bottom: 5px;
+	}
+
+	.widen-content {
+		max-width: 57.5rem;
+	}
+</style>

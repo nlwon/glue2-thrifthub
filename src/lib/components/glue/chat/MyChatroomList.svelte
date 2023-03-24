@@ -108,11 +108,6 @@
 
 <div class="h-[70vh] rounded border-base-content/20 md:h-[80vh] md:border">
 	<div class="space-y-2 pl-4 pb-2 md:p-4">
-		<style>
-			.hidefeedback {
-				display: none;
-			}
-		</style>
 		<p class="text-2xl font-semibold">Messages</p>
 		<p class="text-sm text-base-content/70 md:text-xs">
 			You'll receive an email notification when someone messages you!
@@ -165,4 +160,7 @@
 			</div>
 		</a>
 	{/each}
+
+	<!-- only kept here so the feedback hides when the messages frame exists on a page, can fix later -->
+	<style> .hidefeedback { display: none; } </style>
 </div>

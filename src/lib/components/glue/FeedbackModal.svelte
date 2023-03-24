@@ -41,31 +41,6 @@
 </script>
 
 {#if !hideRouteIds?.includes($page.route?.id)}
-	<style>
-		.shadow {
-			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
-		}
-		@media (min-width: 768px) {
-			.horiz-adjust { 
-				width: 290px;
-				right: 60%;
-			}
-		}
-		.vert-adjust {
-			--tw-translate-y: -20%;
-		}
-		.vert-adjust label {
-			width: 100%;
-		}
-		.hidefeedback { 
-		}
-		@media (max-width: 768px) {
-			.horiz-adjust { 
-				right: 30px;
-				bottom: 30px;
-			}
-		}
-	</style>
 	<div class="fixed bottom-4 right-4 md:right-1/4 md:bottom-6 md:-translate-y-1/2 shadow horiz-adjust vert-adjust hidefeedback">
 		<label
 			for="modal-feedback"
@@ -120,3 +95,36 @@
 		</label>
 	</label>
 {/if}
+
+<!-- custom styles -->
+<style>
+	.shadow {
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+	}
+
+	@media (min-width: 768px) {
+		.horiz-adjust { 
+			width: 290px;
+			right: 60%;
+		}
+	}
+
+	.vert-adjust {
+		--tw-translate-y: -20%;
+	}
+
+	.vert-adjust label {
+		width: 100%;
+	}
+
+	.hidefeedback { 
+		--tw-translate-y: -20%;
+	}
+
+	@media (max-width: 768px) {
+		.horiz-adjust { 
+			right: 30px;
+			bottom: 30px;
+		}
+	}
+</style>
