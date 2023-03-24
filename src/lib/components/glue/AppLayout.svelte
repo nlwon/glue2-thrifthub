@@ -59,7 +59,7 @@
 									<img class="mr-1.5 h-5 w-5" src={logo} alt="" />
 									<p class="text-2xl normal-case">{APP_NAME}</p>
 									{#if IS_BETA}
-										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>
+										<span class="ml-1.5 hidden text-base-content/60 md:block lower-beta">beta (v0)</span>
 									{/if}
 								</a>
 							</button>
@@ -112,7 +112,7 @@
 		.left-adjust {
 			place-items: end;
 			text-align: end;
-			padding-right: 30px;
+			padding-right: 10px;
 		}
 	}
 
@@ -124,5 +124,11 @@
 
 	.widen-content {
 		max-width: 57.5rem;
+	}
+
+	.lower-beta {
+		text-transform: lowercase;
+		padding-top: 5px;
+		font-size: 15px;
 	}
 </style>
