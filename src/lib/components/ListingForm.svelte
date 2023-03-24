@@ -95,7 +95,9 @@
 			thumbnailIdx = initialValues?.thumbnailIdx || 0;
 			isSold = initialValues?.isSold;
 			previews = initialValues?.photos?.map((photo: string) => {
-				return pb.getFileUrl(initialValues, photo);
+				return pb.getFileUrl(initialValues, photo, {
+					thumb: '800x0'
+				});
 			});
 		}
 	};

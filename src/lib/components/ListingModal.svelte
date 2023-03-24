@@ -44,7 +44,9 @@
 							{#each listing?.photos as photo}
 								<div class="carousel-item">
 									<img
-										src={pb.getFileUrl(listing, photo)}
+										src={pb.getFileUrl(listing, photo, {
+											thumb: '800x0'
+										})}
 										class="rounded-box w-[50vw] object-cover md:w-[30vw]"
 										alt=""
 									/>

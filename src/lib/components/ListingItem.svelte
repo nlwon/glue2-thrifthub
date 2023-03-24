@@ -49,7 +49,9 @@
 				<div class="flex-shrink-0">
 					<img
 						class="h-28 w-28 rounded object-cover md:w-32 {listing?.isSold && 'opacity-50'}"
-						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0])}
+						src={pb.getFileUrl(listing, listing?.photos[listing?.thumbnailIdx || 0], {
+							thumb: '800x0'
+						})}
 						alt=""
 					/>
 				</div>
