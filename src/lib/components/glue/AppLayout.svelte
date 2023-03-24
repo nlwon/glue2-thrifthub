@@ -90,7 +90,7 @@
 				<!-- footer -->
 				<footer class="footer footer-center bg-base-100 py-8 text-base-content">
 					<div>
-						<p>{APP_NAME} © 2022</p>
+						<p>{APP_NAME} © 2023</p>
 					</div>
 				</footer>
 
