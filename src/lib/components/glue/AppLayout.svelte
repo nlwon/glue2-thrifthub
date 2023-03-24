@@ -8,6 +8,7 @@
 	import FeedbackModal from './FeedbackModal.svelte';
 	import HubSuite from './HubSuite.svelte';
 	import TrackWidth from './TrackWidth.svelte';
+	import logo from '$lib/icons/logo.png';
 
 	let topAnchor;
 
@@ -54,8 +55,9 @@
 						<!-- app name -->
 						<div>
 							<button>
-								<a href="/" class="btn-ghost btn px-1 text-xl normal-case"
-									>{APP_NAME}
+								<a href="/" class="btn-ghost btn px-1">
+									<img class="mr-1.5 h-5 w-5" src={logo} alt="" />
+									<p class="text-xl normal-case">{APP_NAME}</p>
 									{#if IS_BETA}
 										<span class="ml-1.5 hidden text-base-content/60 md:block">beta</span>
 									{/if}
