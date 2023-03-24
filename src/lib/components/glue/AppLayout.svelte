@@ -112,7 +112,7 @@
 		.left-adjust {
 			place-items: end;
 			text-align: end;
-			padding-right: 30px;
+			padding-right: 10px;
 		}
 	}
 
