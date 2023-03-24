@@ -42,6 +42,7 @@
 		"@sentry/tracing": "^7.39.0",
 		"axios": "^1.2.2",
 		"cheerio": "^1.0.0-rc.12",
+		"compressorjs": "^1.2.1",
 		"daisyui": "^2.46.0",
 		"date-fns": "^2.29.3",
 		"date-picker-svelte": "^2.2.5",

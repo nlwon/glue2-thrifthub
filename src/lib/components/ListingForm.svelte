@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte';
 	import Textarea from './glue/Textarea.svelte';
 	import TextInput from './glue/TextInput.svelte';
+	import Compressor from 'compressorjs';
 
 	export let initialValues;
 
@@ -25,7 +26,17 @@
 	let errors;
 
 	const handleFileChange = (event) => {
-		photos = [...photos, ...event?.target?.files];
+		for (let file of event?.target?.files) {
+			new Compressor(file, {
+				quality: 0.5,
+				success(result) {
+					photos = [...photos, result as File];
+				},
+				error(err) {
+					console.log(err.message);
+				}
+			});
+		}
 
 		for (let photo of event?.target?.files) {
 			(function (file) {
