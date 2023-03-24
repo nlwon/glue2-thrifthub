@@ -40,15 +40,6 @@
 {#if listing}
 	<!-- listing card -->
 	<label for="modal-listing-{listing?.isSold ? 'disabled' : listing?.id}">
-		<style>
-			.new-spacing {
-				border-bottom-width: 1px;
-				border-color: hsl(var(--bc) / .2);
-				border-bottom-left-radius: 0px;
-				border-bottom-right-radius: 0px;
-				margin-bottom: 10px;
-			}
-		</style>
 		<div
 			class="relative w-full cursor-pointer rounded-xl py-3 hover:bg-base-200 md:w-[32rem] md:px-2 {listing?.isSold &&
 				'cursor-default hover:bg-base-100'} new-spacing"
@@ -117,3 +108,14 @@
 
 	<ListingModal {listing} />
 {/if}
+
+<!-- custom styles -->
+<style>
+	.new-spacing {
+		border-bottom-width: 1px;
+		border-color: hsl(var(--bc) / .2);
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		margin-bottom: 10px;
+	}
+</style>
