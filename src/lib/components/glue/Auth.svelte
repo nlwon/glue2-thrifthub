@@ -170,7 +170,7 @@
 	</div>
 {:else}
 	<button>
-		<label for="modal-auth" class="btn-sm btn md:btn-md">Sign in</label>
+		<label for="modal-auth" class="btn-sm btn whitespace-nowrap md:btn-md">Sign in</label>
 	</button>
 	<input type="checkbox" id="modal-auth" class="modal-toggle" />
 	<label for="modal-auth" class="modal cursor-pointer">
