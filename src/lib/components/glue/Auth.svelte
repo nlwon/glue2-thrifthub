@@ -141,7 +141,7 @@
 
 {#if $currentUser}
 	<div class="dropdown-end dropdown">
-		<label tabindex="0" class="btn-ghost btn-square btn">
+		<label tabindex="0" class="hover:bg-[#424855] btn-ghost btn-square btn">
 			<div class="placeholder avatar">
 				<div
 					class="w-8 rounded-full bg-neutral-focus text-neutral-content ring-2 ring ring-primary ring-offset-2 ring-offset-base-100"
