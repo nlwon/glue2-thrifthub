@@ -59,7 +59,7 @@
 									<img class="mr-1.5 h-5 w-5" src={logo} alt="logo" />
 									<p class="text-2xl normal-case">{APP_NAME}</p>
 									{#if IS_BETA}
-										<span class="ml-1.5 hidden text-base-content/60 md:block lower-beta">beta (v0)</span>
+										<span class="ml-1.5 hidden text-base-content/60 md:block lower-beta">(v1.0)</span>
 									{/if}
 								</a>
 							</button>
