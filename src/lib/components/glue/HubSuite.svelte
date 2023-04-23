@@ -60,7 +60,7 @@
 
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<ul tabindex="0" style="right: -65px; width: 13rem;" class="dropdown-content menu rounded-box menu-compact mt-3 w-64 translate-x-24 bg-base-200 p-2 shadow drop-shadow-xl right-shift">
-		<p class="ml-2 mb-1 mt-1 text-lg font-semibold">HubSuite</p>
+		<p class="ml-2 mb-1 mt-1 text-lg font-semibold">HubSuiteX</p>
 		{#each products as product}
 			<li class="my-1">
 				<a
