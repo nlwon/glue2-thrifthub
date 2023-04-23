@@ -63,7 +63,7 @@
 
 	<Main>
 		<div class="space-y-3">
-			<h2 class="ml-1 text-2xl font-semibold tracking-wider">New Listings</h2>
+			<h2 class="ml-1 text-2xl font-semibold tracking-wider">New Listing</h2>
 			<div class="space-y-2">
 				{#each listings as listing (listing?.id)}
 					<ListingItem {listing} />
@@ -78,7 +78,7 @@
 	.unselectable {
 		user-select: none;
 	}
-	
+
 	.text-divider {
 		border-bottom-width: 1px;
 		padding-bottom: 10px;
